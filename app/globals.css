@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+body {
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  min-height: 100vh;
+}
+
+@theme {
+  --color-accent: #58a6ff;
+  --color-accent-hover: #79c0ff;
+  --shadow-glass: 0 4px 16px rgba(0,0,0,0.2);
+  --shadow-glass-hover: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-out;
+  }
+
+  .glass-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .heatmap-cell {
+    border-radius: 3px;
+    transition: all 0.15s ease;
+  }
+
+  .heatmap-cell:hover {
+    outline: 2px solid rgba(255, 255, 255, 0.3);
+    transform: scale(1.2);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -50px) rotate(120deg); }
+  66% { transform: translate(-20px, 30px) rotate(240deg); }
+}
+
+.animate-float {
+  animation: float 20s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 30s ease-in-out infinite reverse;
+}
