@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@source "../app/**/*.{js,ts,jsx,tsx,mdx}";
+@source "../components/**/*.{js,ts,jsx,tsx,mdx}";
+@source "../lib/**/*.{js,ts,jsx,tsx,mdx}";
 
 body {
   background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);

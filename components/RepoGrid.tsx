@@ -33,7 +33,7 @@ export default function RepoGrid({ repos }: RepoGridProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {repos.map((repo) => (
         <a
-          key={repo.name}
+          key={repo.html_url}
           href={repo.html_url}
           target="_blank"
           rel="noopener noreferrer"

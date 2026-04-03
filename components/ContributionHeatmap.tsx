@@ -75,7 +75,7 @@ export default function ContributionHeatmap({ contributions }: HeatmapProps) {
               key={i}
               className="absolute text-[10px] text-white/40"
               style={{
-                left: week * (CELL_SIZE + GAP) + 24, // +24px for day labels column width
+                left: week * (CELL_SIZE + GAP) + 28, // +28px for day labels column width (24px + 4px margin)
               }}
             >
               {label}
@@ -85,14 +85,14 @@ export default function ContributionHeatmap({ contributions }: HeatmapProps) {
 
         <div className="flex">
           {/* Day labels */}
-          <div className="flex flex-col gap-[3px] pr-1 mr-1" style={{ width: 24 }}>
+          <div className="flex flex-col gap-[3px] pr-1 mr-1">
             {[0, 1, 2, 3, 4, 5, 6].map((rowIndex) => (
               <div
                 key={rowIndex}
                 className="text-[10px] text-white/40 leading-none"
                 style={{ height: CELL_SIZE }}
               >
-                {rowIndex % 2 === 0 ? DAYS[rowIndex / 2] : ''}
+                {rowIndex < 6 && rowIndex % 2 === 0 ? DAYS[rowIndex / 2] : ''}
               </div>
             ))}
           </div>
