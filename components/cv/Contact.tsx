@@ -1,0 +1,101 @@
+import { ArrowUpRight } from "lucide-react";
+import SectionHeader from "./SectionHeader";
+import WeChatModalTrigger from "./WeChatModalTrigger";
+import type { CVData } from "@/lib/cv-data";
+
+function toTelHref(phone: string) {
+  const normalized = phone.replace(/[^\d+]/g, "");
+  return normalized ? `tel:${normalized}` : "tel:";
+}
+
+export default function Contact({ data }: { data: CVData }) {
+  const c = data.contact;
+
+  const Row = ({
+    label,
+    value,
+    href,
+    external,
+  }: {
+    label: string;
+    value: string;
+    href: string;
+    external?: boolean;
+  }) => (
+    <div className="cv-row">
+      <div className="cv-row-meta">
+        <strong>{label}</strong>
+      </div>
+      <a
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        className="focus-ring group flex items-center gap-3"
+      >
+        <span className="cv-row-title transition group-hover:text-[color:var(--color-accent-strong)]">
+          {value}
+        </span>
+        <ArrowUpRight
+          size={20}
+          className="text-[color:var(--color-text-muted)] transition group-hover:text-[color:var(--color-accent-strong)]"
+        />
+      </a>
+    </div>
+  );
+
+  return (
+    <section id="contact" className="cv-section">
+      <SectionHeader number="08" label={data.sections.contact} />
+      <div className="flex flex-col">
+        {c.phone && <Row label={c.phoneLabel} value={c.phone} href={toTelHref(c.phone)} />}
+        {c.email && <Row label={c.emailLabel} value={c.email} href={`mailto:${c.email}`} />}
+        {c.site && <Row label={c.siteLabel} value={c.site} href={c.siteHref} external />}
+        <div className="cv-row">
+          <div className="cv-row-meta">
+            <strong>{c.socialsLabel}</strong>
+          </div>
+          <div className="flex flex-wrap gap-x-8 gap-y-4">
+            {c.socials.map((s) =>
+              s.href ? (
+                <a
+                  key={`${s.label}-${s.href}`}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring group inline-flex items-center gap-2"
+                >
+                  <span className="cv-row-title transition group-hover:text-[color:var(--color-accent-strong)]">
+                    {s.label}
+                  </span>
+                  <ArrowUpRight
+                    size={20}
+                    className="text-[color:var(--color-text-muted)] transition group-hover:text-[color:var(--color-accent-strong)]"
+                  />
+                </a>
+              ) : s.kind === "wechat" && s.text ? (
+                <WeChatModalTrigger
+                  key={`${s.label}-wechat`}
+                  label={s.label}
+                  wechatId={s.text}
+                  modalCopy={c.weChat.modalCopy}
+                  modalCopied={c.weChat.modalCopied}
+                  modalCopyFailed={c.weChat.modalCopyFailed}
+                  modalClose={c.weChat.modalClose}
+                  modalQrAlt={c.weChat.modalQrAlt}
+                />
+              ) : s.text ? (
+                <div
+                  key={`${s.label}-${s.text}`}
+                  className="inline-flex max-w-full flex-wrap items-baseline gap-x-2 gap-y-1"
+                >
+                  <span className="cv-row-title text-[color:var(--color-text-strong)]">{s.label}</span>
+                  <span className="text-base text-[color:var(--color-text)]">{s.text}</span>
+                </div>
+              ) : null,
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

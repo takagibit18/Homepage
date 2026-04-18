@@ -1,92 +1,69 @@
-# GitHub Homepage
+<div align="center">
 
-A minimalist glassmorphism-styled personal GitHub homepage built with Next.js.
+<!-- Glassmorphism + neon style header -->
+<img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:0f0c29,35:1f1b4d,70:302b63,100:0b1020&text=Sean%20Yu&fontColor=79c0ff&fontSize=56&animation=fadeIn&fontAlignY=36&desc=CS%20Student%20%7C%20Agent%20and%20RAG%20Engineer&descAlignY=58&descSize=18" alt="header" />
 
-## Features
+<h1>Sean Yu</h1>
+<p>
+  CS learner focused on LLM apps, agents, RAG, and pragmatic engineering
+</p>  
 
-- **Profile Card** — Avatar, name, bio, stats (repos / followers / following) and social links
-- **Repository Grid** — Latest updated repositories with language, stars and forks
-- **Contribution Heatmap** — Custom CSS grid heatmap (no third-party library)
-- **Glassmorphism Design** — Dark gradient background with frosted glass cards and subtle hover animations
+</div>
+
+---
 
 ## Tech Stack
 
-- [Next.js 15](https://nextjs.org/) (App Router)
-- TypeScript
-- [Tailwind CSS 4](https://tailwindcss.com/)
-- [Lucide React](https://lucide.dev/) (icons)
+<div align="center">
 
-## Getting Started
+![Python](https://img.shields.io/badge/Python-111827?style=for-the-badge&logo=python&logoColor=F7DF1E)
+![FastAPI](https://img.shields.io/badge/FastAPI-0F172A?style=for-the-badge&logo=fastapi&logoColor=22D3EE)
+![LangChain](https://img.shields.io/badge/LangChain-0B1220?style=for-the-badge&logo=chainlink&logoColor=93C5FD)
+![LlamaIndex](https://img.shields.io/badge/LlamaIndex-0E1B2E?style=for-the-badge&logo=llama&logoColor=60A5FA)
+![RAG](https://img.shields.io/badge/RAG-Pipeline-10203A?style=for-the-badge&logo=readthedocs&logoColor=38BDF8)
+![Qdrant](https://img.shields.io/badge/Qdrant-111827?style=for-the-badge&logo=qdrant&logoColor=22C55E)
+![Chroma](https://img.shields.io/badge/Chroma-0F1E35?style=for-the-badge&logo=databricks&logoColor=A78BFA)
+![Redis](https://img.shields.io/badge/Redis-09131F?style=for-the-badge&logo=redis&logoColor=EF4444)
+![Docker](https://img.shields.io/badge/Docker-0F1A12?style=for-the-badge&logo=docker&logoColor=60A5FA)
+![OpenAI](https://img.shields.io/badge/OpenAI_API-111827?style=for-the-badge&logo=openai&logoColor=10B981)
+![Claude](https://img.shields.io/badge/Claude_API-1F2937?style=for-the-badge&logo=anthropic&logoColor=F59E0B)
+![Pytest](https://img.shields.io/badge/Pytest-0B1220?style=for-the-badge&logo=pytest&logoColor=FACC15)
 
-### 1. Install dependencies
+</div>
 
-```bash
-npm install
-```
+---
 
-### 2. Configure environment
+## Featured Projects
 
-Copy the example env file and set your GitHub username:
+<p align="left">
+  <a href="https://github.com/takagibit18/review-debug-agent">
+    <img width="420" src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=takagibit18&repo=review-debug-agent&theme=react&bg_color=1F222E&title_color=79c0ff&hide_border=true&icon_color=58a6ff&show_icons=true&show_description=true" alt="review-debug-agent" />
+  </a>
+  <a href="https://github.com/takagibit18/2026Agent">
+    <img width="420" src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=takagibit18&repo=2026Agent&theme=react&bg_color=1F222E&title_color=79c0ff&hide_border=true&icon_color=58a6ff&show_icons=true&show_description=true" alt="2026Agent" />
+  </a>
+</p>
 
-```bash
-cp .env.example .env.local
-```
+---
 
-Edit `.env.local`:
+## Contribution Graph
 
-```env
-GITHUB_USERNAME=yourusername
-# Optional: GITHUB_PAT=ghp_xxx  (increases API rate limit)
-```
+<div align="center">
 
-### 3. Run the development server
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=takagibit18&theme=github-compact&hide_border=true&area=true&custom_title=Contribution%20Activity" alt="contribution activity graph" />
 
-```bash
-npm run dev
-```
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+---
 
-## Project Structure
+## About Me
 
-```
-├── app/
-│   ├── layout.tsx              # Root layout: Inter font, gradient bg, floating orbs
-│   ├── page.tsx                # Main page: fetches data and composes all sections
-│   ├── globals.css             # Gradient background, .glass-card utility, animations
-│   ├── loading.tsx             # Skeleton loading state
-│   └── error.tsx               # Error boundary with retry button
-├── components/
-│   ├── ProfileCard.tsx         # Avatar, name, bio, stats, social links
-│   ├── RepoGrid.tsx            # Responsive grid of repository cards
-│   └── ContributionHeatmap.tsx # 52x7 custom CSS grid contribution heatmap
-├── lib/
-│   ├── github.ts               # GitHub REST API client (user + repos)
-│   └── contributions.ts        # Contribution data via third-party API
-├── .env.local                  # Environment variables (not committed)
-├── .env.example                # Environment variable template
-├── next.config.ts              # Next.js config (image remote patterns)
-├── tailwind.config.ts          # Tailwind theme extensions
-└── tsconfig.json               # TypeScript configuration
-```
+- I focus on Agent Developer / LLM Application Engineer.
+- I now have hands-on proficiency in Python engineering, production-grade RAG pipelines, and LLM service delivery.
+- Core strengths include hybrid retrieval (BM25 + vector), reranking, context compression, and evaluation-driven optimization with clear metrics.
+- I can build reliable systems with FastAPI, Docker, Redis, structured testing, and cost-aware API orchestration.
+- I have practical experience with Agent design patterns such as ReAct and Plan-and-Execute, and I choose architectures based on task complexity and ROI.
+- I stay actively curious: I learn new tools quickly, validate ideas through rapid prototypes, and turn lessons into reusable engineering patterns.
+- I value disciplined iteration, clear technical documentation, and continuous improvement from feedback.
 
-## Build for Production
-
-```bash
-npm run build
-npm start
-```
-
-## Deploy
-
-Push to GitHub and connect to [Vercel](https://vercel.com). Set the `GITHUB_USERNAME` environment variable in the Vercel dashboard.
-
-## API Rate Limiting
-
-Public GitHub API allows **60 requests/hour** by IP. If traffic exceeds this, create a [Personal Access Token](https://github.com/settings/tokens) (no scopes needed) and add it to `.env.local`:
-
-```env
-GITHUB_PAT=ghp_xxxxxxxxxxxxxxxxxxxx
-```
-
-This increases the rate limit to **5000 requests/hour**.
+---
