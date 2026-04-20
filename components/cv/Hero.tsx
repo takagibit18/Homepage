@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
+import Image from "next/image";
 import type { CVData } from "@/lib/cv-data";
 
 interface HeroProps {
@@ -57,12 +58,28 @@ export default function Hero({ data }: HeroProps) {
             </motion.p>
           </div>
 
-          <motion.blockquote
+          <motion.div
             {...fadeUp(0.35)}
-            className="cv-quote border-l border-[color:var(--color-border-strong)] pl-5"
+            className="flex flex-col items-start gap-6 md:items-end"
           >
-            &ldquo; {data.hero.quote} &rdquo;
-          </motion.blockquote>
+            <div className="cv-card p-2 shadow-[var(--shadow-soft)]">
+              <div className="relative h-40 w-40 overflow-hidden rounded-[0.6rem] md:h-56 md:w-56">
+                <Image
+                  src="/avatar.png"
+                  alt={`${data.hero.name} avatar`}
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 224px, 160px"
+                  className="object-cover"
+                  style={{ imageRendering: "pixelated" }}
+                />
+              </div>
+            </div>
+
+            <blockquote className="cv-quote border-l border-[color:var(--color-border-strong)] pl-5 md:text-right">
+              &ldquo; {data.hero.quote} &rdquo;
+            </blockquote>
+          </motion.div>
         </div>
 
         <motion.div {...fadeUp(0.45)} className="flex flex-wrap items-center gap-3">

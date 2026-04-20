@@ -18,10 +18,11 @@ const MONTHS: Record<Locale, string[]> = {
 };
 const DAYS: Record<Locale, string[]> = {
   en: ["Mon", "Wed", "Fri"],
-  zh: ["一", "三", "五"],
+  zh: ["周一", "周三", "周五"],
 };
 const CELL_SIZE = 11;
 const GAP = 3;
+const WEEKS = 26;
 
 function getColor(count: number): string {
   if (count === 0) return "rgba(244, 234, 216, 0.05)";
@@ -42,16 +43,16 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
 
   const today = new Date();
   const startDate = new Date(today);
-  startDate.setDate(startDate.getDate() - 364);
+  startDate.setDate(startDate.getDate() - (WEEKS * 7 - 1));
   const dayOfWeek = startDate.getDay();
   const daysUntilMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
   startDate.setDate(startDate.getDate() + daysUntilMonday);
 
   const weeks: Date[][] = [];
   const current = new Date(startDate);
-  for (let w = 0; w < 52; w++) {
+  for (let weekIndex = 0; weekIndex < WEEKS; weekIndex++) {
     const week: Date[] = [];
-    for (let d = 0; d < 7; d++) {
+    for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
       week.push(new Date(current));
       current.setDate(current.getDate() + 1);
     }
@@ -60,15 +61,23 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
 
   const monthLabels: { week: number; label: string }[] = [];
   let lastMonth = -1;
-  for (let w = 0; w < 52; w++) {
-    const firstDay = weeks[w][0];
+  for (let weekIndex = 0; weekIndex < WEEKS; weekIndex++) {
+    const firstDay = weeks[weekIndex][0];
     if (firstDay.getMonth() !== lastMonth) {
-      monthLabels.push({ week: w, label: MONTHS[locale][firstDay.getMonth()] });
+      monthLabels.push({ week: weekIndex, label: MONTHS[locale][firstDay.getMonth()] });
       lastMonth = firstDay.getMonth();
     }
   }
 
-  const totalContributions = contributions.reduce((sum, c) => sum + c.count, 0);
+  const totalContributions = weeks.reduce(
+    (sum, week) =>
+      sum +
+      week.reduce((weekSum, date) => {
+        const dateStr = date.toISOString().slice(0, 10);
+        return weekSum + (countMap.get(dateStr) || 0);
+      }, 0),
+    0
+  );
 
   return (
     <section id="activity" className="cv-section">
@@ -83,11 +92,11 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
         <p className="cv-heading-lg mb-8">{t.total(totalContributions.toLocaleString())}</p>
 
         <div className="overflow-x-auto">
-          <div className="inline-block min-w-[680px]">
-            <div className="flex mb-1 relative" style={{ height: 16 }}>
-              {monthLabels.map(({ week, label }, i) => (
+          <div className="inline-block min-w-[420px]">
+            <div className="relative mb-1 flex" style={{ height: 16 }}>
+              {monthLabels.map(({ week, label }, index) => (
                 <span
-                  key={i}
+                  key={index}
                   className="absolute text-[10px] text-[color:var(--color-text-muted)]"
                   style={{
                     left: week * (CELL_SIZE + GAP) + 28,
@@ -99,7 +108,7 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
             </div>
 
             <div className="flex">
-              <div className="flex flex-col gap-[3px] pr-1 mr-1">
+              <div className="mr-1 flex flex-col gap-[3px] pr-1">
                 {[0, 1, 2, 3, 4, 5, 6].map((rowIndex) => (
                   <div
                     key={rowIndex}
@@ -112,8 +121,8 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
               </div>
 
               <div className="flex gap-[3px]">
-                {weeks.map((week, wi) => (
-                  <div key={wi} className="flex flex-col gap-[3px]">
+                {weeks.map((week, weekIndex) => (
+                  <div key={weekIndex} className="flex flex-col gap-[3px]">
                     {week.map((date) => {
                       const dateStr = date.toISOString().slice(0, 10);
                       const count = countMap.get(dateStr) || 0;
@@ -123,7 +132,7 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
                           className="rounded-[2px] transition-transform duration-150 ease-out hover:scale-[1.15]"
                           title={
                             locale === "zh"
-                              ? `${dateStr} · ${count} 次贡献`
+                              ? `${dateStr} 有 ${count} 次贡献`
                               : `${count} contributions on ${dateStr}`
                           }
                           style={{
@@ -141,14 +150,14 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
 
             <div className="mt-4 flex items-center justify-end gap-1.5 text-[10px] text-[color:var(--color-text-muted)]">
               <span>{t.less}</span>
-              {[0, 1, 4, 8, 13].map((v) => (
+              {[0, 1, 4, 8, 13].map((value) => (
                 <div
-                  key={v}
+                  key={value}
                   className="rounded-[2px]"
                   style={{
                     width: CELL_SIZE - 1,
                     height: CELL_SIZE - 1,
-                    backgroundColor: getColor(v),
+                    backgroundColor: getColor(value),
                   }}
                 />
               ))}

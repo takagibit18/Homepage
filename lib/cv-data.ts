@@ -177,7 +177,7 @@ export const CV_DATA: Record<Locale, CVData> = {
         "No description yet. This repository focuses on implementation details and iterative improvements.",
     },
     activity: {
-      total: (n) => `${n} contributions in the last year`,
+      total: (n) => `${n} contributions in the last 6 months`,
       less: "Less",
       more: "More",
     },
@@ -293,7 +293,7 @@ export const CV_DATA: Record<Locale, CVData> = {
       noDescription: "暂无描述，该仓库当前主要用于功能迭代与实现细节更新。",
     },
     activity: {
-      total: (n) => `过去一年共 ${n} 次贡献`,
+      total: (n) => `过去半年共 ${n} 次贡献`,
       less: "少",
       more: "多",
     },

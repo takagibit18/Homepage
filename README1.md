@@ -100,6 +100,8 @@ npm run lint
 3. 按需设置 `GITHUB_PAT`
 4. 触发部署
 
+国内域名 + 阿里云低成本部署方案见：[DEPLOY_ALIYUN.md](DEPLOY_ALIYUN.md)
+
 ## API 速率限制
 
 GitHub 未认证请求默认速率限制为每小时 60 次（按 IP）。
