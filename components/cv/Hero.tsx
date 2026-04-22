@@ -12,6 +12,7 @@ interface HeroProps {
 export default function Hero({ data }: HeroProps) {
   const reducedMotion = useReducedMotion();
   const EASE = [0.22, 0.68, 0.2, 1] as const;
+  const avatarSrc = "/avatar-warm-portrait.png";
 
   const fadeUp = (delay: number) =>
     reducedMotion
@@ -62,17 +63,18 @@ export default function Hero({ data }: HeroProps) {
             {...fadeUp(0.35)}
             className="flex flex-col items-start gap-6 md:items-end"
           >
-            <div className="cv-card p-2 shadow-[var(--shadow-soft)]">
-              <div className="relative h-40 w-40 overflow-hidden rounded-[0.6rem] md:h-56 md:w-56">
-                <Image
-                  src="/avatar.png"
-                  alt={`${data.hero.name} avatar`}
-                  fill
-                  priority
-                  sizes="(min-width: 768px) 224px, 160px"
-                  className="object-cover"
-                  style={{ imageRendering: "pixelated" }}
-                />
+            <div className="cv-avatar-shell">
+              <div className="cv-avatar-frame">
+                <div className="cv-avatar-surface">
+                  <Image
+                    src={avatarSrc}
+                    alt={`${data.hero.name} portrait`}
+                    fill
+                    priority
+                    sizes="(min-width: 768px) 224px, 160px"
+                    className="object-cover object-center"
+                  />
+                </div>
               </div>
             </div>
 

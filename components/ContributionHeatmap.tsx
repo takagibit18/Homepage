@@ -20,9 +20,10 @@ const DAYS: Record<Locale, string[]> = {
   en: ["Mon", "Wed", "Fri"],
   zh: ["周一", "周三", "周五"],
 };
-const CELL_SIZE = 11;
-const GAP = 3;
 const WEEKS = 26;
+const ROWS = 7;
+const WEEK_GRID_WIDTH = `calc(${WEEKS} * var(--hm-cell) + ${WEEKS - 1} * var(--hm-gap))`;
+const LABEL_ROW_WIDTH = `calc(var(--hm-week-grid-offset) + ${WEEKS} * var(--hm-cell) + ${WEEKS - 1} * var(--hm-gap))`;
 
 function getColor(count: number): string {
   if (count === 0) return "rgba(244, 234, 216, 0.05)";
@@ -30,6 +31,10 @@ function getColor(count: number): string {
   if (count <= 7) return "#8a6b2c";
   if (count <= 12) return "#c39344";
   return "#eac977";
+}
+
+function getMonthLabelLeft(week: number): string {
+  return `calc(var(--hm-week-grid-offset) + ${week} * (var(--hm-cell) + var(--hm-gap)))`;
 }
 
 export default function ContributionHeatmap({ contributions, locale, data }: HeatmapProps) {
@@ -91,15 +96,15 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
       >
         <p className="cv-heading-lg mb-8">{t.total(totalContributions.toLocaleString())}</p>
 
-        <div className="overflow-x-auto">
-          <div className="inline-block min-w-[420px]">
-            <div className="relative mb-1 flex" style={{ height: 16 }}>
+        <div className="overflow-x-auto pb-1">
+          <div className="inline-block w-max">
+            <div className="relative mb-1" style={{ height: "var(--hm-month-label-height)", width: LABEL_ROW_WIDTH }}>
               {monthLabels.map(({ week, label }, index) => (
                 <span
                   key={index}
-                  className="absolute text-[10px] text-[color:var(--color-text-muted)]"
+                  className="absolute top-0 text-[10px] leading-none text-[color:var(--color-text-muted)]"
                   style={{
-                    left: week * (CELL_SIZE + GAP) + 28,
+                    left: getMonthLabelLeft(week),
                   }}
                 >
                   {label}
@@ -107,22 +112,22 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
               ))}
             </div>
 
-            <div className="flex">
-              <div className="mr-1 flex flex-col gap-[3px] pr-1">
-                {[0, 1, 2, 3, 4, 5, 6].map((rowIndex) => (
+            <div className="flex items-start">
+              <div className="mr-[var(--hm-gap)] flex w-[var(--hm-day-label-width)] flex-col gap-[var(--hm-gap)]">
+                {Array.from({ length: ROWS }, (_, rowIndex) => (
                   <div
                     key={rowIndex}
                     className="text-[10px] leading-none text-[color:var(--color-text-muted)]"
-                    style={{ height: CELL_SIZE }}
+                    style={{ height: "var(--hm-cell)" }}
                   >
                     {rowIndex < 6 && rowIndex % 2 === 0 ? DAYS[locale][rowIndex / 2] : ""}
                   </div>
                 ))}
               </div>
 
-              <div className="flex gap-[3px]">
+              <div className="flex gap-[var(--hm-gap)]" style={{ width: WEEK_GRID_WIDTH }}>
                 {weeks.map((week, weekIndex) => (
-                  <div key={weekIndex} className="flex flex-col gap-[3px]">
+                  <div key={weekIndex} className="flex flex-col gap-[var(--hm-gap)]">
                     {week.map((date) => {
                       const dateStr = date.toISOString().slice(0, 10);
                       const count = countMap.get(dateStr) || 0;
@@ -136,8 +141,8 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
                               : `${count} contributions on ${dateStr}`
                           }
                           style={{
-                            width: CELL_SIZE,
-                            height: CELL_SIZE,
+                            width: "var(--hm-cell)",
+                            height: "var(--hm-cell)",
                             backgroundColor: getColor(count),
                           }}
                         />
@@ -155,8 +160,8 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
                   key={value}
                   className="rounded-[2px]"
                   style={{
-                    width: CELL_SIZE - 1,
-                    height: CELL_SIZE - 1,
+                    width: "calc(var(--hm-cell) - 1px)",
+                    height: "calc(var(--hm-cell) - 1px)",
                     backgroundColor: getColor(value),
                   }}
                 />
