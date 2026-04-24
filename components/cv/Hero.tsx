@@ -25,60 +25,74 @@ export default function Hero({ data }: HeroProps) {
 
   return (
     <section className="relative pt-24 pb-20 md:pt-32 md:pb-28">
-      <div className="flex flex-col gap-8 md:gap-12">
-        <motion.div {...fadeUp(0)} className="flex flex-wrap items-center gap-3">
-          <span className="cv-badge">{data.hero.yearsBadge}</span>
-          <span className="cv-badge cv-badge--accent">{data.hero.intent}</span>
-        </motion.div>
+      <div className="flex flex-col gap-8 md:gap-10">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.82fr)] md:items-center md:gap-16">
+          <div className="flex flex-col gap-7 md:gap-8">
+            <motion.div {...fadeUp(0)} className="flex flex-wrap items-center gap-3">
+              <span className="cv-badge">{data.hero.yearsBadge}</span>
+              <span className="cv-badge cv-badge--accent">{data.hero.intent}</span>
+            </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-[1.35fr_1fr] md:items-end md:gap-16">
-          <div className="flex flex-col gap-3">
-            <motion.h1
-              {...fadeUp(0.05)}
-              className="cv-hero-name"
-              aria-label={data.hero.name}
-            >
-              {data.hero.name}
-            </motion.h1>
+            <div className="flex flex-col gap-3">
+              <motion.h1
+                {...fadeUp(0.05)}
+                className="cv-hero-name"
+                aria-label={data.hero.name}
+              >
+                {data.hero.name}
+              </motion.h1>
 
-            <motion.span
-              {...fadeUp(0.15)}
-              className="text-xs md:text-sm uppercase tracking-[0.35em] text-[color:var(--color-text-muted)]"
-            >
-              {data.hero.nameLatin}
-            </motion.span>
+              <motion.span
+                {...fadeUp(0.15)}
+                className="text-xs md:text-sm uppercase tracking-[0.35em] text-[color:var(--color-text-muted)]"
+              >
+                {data.hero.nameLatin}
+              </motion.span>
 
-            <motion.p
-              {...fadeUp(0.25)}
-              className="cv-heading-sm mt-4 text-[color:var(--color-text-strong)]"
-            >
-              {data.hero.role}{" "}
-              <span className="text-[color:var(--color-text-muted)]">
-                {data.hero.location}
-              </span>
-            </motion.p>
+              <motion.p
+                {...fadeUp(0.25)}
+                className="cv-heading-sm mt-4 text-[color:var(--color-text-strong)]"
+              >
+                {data.hero.role}{" "}
+                <span className="text-[color:var(--color-text-muted)]">
+                  {data.hero.location}
+                </span>
+              </motion.p>
+            </div>
           </div>
 
           <motion.div
             {...fadeUp(0.35)}
-            className="flex flex-col items-start gap-6 md:items-end"
+            className="cv-hero-card"
           >
-            <div className="cv-avatar-shell">
-              <div className="cv-avatar-frame">
-                <div className="cv-avatar-surface">
-                  <Image
-                    src={avatarSrc}
-                    alt={`${data.hero.name} portrait`}
-                    fill
-                    priority
-                    sizes="(min-width: 768px) 224px, 160px"
-                    className="object-cover object-center"
-                  />
+            <div className="flex items-center gap-4">
+              <div className="cv-avatar-shell">
+                <div className="cv-avatar-frame">
+                  <div className="cv-avatar-surface">
+                    <Image
+                      src={avatarSrc}
+                      alt={`${data.hero.name} portrait`}
+                      fill
+                      priority
+                      sizes="(min-width: 768px) 224px, 160px"
+                      className="object-cover object-center"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="min-w-0">
+                <div className="text-xs uppercase tracking-[0.22em] text-[color:var(--color-text-muted)]">
+                  {data.hero.nameLatin}
+                </div>
+                <div className="mt-2 flex items-center gap-2 text-sm text-[color:var(--color-text-strong)]">
+                  <span className="cv-status-dot" aria-hidden />
+                  <span className="truncate">{data.hero.intent}</span>
                 </div>
               </div>
             </div>
 
-            <blockquote className="cv-quote border-l border-[color:var(--color-border-strong)] pl-5 md:text-right">
+            <blockquote className="cv-quote">
               &ldquo; {data.hero.quote} &rdquo;
             </blockquote>
           </motion.div>
@@ -96,7 +110,7 @@ export default function Hero({ data }: HeroProps) {
 
         <motion.div
           {...fadeUp(0.55)}
-          className="mt-2 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[color:var(--color-text-muted)]"
+          className="cv-scroll-cue mt-1 flex items-center gap-2 text-xs uppercase tracking-[0.2em]"
         >
           <ArrowDown size={14} />
           <span>{data.nav.scroll}</span>

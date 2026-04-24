@@ -227,17 +227,19 @@ body {
     font-size: clamp(3.5rem, 10vw, 7.5rem);
     font-weight: 600;
     line-height: 0.95;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.01em;
     color: var(--color-text-strong);
   }
 
   .cv-quote {
     font-family: var(--font-space-grotesk), sans-serif;
-    font-size: clamp(1rem, 1.4vw, 1.15rem);
-    line-height: 1.7;
+    font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+    line-height: 1.58;
     color: var(--color-text);
-    max-width: 46ch;
+    max-width: 38ch;
     font-style: italic;
+    border-left: 1px solid rgba(201, 154, 62, 0.45);
+    padding-left: 1rem;
   }
 
   .cv-badge {
@@ -247,8 +249,8 @@ body {
     padding: 0.35rem 0.8rem;
     border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-pill);
-    background: rgba(201, 154, 62, 0.07);
-    color: var(--color-text-strong);
+    background: rgba(244, 234, 216, 0.035);
+    color: var(--color-text);
     font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -371,30 +373,166 @@ body {
     background: #1d1912;
   }
 
+  .cv-hero-card {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+    width: 100%;
+    max-width: 30rem;
+    overflow: hidden;
+    border: 1px solid rgba(244, 234, 216, 0.12);
+    border-radius: 0.5rem;
+    background:
+      linear-gradient(145deg, rgba(23, 20, 15, 0.76), rgba(11, 11, 9, 0.54)),
+      rgba(17, 16, 13, 0.58);
+    box-shadow:
+      0 18px 46px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(244, 234, 216, 0.06);
+    padding: 1rem;
+    backdrop-filter: blur(14px);
+    transform: translateZ(0);
+    transition:
+      border-color var(--dur-mid) var(--ease-swift),
+      box-shadow var(--dur-mid) var(--ease-swift),
+      background var(--dur-mid) var(--ease-swift),
+      transform var(--dur-mid) var(--ease-swift);
+  }
+
+  .cv-hero-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cv-hero-card::before,
+  .cv-hero-card::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    transition:
+      opacity var(--dur-mid) var(--ease-swift),
+      transform 520ms var(--ease-swift);
+  }
+
+  .cv-hero-card::before {
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    background:
+      linear-gradient(112deg, transparent 0%, rgba(244, 234, 216, 0.08) 28%, transparent 48%),
+      radial-gradient(220px 150px at 18% 18%, rgba(244, 234, 216, 0.08), transparent 70%),
+      radial-gradient(260px 180px at 84% 76%, rgba(201, 154, 62, 0.1), transparent 76%);
+    transform: translateX(-8%) scale(1.03);
+    transform-origin: left center;
+  }
+
+  .cv-hero-card::after {
+    inset: 1px;
+    z-index: 0;
+    opacity: 0.36;
+    border-radius: inherit;
+    background:
+      radial-gradient(120px 80px at 20% 16%, rgba(244, 234, 216, 0.06), transparent 70%),
+      radial-gradient(180px 120px at 86% 20%, rgba(201, 154, 62, 0.075), transparent 72%);
+    filter: blur(10px);
+    transform: scale(0.98);
+  }
+
+  .cv-hero-card:hover {
+    border-color: rgba(244, 234, 216, 0.24);
+    background:
+      linear-gradient(145deg, rgba(29, 25, 18, 0.82), rgba(13, 13, 10, 0.64)),
+      rgba(17, 16, 13, 0.66);
+    box-shadow:
+      0 22px 54px rgba(0, 0, 0, 0.36),
+      0 0 0 1px rgba(201, 154, 62, 0.1),
+      inset 0 1px 0 rgba(244, 234, 216, 0.1),
+      inset 0 -1px 0 rgba(201, 154, 62, 0.075);
+    transform: translateY(-3px);
+  }
+
+  .cv-hero-card:hover::before {
+    opacity: 0.78;
+    transform: translateX(0) scale(1.04);
+  }
+
+  .cv-hero-card:hover::after {
+    opacity: 0.58;
+    transform: scale(1.02);
+  }
+
+  @media (min-width: 768px) {
+    .cv-hero-card {
+      margin-left: auto;
+      padding: 1.25rem;
+    }
+  }
+
   .cv-avatar-shell {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.22));
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 32% 26%, rgba(244, 234, 216, 0.22), transparent 36%),
+      linear-gradient(145deg, rgba(201, 154, 62, 0.38), rgba(244, 234, 216, 0.08));
+    padding: 0.35rem;
+    box-shadow:
+      0 14px 30px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(201, 154, 62, 0.22);
+    transition:
+      box-shadow var(--dur-mid) var(--ease-swift),
+      transform var(--dur-mid) var(--ease-swift);
+  }
+
+  .cv-hero-card:hover .cv-avatar-shell {
+    box-shadow:
+      0 18px 36px rgba(0, 0, 0, 0.36),
+      0 0 0 1px rgba(225, 189, 104, 0.38),
+      0 0 28px rgba(201, 154, 62, 0.16);
+    transform: translateY(-2px) scale(1.015);
   }
 
   .cv-avatar-shell::before {
-    content: none;
+    content: "";
+    position: absolute;
+    inset: -0.55rem;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(circle, rgba(201, 154, 62, 0.18) 0%, transparent 68%);
   }
 
   .cv-avatar-frame {
     position: relative;
-    width: 10rem;
-    height: 10rem;
+    width: 8.25rem;
+    height: 8.25rem;
     overflow: hidden;
     border-radius: 999px;
-    background: transparent;
-    box-shadow: none;
+    background: rgba(244, 234, 216, 0.05);
+    box-shadow:
+      inset 0 0 0 1px rgba(244, 234, 216, 0.5),
+      inset 0 -18px 30px rgba(11, 11, 9, 0.18);
+    transition:
+      box-shadow var(--dur-mid) var(--ease-swift),
+      transform var(--dur-mid) var(--ease-swift);
+  }
+
+  .cv-hero-card:hover .cv-avatar-frame {
+    box-shadow:
+      inset 0 0 0 1px rgba(244, 234, 216, 0.72),
+      inset 0 -18px 30px rgba(11, 11, 9, 0.2);
   }
 
   .cv-avatar-frame::after {
-    content: none;
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 28px rgba(11, 11, 9, 0.18);
+    pointer-events: none;
   }
 
   .cv-avatar-surface {
@@ -402,13 +540,22 @@ body {
     inset: 0;
     transform: scale(1);
     transform-origin: center;
+    transition: transform 520ms var(--ease-swift);
+  }
+
+  .cv-hero-card:hover .cv-avatar-surface {
+    transform: scale(1.035);
   }
 
   @media (min-width: 768px) {
     .cv-avatar-frame {
-      width: 14rem;
-      height: 14rem;
+      width: 9.5rem;
+      height: 9.5rem;
     }
+  }
+
+  .cv-scroll-cue {
+    color: rgba(122, 117, 104, 0.74);
   }
 
   .focus-ring {
@@ -453,5 +600,13 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .cv-hero-card:hover,
+  .cv-hero-card:hover::before,
+  .cv-hero-card:hover::after,
+  .cv-hero-card:hover .cv-avatar-shell,
+  .cv-hero-card:hover .cv-avatar-surface {
+    transform: none !important;
   }
 }
