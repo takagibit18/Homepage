@@ -15,7 +15,7 @@ export default function TopBar({ user, data, locale, onLocaleChange }: TopBarPro
   const displayName = user?.name || user?.login || data.footer.author;
 
   return (
-    <div className="sticky top-0 z-50 border-b border-[color:var(--color-border)] bg-[color:var(--color-bg)]/85 backdrop-blur">
+    <div className="sticky top-0 z-50 border-b border-[color:var(--color-border)] bg-[rgba(17,16,13,0.88)] backdrop-blur">
       <div className="cv-container flex h-14 items-center justify-between gap-4">
         <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
           <span className="cv-status-dot shrink-0" aria-hidden />
