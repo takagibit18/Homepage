@@ -7,9 +7,9 @@ export default function Skills({ data }: { data: CVData }) {
       <SectionHeader number="02" label={data.sections.skills} />
       <div className="flex flex-col">
         {data.skills.map((group) => (
-          <div key={group.group} className="cv-row">
-            <div className="cv-row-meta">
-              <strong>{group.group}</strong>
+          <div key={group.group} className="cv-skill-cluster">
+            <div>
+              <strong className="cv-skill-heading">{group.group}</strong>
             </div>
             <div className="flex flex-wrap gap-2.5">
               {group.items.map((item) => (

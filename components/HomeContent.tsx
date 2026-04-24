@@ -9,7 +9,6 @@ import About from "@/components/cv/About";
 import Skills from "@/components/cv/Skills";
 import Education from "@/components/cv/Education";
 import Languages from "@/components/cv/Languages";
-import Publications from "@/components/cv/Publications";
 import Contact from "@/components/cv/Contact";
 import Footer from "@/components/cv/Footer";
 import type { GitHubRepo, GitHubUser } from "@/lib/github";
@@ -41,7 +40,6 @@ export default function HomeContent({ user, repos, contributions }: HomeContentP
         <ContributionHeatmap contributions={contributions} locale={locale} data={data} />
         <Education data={data} />
         <Languages data={data} />
-        <Publications data={data} />
         <Contact data={data} />
         <Footer data={data} user={user} />
       </main>

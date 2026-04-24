@@ -46,10 +46,10 @@ interface CellResponse {
 }
 
 function getColor(count: number): string {
-  if (count === 0) return "rgba(244, 234, 216, 0.05)";
-  if (count <= 3) return "#4a3b1f";
-  if (count <= 7) return "#8a6b2c";
-  if (count <= 12) return "#c39344";
+  if (count === 0) return "rgba(244, 234, 216, 0.085)";
+  if (count <= 3) return "#5a4523";
+  if (count <= 7) return "#987333";
+  if (count <= 12) return "#cda04b";
   return "#eac977";
 }
 
@@ -164,6 +164,7 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
       <SectionHeader number="04" label={data.sections.activity} />
 
       <motion.div
+        className="cv-section-panel cv-heatmap-panel"
         initial={reducedMotion ? false : { opacity: 0, y: 16 }}
         whileInView={reducedMotion ? {} : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.35 }}
@@ -204,7 +205,7 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
               {monthLabels.map(({ week, label }, index) => (
                 <span
                   key={index}
-                  className="absolute top-0 text-[10px] leading-none text-[color:var(--color-text-muted)]"
+                  className="absolute top-0 text-[10px] leading-none text-[rgba(216,207,190,0.72)]"
                   style={{
                     left: getMonthLabelLeft(week),
                   }}
@@ -219,7 +220,7 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
                 {Array.from({ length: ROWS }, (_, rowIndex) => (
                   <div
                     key={rowIndex}
-                    className="text-[10px] leading-none text-[color:var(--color-text-muted)]"
+                    className="text-[10px] leading-none text-[rgba(216,207,190,0.72)]"
                     style={{ height: "var(--hm-cell)" }}
                   >
                     {rowIndex < 6 && rowIndex % 2 === 0 ? DAYS[locale][rowIndex / 2] : ""}
@@ -328,7 +329,7 @@ export default function ContributionHeatmap({ contributions, locale, data }: Hea
               </div>
             </div>
 
-            <div className="mt-4 flex items-center justify-end gap-1.5 text-[10px] text-[color:var(--color-text-muted)]">
+            <div className="mt-4 flex items-center justify-end gap-1.5 text-[10px] text-[rgba(216,207,190,0.72)]">
               <span>{t.less}</span>
               {[0, 1, 4, 8, 13].map((value) => (
                 <div

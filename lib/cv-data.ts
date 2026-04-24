@@ -220,7 +220,7 @@ export const CV_DATA: Record<Locale, CVData> = {
       },
       socials: [
         { label: "GitHub", href: "https://github.com/takagibit18" },
-        { label: "WeChat", text: "your-wechat-id", kind: "wechat" },
+        { label: "WeChat", text: "Sean_Yu3", kind: "wechat" },
       ],
     },
     footer: {

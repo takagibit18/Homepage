@@ -20,15 +20,17 @@ export default function Footer({ data, user }: FooterProps) {
       : "#contact";
 
   return (
-    <footer className="cv-section border-t border-[color:var(--color-border)]">
+    <footer className="cv-footer-lockup border-t border-[color:var(--color-border)]">
       <motion.div
         initial={reducedMotion ? false : { opacity: 0, y: 20 }}
         animate={reducedMotion ? {} : { opacity: 1, y: 0 }}
         transition={{ duration: 1.05, ease: [0.22, 0.68, 0.2, 1] }}
       >
-        <h2 className="cv-heading-xl mb-12">{data.footer.tagline}</h2>
+        <h2 className="cv-heading-xl mb-10 max-w-[14ch] text-[clamp(1.9rem,6.8vw,4.6rem)] md:mb-12 md:max-w-none">
+          {data.footer.tagline}
+        </h2>
 
-        <div className="grid gap-10 border-t border-[color:var(--color-border)] pt-10 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-12">
+        <div className="cv-section-panel grid gap-8 p-5 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-12 md:p-6">
           <div className="flex items-center gap-4">
             {user?.avatar_url ? (
               <Image
@@ -55,7 +57,7 @@ export default function Footer({ data, user }: FooterProps) {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <a href="#" className="cv-cta">
+            <a href="/cv.pdf" className="cv-cta">
               {data.nav.downloadCv}
             </a>
             <a href={contactHref} className="cv-cta cv-cta-primary">
@@ -64,7 +66,7 @@ export default function Footer({ data, user }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-12 flex items-center justify-between text-xs text-[color:var(--color-text-muted)]">
+        <div className="mt-10 flex items-center justify-between text-xs text-[color:var(--color-text-muted)]">
           <span>
             © {new Date().getFullYear()} {displayName}
           </span>

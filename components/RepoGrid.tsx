@@ -6,6 +6,7 @@ import SectionHeader from "@/components/cv/SectionHeader";
 import type { GitHubRepo } from "@/lib/github";
 import type { Locale } from "@/lib/locale";
 import type { CVData } from "@/lib/cv-data";
+import { FEATURED_PROJECTS, type FeaturedProject } from "@/lib/project-highlights";
 
 interface RepoGridProps {
   repos: GitHubRepo[];
@@ -36,71 +37,95 @@ const LANGUAGE_COLORS: Record<string, string> = {
   Shell: "#89e051",
 };
 
+type ProjectCard = {
+  project: FeaturedProject;
+  repo: GitHubRepo | null;
+};
+
 export default function RepoGrid({ repos, locale, data }: RepoGridProps) {
   const reducedMotion = useReducedMotion();
   const t = data.projects;
+  const featuredRepos: ProjectCard[] = FEATURED_PROJECTS.map((project) => {
+    const repo = repos.find((candidate) =>
+      project.repoAliases.includes(candidate.name.toLowerCase())
+    );
+    return { repo: repo || null, project };
+  });
 
   return (
     <section id="projects" className="cv-section">
       <SectionHeader number="03" label={data.sections.projects} />
 
-      {repos.length === 0 ? (
+      {featuredRepos.length === 0 ? (
         <p className="text-sm text-[color:var(--color-text-muted)]">{t.emptyState}</p>
       ) : (
-        <ul className="flex flex-col">
-          {repos.map((repo, index) => (
+        <ul className="grid gap-4 md:grid-cols-2">
+          {featuredRepos.map(({ repo, project }, index) => (
             <motion.li
-              key={repo.html_url}
+              key={project.href}
               initial={reducedMotion ? false : { opacity: 0, y: 14 }}
               whileInView={reducedMotion ? {} : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.85, delay: index * 0.08, ease: [0.22, 0.68, 0.2, 1] }}
             >
               <a
-                href={repo.html_url}
+                href={repo?.html_url || project.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring group grid gap-3 border-t border-[color:var(--color-border)] py-7 first:border-t-0 md:grid-cols-[260px_1fr_auto] md:items-center md:gap-10"
+                className="cv-feature-card focus-ring group h-full content-between"
               >
-                <div className="cv-row-meta">
-                  <strong className="inline-flex items-center gap-2">
-                    {repo.language && (
-                      <span
-                        className="inline-block h-2.5 w-2.5 rounded-full"
-                        style={{
-                          backgroundColor:
-                            LANGUAGE_COLORS[repo.language] || "var(--color-text-muted)",
-                        }}
-                      />
-                    )}
-                    <span>{repo.language || "—"}</span>
-                  </strong>
-                  <span>{formatDate(repo.updated_at, locale, t)}</span>
+                <div>
+                  <div className="mb-8 flex items-start justify-between gap-4">
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <span className="cv-feature-meta">
+                        {(repo?.language || project.language) && (
+                          <span
+                            className="inline-block h-2.5 w-2.5 rounded-full"
+                            style={{
+                              backgroundColor:
+                                LANGUAGE_COLORS[repo?.language || project.language] ||
+                                "var(--color-text-muted)",
+                            }}
+                          />
+                        )}
+                        <strong className="font-medium text-[color:var(--color-text-strong)]">
+                          {repo?.language || project.language}
+                        </strong>
+                      </span>
+                      {repo?.updated_at && (
+                        <span className="cv-feature-meta">{formatDate(repo.updated_at, locale, t)}</span>
+                      )}
+                    </div>
+
+                    <ArrowUpRight
+                      size={22}
+                      className="shrink-0 text-[color:var(--color-text-muted)] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[color:var(--color-accent-strong)]"
+                    />
+                  </div>
+
+                  <h3 className="cv-row-title transition group-hover:text-[color:var(--color-accent-strong)]">
+                    {project.title}
+                  </h3>
+                  <p className="cv-feature-desc">
+                    {project.description[locale] || t.noDescription}
+                  </p>
                 </div>
 
-                <div>
-                  <h3 className="cv-row-title flex items-center gap-3 transition group-hover:text-[color:var(--color-accent-strong)]">
-                    {repo.name}
-                  </h3>
-                  <p className="cv-row-desc">
-                    {repo.description || t.noDescription}
-                  </p>
-                  <div className="mt-3 flex items-center gap-5 text-xs text-[color:var(--color-text-muted)]">
+                <div className="mt-8 flex items-center justify-between gap-4 border-t border-[rgba(244,234,216,0.08)] pt-4">
+                  <div className="flex items-center gap-5 text-xs text-[color:var(--color-text-muted)]">
                     <span className="inline-flex items-center gap-1.5">
                       <Star size={12} />
-                      {formatCount(repo.stargazers_count)}
+                      {formatCount(repo?.stargazers_count || 0)}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
                       <GitFork size={12} />
-                      {formatCount(repo.forks_count)}
+                      {formatCount(repo?.forks_count || 0)}
                     </span>
                   </div>
+                  <span className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-text-faint)]">
+                    GitHub
+                  </span>
                 </div>
-
-                <ArrowUpRight
-                  size={24}
-                  className="hidden shrink-0 text-[color:var(--color-text-muted)] transition group-hover:text-[color:var(--color-accent-strong)] md:block"
-                />
               </a>
             </motion.li>
           ))}
