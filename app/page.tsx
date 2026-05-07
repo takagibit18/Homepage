@@ -8,6 +8,14 @@ export default async function HomePage() {
     getGitHubRepos(6),
     getContributions(),
   ]);
+  const talkToSeanUrl = process.env.NEXT_PUBLIC_TALK_TO_SEAN_URL?.trim() || null;
 
-  return <HomeContent user={user} repos={repos} contributions={contributions} />;
+  return (
+    <HomeContent
+      user={user}
+      repos={repos}
+      contributions={contributions}
+      talkToSeanUrl={talkToSeanUrl}
+    />
+  );
 }

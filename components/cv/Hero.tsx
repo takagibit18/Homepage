@@ -1,15 +1,16 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowUpRight, GitBranch, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import type { CVData } from "@/lib/cv-data";
 
 interface HeroProps {
   data: CVData;
+  talkToSeanUrl: string | null;
 }
 
-export default function Hero({ data }: HeroProps) {
+export default function Hero({ data, talkToSeanUrl }: HeroProps) {
   const reducedMotion = useReducedMotion();
   const EASE = [0.22, 0.68, 0.2, 1] as const;
   const avatarSrc = "/avatar-warm-portrait.png";
@@ -26,8 +27,8 @@ export default function Hero({ data }: HeroProps) {
   return (
     <section className="relative pt-24 pb-20 md:pt-32 md:pb-28">
       <div className="flex flex-col gap-8 md:gap-10">
-        <div className="grid gap-8 md:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.82fr)] md:items-center md:gap-16">
-          <div className="flex flex-col gap-7 md:gap-8">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.82fr)] md:items-start md:gap-16">
+          <div className="flex flex-col gap-5 md:gap-6">
             <motion.div {...fadeUp(0)} className="flex flex-wrap items-center gap-3">
               <span className="cv-badge">{data.hero.yearsBadge}</span>
               <span className="cv-badge cv-badge--accent">{data.hero.intent}</span>
@@ -51,7 +52,7 @@ export default function Hero({ data }: HeroProps) {
 
               <motion.p
                 {...fadeUp(0.25)}
-                className="cv-heading-sm mt-4 text-[color:var(--color-text-strong)]"
+                className="cv-heading-sm mt-2 max-w-3xl text-[color:var(--color-text-strong)]"
               >
                 {data.hero.role}{" "}
                 <span className="text-[color:var(--color-text-muted)]">
@@ -59,6 +60,28 @@ export default function Hero({ data }: HeroProps) {
                 </span>
               </motion.p>
             </div>
+
+            <motion.div {...fadeUp(0.32)} className="flex flex-wrap items-center gap-3 pt-1">
+              <a href="#projects" className="cv-cta cv-cta-primary focus-ring text-sm">
+                {data.nav.exploreProjects}
+                <ArrowDown size={14} />
+              </a>
+              {talkToSeanUrl && (
+                <a
+                  href={talkToSeanUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cv-cta cv-cta--cool focus-ring text-sm"
+                >
+                  <MessageCircle size={15} />
+                  {data.hero.talkToSean}
+                  <ArrowUpRight size={13} />
+                </a>
+              )}
+              <a href="/cv.pdf" className="cv-cta cv-cta--ghost focus-ring text-sm">
+                {data.nav.downloadCv}
+              </a>
+            </motion.div>
           </div>
 
           <motion.div
@@ -95,18 +118,38 @@ export default function Hero({ data }: HeroProps) {
             <blockquote className="cv-quote">
               &ldquo; {data.hero.quote} &rdquo;
             </blockquote>
+
+            <div className="cv-agent-lab" aria-label={data.hero.labTitle}>
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <div className="text-xs uppercase tracking-[0.24em] text-[color:var(--color-text-muted)]">
+                    {data.hero.labTitle}
+                  </div>
+                  <div className="mt-1 text-sm text-[color:var(--color-text)]">
+                    {data.hero.labSubtitle}
+                  </div>
+                </div>
+                <GitBranch size={18} className="shrink-0 text-[color:var(--color-accent-strong)]" />
+              </div>
+
+              <div className="mt-5 grid gap-3">
+                {data.hero.proofPoints.map((item) => (
+                  <div key={item.label} className="cv-agent-step">
+                    <span className="cv-agent-step-label">{item.label}</span>
+                    <div className="min-w-0">
+                      <div className="text-sm font-medium text-[color:var(--color-text-strong)]">
+                        {item.value}
+                      </div>
+                      <div className="mt-1 text-xs leading-5 text-[color:var(--color-text-muted)]">
+                        {item.detail}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </div>
-
-        <motion.div {...fadeUp(0.45)} className="flex flex-wrap items-center gap-3">
-          <a href="/cv.pdf" className="cv-cta cv-cta-primary focus-ring text-sm">
-            {data.nav.downloadCv}
-          </a>
-          <a href="#projects" className="cv-cta cv-cta--ghost focus-ring text-sm">
-            {data.sections.projects}
-            <ArrowDown size={14} />
-          </a>
-        </motion.div>
 
         <motion.div
           {...fadeUp(0.55)}

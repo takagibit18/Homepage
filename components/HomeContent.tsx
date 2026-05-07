@@ -20,9 +20,15 @@ interface HomeContentProps {
   user: GitHubUser | null;
   repos: GitHubRepo[];
   contributions: ContributionDay[];
+  talkToSeanUrl: string | null;
 }
 
-export default function HomeContent({ user, repos, contributions }: HomeContentProps) {
+export default function HomeContent({
+  user,
+  repos,
+  contributions,
+  talkToSeanUrl,
+}: HomeContentProps) {
   const [locale, setLocale] = useState<Locale>("en");
   const data = useMemo(() => CV_DATA[locale], [locale]);
 
@@ -33,14 +39,14 @@ export default function HomeContent({ user, repos, contributions }: HomeContentP
       <div className="page-grain" aria-hidden />
 
       <main className="cv-container relative">
-        <Hero data={data} />
+        <Hero data={data} talkToSeanUrl={talkToSeanUrl} />
         <About data={data} />
         <Skills data={data} />
         <RepoGrid repos={repos} locale={locale} data={data} />
         <ContributionHeatmap contributions={contributions} locale={locale} data={data} />
         <Education data={data} />
         <Languages data={data} />
-        <Contact data={data} />
+        <Contact data={data} talkToSeanUrl={talkToSeanUrl} />
         <Footer data={data} user={user} />
       </main>
     </>
