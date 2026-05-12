@@ -14,6 +14,7 @@ export default function Hero({ data, talkToSeanUrl }: HeroProps) {
   const reducedMotion = useReducedMotion();
   const EASE = [0.22, 0.68, 0.2, 1] as const;
   const avatarSrc = "/avatar-warm-portrait.png";
+  const isExternalChat = talkToSeanUrl ? !talkToSeanUrl.startsWith("/") : false;
 
   const fadeUp = (delay: number) =>
     reducedMotion
@@ -69,8 +70,8 @@ export default function Hero({ data, talkToSeanUrl }: HeroProps) {
               {talkToSeanUrl && (
                 <a
                   href={talkToSeanUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={isExternalChat ? "_blank" : undefined}
+                  rel={isExternalChat ? "noopener noreferrer" : undefined}
                   className="cv-cta cv-cta--cool focus-ring text-sm"
                 >
                   <MessageCircle size={15} />

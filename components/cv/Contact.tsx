@@ -16,6 +16,7 @@ export default function Contact({
   talkToSeanUrl: string | null;
 }) {
   const c = data.contact;
+  const isExternalChat = talkToSeanUrl ? !talkToSeanUrl.startsWith("/") : false;
 
   const Row = ({
     label,
@@ -61,7 +62,7 @@ export default function Contact({
             label={c.talkToSeanLabel}
             value={c.talkToSeanValue}
             href={talkToSeanUrl}
-            external
+            external={isExternalChat}
           />
         )}
         <div className="cv-contact-link cv-contact-social">
