@@ -1,14 +1,20 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import nextPlugin from "@next/eslint-plugin-next";
+import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const compat = new FlatCompat({ baseDirectory: __dirname });
-
-export default [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+export default tseslint.config(
   {
+    name: "next/core-web-vitals",
+    plugins: {
+      "@next/next": nextPlugin,
+    },
+    rules: nextPlugin.configs["core-web-vitals"].rules,
+  },
+  {
+    name: "next/recommended",
+    rules: nextPlugin.configs.recommended.rules,
+  },
+  {
+    name: "project/ignores",
     ignores: [
       ".next/**",
       "node_modules/**",
@@ -18,4 +24,4 @@ export default [
       "tsconfig.tsbuildinfo",
     ],
   },
-];
+);
