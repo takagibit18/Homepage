@@ -1,6 +1,7 @@
 "use client";
 
-import { Star, GitFork, ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Star, GitFork, ArrowUpRight, Layers, ListChecks } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import SectionHeader from "@/components/cv/SectionHeader";
 import type { GitHubRepo } from "@/lib/github";
@@ -72,7 +73,7 @@ export default function RepoGrid({ repos, locale, data }: RepoGridProps) {
                 href={repo?.html_url || project.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cv-feature-card focus-ring group h-full content-between"
+                className="cv-feature-card cv-case-card focus-ring group h-full content-between"
               >
                 <div>
                   <div className="mb-8 flex items-start justify-between gap-4">
@@ -93,7 +94,9 @@ export default function RepoGrid({ repos, locale, data }: RepoGridProps) {
                         </strong>
                       </span>
                       {repo?.updated_at && (
-                        <span className="cv-feature-meta">{formatDate(repo.updated_at, locale, t)}</span>
+                        <span className="cv-feature-meta" suppressHydrationWarning>
+                          {formatDate(repo.updated_at, locale, t)}
+                        </span>
                       )}
                     </div>
 
@@ -109,6 +112,35 @@ export default function RepoGrid({ repos, locale, data }: RepoGridProps) {
                   <p className="cv-feature-desc">
                     {project.description[locale] || t.noDescription}
                   </p>
+
+                  <dl className="mt-7 grid gap-4">
+                    <div className="cv-case-row">
+                      <dt>{t.problemLabel}</dt>
+                      <dd>{project.problem[locale]}</dd>
+                    </div>
+                    <div className="cv-case-row">
+                      <dt>{t.architectureLabel}</dt>
+                      <dd className="inline-flex items-start gap-2">
+                        <Layers size={14} className="mt-1 shrink-0 text-[color:var(--color-accent-strong)]" />
+                        <span>{project.architecture[locale]}</span>
+                      </dd>
+                    </div>
+                    <div className="cv-case-row">
+                      <dt>{t.evidenceLabel}</dt>
+                      <dd className="inline-flex items-start gap-2">
+                        <ListChecks size={14} className="mt-1 shrink-0 text-[color:var(--color-accent-strong)]" />
+                        <span>{project.evidence[locale]}</span>
+                      </dd>
+                    </div>
+                  </dl>
+
+                  <div className="mt-6 flex flex-wrap gap-2" aria-label={t.stackLabel}>
+                    {project.stack.map((item) => (
+                      <span key={item} className="cv-mini-chip">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="mt-8 flex items-center justify-between gap-4 border-t border-[rgba(244,234,216,0.08)] pt-4">

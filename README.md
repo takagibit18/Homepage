@@ -12,6 +12,20 @@
 
 ---
 
+## Talk-to-Sean v2 Product Surface
+
+This repository now serves the runtime version of Sean's personal homepage and AI profile assistant.
+
+- `/` renders Hero, About, Skills, Projects, Activity, Education, Languages, Publications, Contact, and Footer.
+- `/chat` renders the Talk to Sean AI profile assistant.
+- `/api/chat` calls an OpenAI-compatible model provider from the server side.
+- `/api/health` supports deployment smoke checks.
+- `/api/dev/config-check` exposes masked configuration self-checks in development only.
+
+The homepage CTA is explicit: the `Talk to Sean` button routes directly to `/chat`.
+
+---
+
 ## Tech Stack
 
 <div align="center">
@@ -39,8 +53,8 @@
   <a href="https://github.com/takagibit18/review-debug-agent">
     <img width="420" src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=takagibit18&repo=review-debug-agent&theme=react&bg_color=1F222E&title_color=79c0ff&hide_border=true&icon_color=58a6ff&show_icons=true&show_description=true" alt="review-debug-agent" />
   </a>
-  <a href="https://github.com/takagibit18/2026Agent">
-    <img width="420" src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=takagibit18&repo=2026Agent&theme=react&bg_color=1F222E&title_color=79c0ff&hide_border=true&icon_color=58a6ff&show_icons=true&show_description=true" alt="2026Agent" />
+  <a href="https://github.com/takagibit18/shotgunCV">
+    <img width="420" src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=takagibit18&repo=shotgunCV&theme=react&bg_color=1F222E&title_color=79c0ff&hide_border=true&icon_color=58a6ff&show_icons=true&show_description=true" alt="shotgunCV" />
   </a>
 </p>
 
@@ -67,3 +81,7 @@
 - I value disciplined iteration, clear technical documentation, and continuous improvement from feedback.
 
 ---
+
+## Architecture Notes
+
+- [Chatbot deployment strategy](docs/chatbot-deployment-strategy.md): domestic static entry, overseas chatbot service, and API ownership plan.

@@ -14,19 +14,25 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4">
-      <div className="glass-card p-8 text-center max-w-md">
-        <h2 className="text-xl font-bold text-white/95 mb-2">
-          Something went wrong
-        </h2>
-        <p className="text-sm text-white/65 mb-5">{error.message}</p>
-        <button
-          onClick={reset}
-          className="px-5 py-2 rounded-lg bg-accent/20 text-accent hover:bg-accent/30 transition-colors text-sm font-medium"
-        >
-          Try again
-        </button>
-      </div>
+    <main id="main-content" className="cv-container flex min-h-screen items-center py-20">
+      <section className="cv-section-panel max-w-2xl p-6 md:p-8">
+        <p className="text-sm uppercase tracking-[0.22em] text-[color:var(--color-accent-strong)]">
+          GitHub data temporarily unavailable
+        </p>
+        <h1 className="cv-heading-lg mt-4">Sean Yu</h1>
+        <p className="mt-4 text-sm leading-7 text-[color:var(--color-text)]">
+          The live GitHub activity feed did not load, but the static profile is still
+          available. You can retry the page data request or continue to the contact links.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <button type="button" onClick={reset} className="cv-cta cv-cta-primary focus-ring">
+            Retry
+          </button>
+          <a href="#contact" className="cv-cta cv-cta--ghost focus-ring">
+            Contact
+          </a>
+        </div>
+      </section>
     </main>
   );
 }

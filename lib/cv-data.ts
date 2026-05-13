@@ -24,6 +24,12 @@ export type CVPublication = {
   href?: string;
 };
 
+export type CVHeroProof = {
+  label: string;
+  value: string;
+  detail: string;
+};
+
 /** Social entry: use `href` for links; omit `href` and set `text` for WeChat ID / handle. */
 export type CVSocial = {
   label: string;
@@ -45,6 +51,7 @@ export type CVData = {
   nav: {
     availability: string;
     downloadCv: string;
+    exploreProjects: string;
     contactMe: string;
     scroll: string;
     timezone: string;
@@ -57,6 +64,10 @@ export type CVData = {
     role: string;
     location: string;
     quote: string;
+    talkToSean: string;
+    labTitle: string;
+    labSubtitle: string;
+    proofPoints: CVHeroProof[];
   };
   sections: {
     about: string;
@@ -83,6 +94,10 @@ export type CVData = {
     month: string;
     ago: string;
     noDescription: string;
+    problemLabel: string;
+    architectureLabel: string;
+    stackLabel: string;
+    evidenceLabel: string;
   };
   activity: {
     total: (n: string) => string;
@@ -101,8 +116,28 @@ export type CVData = {
     email: string;
     site: string;
     siteHref: string;
+    talkToSeanLabel: string;
+    talkToSeanValue: string;
     weChat: CVContactWeChat;
     socials: CVSocial[];
+  };
+  chat: {
+    title: string;
+    eyebrow: string;
+    ready: string;
+    replying: string;
+    visitor: string;
+    assistant: string;
+    reset: string;
+    backHome: string;
+    welcomeTitle: string;
+    welcomeBody: string;
+    placeholder: string;
+    send: string;
+    characterCount: (remaining: number) => string;
+    shiftEnterTooltip: string;
+    starterPrompts: string[];
+    errors: Record<string, string>;
   };
   footer: {
     tagline: string;
@@ -115,8 +150,9 @@ export type CVData = {
 export const CV_DATA: Record<Locale, CVData> = {
   en: {
     nav: {
-      availability: "Open to Agent / LLM roles",
+      availability: "Building eval-first Agent / RAG systems",
       downloadCv: "Download CV",
+      exploreProjects: "Explore Projects",
       contactMe: "Contact Me",
       scroll: "Scroll",
       timezone: "(UTC+8)",
@@ -125,11 +161,32 @@ export const CV_DATA: Record<Locale, CVData> = {
       yearsBadge: "Class of '27  ·  CS @ MUC",
       name: "Sean Yu",
       nameLatin: "SEAN YU",
-      intent: "Open to Agent / LLM roles",
-      role: "Agent & LLM engineer,",
-      location: "based in Beijing",
+      intent: "Agent / RAG / LLM systems",
+      role: "AI-native developer,",
+      location:
+        "combining product taste with engineering discipline to turn LLM ideas into traceable, evaluable systems.",
       quote:
-        "I judge LLM applications on reproducible evals and end-to-end traces—not on gut feel.",
+        "I judge LLM applications on reproducible evals and end-to-end traces, not on gut feel.",
+      talkToSean: "Talk to Sean",
+      labTitle: "Agent lab notes",
+      labSubtitle: "From prompt to trace to measurable behavior.",
+      proofPoints: [
+        {
+          label: "Trace",
+          value: "tool calls",
+          detail: "structured inputs, observable failures, retry paths",
+        },
+        {
+          label: "Retrieval",
+          value: "hybrid RAG",
+          detail: "embedding + lexical search, reranking, context control",
+        },
+        {
+          label: "Eval",
+          value: "rubrics",
+          detail: "case suites, score deltas, reproducible regressions",
+        },
+      ],
     },
     sections: {
       about: "about",
@@ -144,7 +201,7 @@ export const CV_DATA: Record<Locale, CVData> = {
     about: {
       meta: "who I am",
       body:
-        "CS undergraduate at Minzu University of China (985). I build LLM-backed services with Python—FastAPI, Pydantic, and async patterns—plus MySQL and Redis. I care about prompt design, structured outputs, tool calling, and agent orchestration, and I’m comfortable shipping with Docker and GitHub Actions. Open source contributor; used to PRs, issues, and code review.",
+        "CS undergraduate at Minzu University of China (985). I build LLM-backed services with Python, FastAPI, Pydantic, and async patterns, plus MySQL and Redis. I care about prompt design, structured outputs, tool calling, retrieval quality, and agent orchestration. My default loop is prototype, trace, evaluate, then harden the system with Docker, GitHub Actions, and reviewable open-source workflows.",
     },
     skills: [
       {
@@ -175,6 +232,10 @@ export const CV_DATA: Record<Locale, CVData> = {
       ago: " ago",
       noDescription:
         "No description yet. This repository focuses on implementation details and iterative improvements.",
+      problemLabel: "Problem",
+      architectureLabel: "Architecture",
+      stackLabel: "Stack",
+      evidenceLabel: "Evidence",
     },
     activity: {
       total: (n) => `${n} contributions in the last 6 months`,
@@ -211,6 +272,8 @@ export const CV_DATA: Record<Locale, CVData> = {
       email: "huali6641@gmail.com",
       site: "takagibit18",
       siteHref: "https://github.com/takagibit18",
+      talkToSeanLabel: "AI profile",
+      talkToSeanValue: "Talk to Sean",
       weChat: {
         modalClose: "Close",
         modalCopy: "Copy WeChat ID",
@@ -223,6 +286,38 @@ export const CV_DATA: Record<Locale, CVData> = {
         { label: "WeChat", text: "Sean_Yu3", kind: "wechat" },
       ],
     },
+    chat: {
+      title: "Talk to Sean",
+      eyebrow: "AI profile assistant",
+      ready: "Ready for questions",
+      replying: "Sean AI is replying",
+      visitor: "Visitor",
+      assistant: "Sean AI",
+      reset: "Reset",
+      backHome: "Back to homepage",
+      welcomeTitle: "Ask about Sean's work",
+      welcomeBody:
+        "This assistant answers from Sean's public profile, projects, and engineering notes.",
+      placeholder: "Ask about Sean's agent, RAG, or backend work...",
+      send: "Send",
+      characterCount: (remaining) => `${remaining} characters left`,
+      shiftEnterTooltip: "Shift+Enter inserts a new line",
+      starterPrompts: [
+        "What kind of LLM systems has Sean built?",
+        "Summarize Sean's strongest engineering skills.",
+        "How should I evaluate Sean for an agent project?",
+      ],
+      errors: {
+        MISSING_API_KEY: "Service not configured yet. Please contact the site owner.",
+        INVALID_BASE_URL: "Model provider is misconfigured.",
+        MODEL_UNAVAILABLE: "AI model is temporarily unavailable.",
+        RATE_LIMITED: "Too many requests. Please wait a moment and try again.",
+        QUOTA_EXHAUSTED: "Today's public quota is used up. Please try again tomorrow.",
+        INVALID_MESSAGE: "Please send a non-empty message under 1200 characters.",
+        PROVIDER_TIMEOUT: "AI is taking too long. Please try again.",
+        default: "Something went wrong. Please try again.",
+      },
+    },
     footer: {
       tagline: "Eval first. Scale second.",
       author: "Sean Yu",
@@ -232,8 +327,9 @@ export const CV_DATA: Record<Locale, CVData> = {
   },
   zh: {
     nav: {
-      availability: "意向：Agent / LLM 工程师",
+      availability: "构建评测优先的 Agent / RAG 系统",
       downloadCv: "下载简历",
+      exploreProjects: "查看项目",
       contactMe: "联系我",
       scroll: "向下滚动",
       timezone: "(UTC+8)",
@@ -242,11 +338,31 @@ export const CV_DATA: Record<Locale, CVData> = {
       yearsBadge: "27届 · 中央民大计科",
       name: "欣禹行",
       nameLatin: "XIN YUXING",
-      intent: "意向：Agent / LLM 工程师",
-      role: "Agent / LLM 方向开发者，",
-      location: "就读于北京",
+      intent: "Agent / RAG / LLM 系统",
+      role: "AI-native 开发者，",
+      location: "结合产品品味与工程纪律，把 LLM 想法打磨成可追踪、可评测的系统。",
       quote:
         "对大模型应用的判断，我坚持以可复现的评测与端到端链路为依据，而不是依赖主观感觉。",
+      talkToSean: "和 Sean 聊聊",
+      labTitle: "Agent 工程笔记",
+      labSubtitle: "从提示词到链路追踪，再到可衡量行为。",
+      proofPoints: [
+        {
+          label: "Trace",
+          value: "工具调用",
+          detail: "结构化输入、失败可观测、重试路径",
+        },
+        {
+          label: "Retrieval",
+          value: "混合 RAG",
+          detail: "向量 + 关键词检索、重排、上下文控制",
+        },
+        {
+          label: "Eval",
+          value: "评分规约",
+          detail: "用例集、分数变化、可复现回归",
+        },
+      ],
     },
     sections: {
       about: "关于",
@@ -261,7 +377,7 @@ export const CV_DATA: Record<Locale, CVData> = {
     about: {
       meta: "个人简介",
       body:
-        "中央民族大学（985）计算机科学与技术本科在读，GPA 3.6。擅长以 Python 做异步与工程化开发，熟悉 FastAPI、Pydantic、pytest、MySQL、Redis；掌握主流 LLM API 接入、Prompt Engineering、Tool Calling、结构化输出与 Agent 基础编排，并了解向量检索、混合检索、Reranker 与 RAGAS 等评测思路。具备 Docker、GitHub Actions CI、日志与错误处理及远程协作部署经验；积极参与开源，熟悉 PR、Issue 与 Code Review 流程。",
+        "中央民族大学（985）计算机科学与技术本科在读，GPA 3.6。擅长以 Python 做异步与工程化开发，熟悉 FastAPI、Pydantic、pytest、MySQL、Redis；关注 LLM API 接入、Prompt Engineering、Tool Calling、结构化输出、检索质量与 Agent 编排。我的默认工作流是先快速原型，再做链路追踪和评测，最后用 Docker、GitHub Actions 与可 review 的开源协作流程把系统打磨稳定。",
     },
     skills: [
       {
@@ -291,6 +407,10 @@ export const CV_DATA: Record<Locale, CVData> = {
       month: "个月",
       ago: "前",
       noDescription: "暂无描述，该仓库当前主要用于功能迭代与实现细节更新。",
+      problemLabel: "问题",
+      architectureLabel: "架构",
+      stackLabel: "技术栈",
+      evidenceLabel: "证据",
     },
     activity: {
       total: (n) => `过去半年共 ${n} 次贡献`,
@@ -327,6 +447,8 @@ export const CV_DATA: Record<Locale, CVData> = {
       email: "huali6641@gmail.com",
       site: "takagibit18",
       siteHref: "https://github.com/takagibit18",
+      talkToSeanLabel: "AI 个人档案",
+      talkToSeanValue: "和 Sean 的 AI 分身聊聊",
       weChat: {
         modalClose: "关闭",
         modalCopy: "复制微信号",
@@ -338,6 +460,37 @@ export const CV_DATA: Record<Locale, CVData> = {
         { label: "GitHub", href: "https://github.com/takagibit18" },
         { label: "微信", text: "Sean_Yu3", kind: "wechat" },
       ],
+    },
+    chat: {
+      title: "和 Sean 聊聊",
+      eyebrow: "AI 个人档案助手",
+      ready: "可以开始提问",
+      replying: "Sean AI 正在回复",
+      visitor: "访客",
+      assistant: "Sean AI",
+      reset: "重置",
+      backHome: "返回主页",
+      welcomeTitle: "了解 Sean 的工作",
+      welcomeBody: "这个助手会基于 Sean 的公开主页、项目和工程笔记回答。",
+      placeholder: "询问 Sean 的 Agent、RAG 或后端工程经历...",
+      send: "发送",
+      characterCount: (remaining) => `还可输入 ${remaining} 个字符`,
+      shiftEnterTooltip: "Shift+Enter 插入换行",
+      starterPrompts: [
+        "Sean 做过哪些 LLM 系统？",
+        "总结 Sean 最强的工程能力。",
+        "如何评估 Sean 是否适合 Agent 项目？",
+      ],
+      errors: {
+        MISSING_API_KEY: "服务暂未配置。请联系站点所有者。",
+        INVALID_BASE_URL: "模型服务配置错误。",
+        MODEL_UNAVAILABLE: "AI 模型暂时不可用。",
+        RATE_LIMITED: "请求过快，请稍后再试。",
+        QUOTA_EXHAUSTED: "今天的公开额度已用完，请明天再试。",
+        INVALID_MESSAGE: "请发送 1200 字以内的非空消息。",
+        PROVIDER_TIMEOUT: "AI 回复时间过长，请重试。",
+        default: "发生错误，请稍后重试。",
+      },
     },
     footer: {
       tagline: "评测先行，再谈规模。",

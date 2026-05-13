@@ -12,10 +12,12 @@
   --color-bg-elevated: #17140f;
   --color-text-strong: #f4ead8;
   --color-text: #d8cfbe;
-  --color-text-muted: #7a7568;
+  --color-text-muted: #a39b8b;
   --color-text-faint: #504b42;
   --color-accent: #c99a3e;
   --color-accent-strong: #e1bd68;
+  --color-cool: #7ec5d6;
+  --color-danger: #f07167;
   --color-success: #7fc26b;
   --color-border: #2f2a22;
   --color-border-strong: #4a3d25;
@@ -137,6 +139,7 @@ body {
   }
 
   .cv-section-number .label {
+    margin: 0;
     font-size: 1.05rem;
     font-weight: 500;
     text-transform: lowercase;
@@ -345,6 +348,21 @@ body {
     color: var(--color-text-strong);
   }
 
+  .cv-cta--cool {
+    background: rgba(76, 142, 168, 0.12);
+    color: var(--color-text-strong);
+    box-shadow:
+      0 0 0 1px rgba(126, 197, 214, 0.24),
+      0 10px 24px rgba(76, 142, 168, 0.08);
+  }
+
+  .cv-cta--cool:hover {
+    background: rgba(76, 142, 168, 0.18);
+    box-shadow:
+      0 0 0 1px rgba(126, 197, 214, 0.42),
+      0 12px 28px rgba(76, 142, 168, 0.13);
+  }
+
   .cv-link {
     color: var(--color-text-strong);
     border-bottom: 1px solid var(--color-border-strong);
@@ -447,6 +465,45 @@ body {
 
   .cv-feature-card:hover::before {
     opacity: 0.96;
+  }
+
+  .cv-case-card {
+    min-height: 28rem;
+  }
+
+  .cv-case-row {
+    display: grid;
+    gap: 0.45rem;
+    border-top: 1px solid rgba(244, 234, 216, 0.07);
+    padding-top: 0.95rem;
+  }
+
+  .cv-case-row dt {
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(225, 189, 104, 0.86);
+  }
+
+  .cv-case-row dd {
+    margin: 0;
+    color: rgba(216, 207, 190, 0.86);
+    font-size: 0.88rem;
+    line-height: 1.68;
+  }
+
+  .cv-mini-chip {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(126, 197, 214, 0.18);
+    border-radius: 999px;
+    background: rgba(76, 142, 168, 0.08);
+    color: rgba(222, 239, 242, 0.92);
+    font-size: 0.72rem;
+    line-height: 1;
+    padding: 0.45rem 0.68rem;
   }
 
   .cv-feature-meta {
@@ -749,6 +806,40 @@ body {
     transform: scale(1.035);
   }
 
+  .cv-agent-lab {
+    border-top: 1px solid rgba(244, 234, 216, 0.09);
+    padding-top: 1.15rem;
+  }
+
+  .cv-agent-step {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0.9rem;
+    align-items: start;
+    border: 1px solid rgba(244, 234, 216, 0.08);
+    border-radius: 0.45rem;
+    background:
+      linear-gradient(135deg, rgba(76, 142, 168, 0.08), transparent 42%),
+      rgba(244, 234, 216, 0.024);
+    padding: 0.75rem 0.8rem;
+  }
+
+  .cv-agent-step-label {
+    color: rgba(126, 197, 214, 0.9);
+    font-family: var(--font-space-grotesk), sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 420px) {
+    .cv-agent-step {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (min-width: 768px) {
     .cv-avatar-frame {
       width: 9.5rem;
@@ -766,6 +857,41 @@ body {
 
   .focus-ring:focus-visible {
     box-shadow: 0 0 0 2px rgba(201, 154, 62, 0.58), 0 0 0 6px rgba(201, 154, 62, 0.18);
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  textarea:focus-visible,
+  input:focus-visible,
+  [tabindex]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(201, 154, 62, 0.58), 0 0 0 6px rgba(201, 154, 62, 0.18);
+  }
+
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 300;
+    transform: translateY(-160%);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-bg);
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: transform var(--dur-fast) var(--ease-swift);
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+
+  .chat-stream-cursor {
+    display: inline-block;
+    margin-left: 0.2rem;
+    color: var(--color-accent-strong);
+    animation: cursorBlink 1s steps(2, start) infinite;
   }
 }
 
@@ -791,6 +917,17 @@ body {
   }
   50% {
     box-shadow: 0 0 0 6px rgba(127, 194, 107, 0.08);
+  }
+}
+
+@keyframes cursorBlink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+  49%,
+  100% {
+    opacity: 0;
   }
 }
 

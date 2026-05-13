@@ -66,16 +66,34 @@ export default function Footer({ data, user }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-10 flex items-center justify-between text-xs text-[color:var(--color-text-muted)]">
-          <span>
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 text-xs text-[color:var(--color-text-muted)]">
+          <span suppressHydrationWarning>
             © {new Date().getFullYear()} {displayName}
           </span>
-          <a
-            href={data.footer.madeByHref}
-            className="transition hover:text-[color:var(--color-text-strong)]"
-          >
-            {data.footer.madeBy}
-          </a>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <a
+              href="https://beian.mps.gov.cn/#/query/webSearch?code=32081202000685"
+              rel="noreferrer"
+              target="_blank"
+              className="inline-flex items-center gap-1.5 transition hover:text-[color:var(--color-text-strong)]"
+            >
+              <Image
+                src="/beian-icon.png"
+                alt=""
+                width={16}
+                height={16}
+                className="h-4 w-4"
+                aria-hidden
+              />
+              <span>苏公网安备32081202000685号</span>
+            </a>
+            <a
+              href={data.footer.madeByHref}
+              className="transition hover:text-[color:var(--color-text-strong)]"
+            >
+              {data.footer.madeBy}
+            </a>
+          </div>
         </div>
       </motion.div>
     </footer>
