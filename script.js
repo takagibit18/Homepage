@@ -1,6 +1,5 @@
 /* ============================================================
-   Sean — Cuberto-style portfolio
-   Interactions: i18n, cursor, smooth scroll, reveal, hover
+   Sean portfolio interactions: i18n, navigation, motion and hover
    ============================================================ */
 (function () {
   "use strict";
@@ -232,32 +231,44 @@
   const loader = document.getElementById("loader");
   const loaderBar = document.getElementById("loaderBar");
   const loaderCount = document.getElementById("loaderCount");
+  let loaderStarted = false;
 
   function runLoader(done) {
-    if (prefersReduced) {
-      if (loader) loader.style.display = "none";
-      done();
-      return;
-    }
-    let pct = 0;
-    const tick = () => {
-      const step = Math.random() * 12 + 4;
-      pct = Math.min(100, pct + step);
-      if (loaderBar) loaderBar.style.width = pct + "%";
-      if (loaderCount) loaderCount.textContent = Math.floor(pct);
-      if (pct < 100) {
-        setTimeout(tick, 80 + Math.random() * 120);
-      } else {
-        setTimeout(() => {
-          if (loader) {
-            loader.classList.add("is-done");
-            setTimeout(() => { loader.style.display = "none"; }, 600);
-          }
-          done();
-        }, 300);
+    if (loaderStarted) return;
+    loaderStarted = true;
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      if (!loader) {
+        done();
+        return;
       }
+      loader.classList.add("is-done");
+      loader.setAttribute("aria-hidden", "true");
+      window.setTimeout(() => {
+        loader.style.display = "none";
+        done();
+      }, prefersReduced ? 0 : 180);
     };
-    tick();
+
+    try {
+      if (prefersReduced || !loader) {
+        finish();
+        return;
+      }
+      if (loaderBar) {
+        loaderBar.style.transition = "width 0.28s var(--ease-out)";
+        requestAnimationFrame(() => {
+          loaderBar.style.width = "100%";
+          if (loaderCount) loaderCount.textContent = "100";
+        });
+      }
+      else if (loaderCount) loaderCount.textContent = "100";
+      window.setTimeout(finish, 300);
+    } catch (error) {
+      finish();
+    }
   }
 
   /* ---------- Custom cursor ---------- */
@@ -294,14 +305,15 @@
   /* ---------- Smooth scroll (Lenis) ---------- */
   let lenis = null;
   if (!prefersReduced && typeof Lenis !== "undefined") {
-    lenis = new Lenis({
+    try {
+      lenis = new Lenis({
       duration: 1.4,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
       smoothTouch: false,
-    });
+      });
     // Single driver: use GSAP ticker if available (keeps Lenis + ScrollTrigger in lockstep),
     // otherwise fall back to a plain rAF loop. Never both — driving lenis.raf() twice per
     // frame makes the internal time delta double-count, which is exactly the "snap at the
@@ -314,7 +326,7 @@
       requestAnimationFrame(rafLenis);
     }
 
-    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
       a.addEventListener("click", (e) => {
         const id = a.getAttribute("href");
         if (id.length > 1) {
@@ -325,21 +337,29 @@
           }
         }
       });
-    });
+      });
+    } catch (error) {
+      lenis = null;
+    }
   }
 
   /* ---------- GSAP + ScrollTrigger ---------- */
+  function showAllAnimatedContent() {
+    document.querySelectorAll(".reveal-up, .reveal-text, .reveal-line em, .hero-left > *, .hero-right")
+      .forEach((el) => {
+        el.style.removeProperty("opacity");
+        el.style.removeProperty("transform");
+        el.style.removeProperty("animation");
+      });
+  }
+
   function initReveals() {
-    if (prefersReduced) {
-      document.querySelectorAll(".reveal-up, .reveal-text, .reveal-line em")
-        .forEach((el) => {
-          el.style.opacity = "1";
-          el.style.transform = "none";
-        });
+    if (prefersReduced || !lenis || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+      showAllAnimatedContent();
       return;
     }
-    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
+    try {
+      gsap.registerPlugin(ScrollTrigger);
 
     if (lenis) {
       // Lenis is already driven by gsap.ticker (set up at init).
@@ -368,10 +388,7 @@
       );
     });
 
-    /* Note: the Hero C meta items use CSS fadeUp (see styles.css) for their
-       entrance so they stay visible on first paint. A GSAP fromTo here would
-       set inline opacity:0 with a delay and override the CSS animation's final
-       state, causing a flicker — so we intentionally do NOT animate them. */
+    /* Hero metadata uses its CSS entrance so it remains visible on first paint. */
 
     gsap.utils.toArray(".stat-num").forEach((el) => {
       const finalText = el.textContent;
@@ -389,6 +406,9 @@
         onComplete: () => { el.innerHTML = finalText; },
       });
     });
+    } catch (error) {
+      showAllAnimatedContent();
+    }
   }
 
   /* ---------- Nav scroll state ---------- */
@@ -401,6 +421,42 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  /* ---------- Mobile navigation ---------- */
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const mobileBreakpoint = window.matchMedia("(min-width: 769px)");
+  function closeMobileMenu() {
+    if (!menuToggle || !mobileMenu) return;
+    mobileMenu.hidden = true;
+    menuToggle.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("menu-open");
+  }
+  function setMobileMenu(open) {
+    if (!menuToggle || !mobileMenu) return;
+    mobileMenu.hidden = !open;
+    menuToggle.setAttribute("aria-expanded", String(open));
+    document.body.classList.toggle("menu-open", open);
+  }
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", () => {
+      setMobileMenu(menuToggle.getAttribute("aria-expanded") !== "true");
+    });
+    mobileMenu.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", closeMobileMenu);
+    });
+    document.addEventListener("click", (event) => {
+      if (!mobileMenu.hidden && !mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+        closeMobileMenu();
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMobileMenu();
+    });
+    mobileBreakpoint.addEventListener("change", (event) => {
+      if (event.matches) closeMobileMenu();
+    });
+  }
+
   /* ---------- Skill card pointer glow ---------- */
   document.querySelectorAll(".skill-card").forEach((card) => {
     card.addEventListener("pointermove", (e) => {
@@ -412,7 +468,7 @@
     });
   });
 
-  /* ---------- Hero terminal card — subtle 3D tilt ---------- */
+  /* ---------- Hero terminal card: subtle 3D tilt ---------- */
   const term = document.getElementById("term");
   if (term && !isTouch) {
     window.addEventListener("mousemove", (e) => {
@@ -441,35 +497,18 @@
   setInterval(updateTime, 1000);
 
   /* ---------- Boot ---------- */
-  function bootHeroIntro() {
-    if (!prefersReduced && typeof gsap !== "undefined") {
-      const heroLines = gsap.utils.toArray(".hero-title .reveal-text");
-      gsap.fromTo(heroLines,
-        { yPercent: 110 },
-        { yPercent: 0, duration: 1.3, ease: "power4.out", stagger: 0.12, delay: 0.1 }
-      );
-      const heroTag = document.querySelector(".hero-tag");
-      if (heroTag) {
-        gsap.fromTo(heroTag, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out" });
-      }
-    } else {
-      document.querySelectorAll(".hero-title .reveal-text").forEach((el) => {
-        el.style.transform = "none";
-      });
+  let hasBooted = false;
+  function boot() {
+    if (hasBooted) return;
+    hasBooted = true;
+    try {
+      runLoader(initReveals);
+    } catch (error) {
+      if (loader) loader.style.display = "none";
+      showAllAnimatedContent();
     }
   }
 
-  window.addEventListener("load", () => {
-    runLoader(() => {
-      bootHeroIntro();
-      initReveals();
-    });
-  });
-
-  if (document.readyState === "complete") {
-    runLoader(() => {
-      bootHeroIntro();
-      initReveals();
-    });
-  }
+  if (document.readyState === "complete") boot();
+  else window.addEventListener("load", boot, { once: true });
 })();
