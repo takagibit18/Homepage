@@ -49,8 +49,20 @@
 <button data-lang="zh" type="button">中</button>
 </div>
 <a class="nav-cta" data-i18n="nav.cta" href="#contact">Get in touch</a>
+<button aria-expanded="false" aria-label="Open menu" class="nav-burger" id="navBurger" type="button"><span></span><span></span></button>
 </div>
 </nav>
+<!-- Mobile menu -->
+<div aria-hidden="true" class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu-links">
+<a class="mobile-menu-link" href="#about"><span class="nav-num">01</span> <span data-i18n="nav.about">About</span></a>
+<a class="mobile-menu-link" href="#skills"><span class="nav-num">02</span> <span data-i18n="nav.skills">Skills</span></a>
+<a class="mobile-menu-link" href="#work"><span class="nav-num">03</span> <span data-i18n="nav.work">Work</span></a>
+<a class="mobile-menu-link" href="#experience"><span class="nav-num">04</span> <span data-i18n="nav.experience">Work Experience</span></a>
+<a class="mobile-menu-link" href="#education"><span class="nav-num">05</span> <span data-i18n="nav.education">Education</span></a>
+<a class="mobile-menu-link" href="#contact"><span class="nav-num">06</span> <span data-i18n="nav.contact">Contact</span></a>
+</div>
+</div>
 <!-- Hero -->
 <section class="hero" id="hero">
 <div class="hero-bg">
@@ -173,7 +185,6 @@
 <article class="skill-card reveal-up" data-hover="">
 <div class="skill-card-head">
 <span class="skill-num">01</span>
-<span class="skill-arrow">↗</span>
 </div>
 <h3 class="skill-title" data-i18n="skills.1.title">LLM Application Engineering</h3>
 <p class="skill-desc" data-i18n="skills.1.desc">LLM features with streaming responses, structured outputs, tool calling and context-aware prompts.</p>
@@ -187,7 +198,6 @@
 <article class="skill-card reveal-up" data-hover="">
 <div class="skill-card-head">
 <span class="skill-num">02</span>
-<span class="skill-arrow">↗</span>
 </div>
 <h3 class="skill-title" data-i18n="skills.2.title">Agent Workflow Engineering</h3>
 <p class="skill-desc" data-i18n="skills.2.desc">Controllable agent loops with clear state, tool boundaries, structured handoffs and failure handling.</p>
@@ -201,7 +211,6 @@
 <article class="skill-card reveal-up" data-hover="">
 <div class="skill-card-head">
 <span class="skill-num">03</span>
-<span class="skill-arrow">↗</span>
 </div>
 <h3 class="skill-title" data-i18n="skills.3.title">RAG &amp; Data Pipelines</h3>
 <p class="skill-desc" data-i18n="skills.3.desc">Document extraction, retrieval and evaluation pipelines for grounded, source-traced answers.</p>
@@ -215,7 +224,6 @@
 <article class="skill-card reveal-up" data-hover="">
 <div class="skill-card-head">
 <span class="skill-num">04</span>
-<span class="skill-arrow">↗</span>
 </div>
 <h3 class="skill-title" data-i18n="skills.4.title">AI Backend &amp; Evaluation</h3>
 <p class="skill-desc" data-i18n="skills.4.desc">FastAPI services, asynchronous workflows, schemas, tests and evaluation for dependable AI applications.</p>
@@ -278,7 +286,6 @@
 <div class="work-item-tags">
 <span>Batch Workflow</span><span>LangGraph</span><span>RAG</span><span>Pydantic</span>
 </div>
-<div class="work-item-arrow">↗</div>
 </article>
 <article class="work-item reveal-up" data-hover="">
 <div class="work-item-head">
@@ -292,7 +299,6 @@
 <div class="work-item-tags">
 <span>BM25</span><span>Hybrid Search</span><span>Re-ranking</span><span>Golden Eval</span>
 </div>
-<div class="work-item-arrow">↗</div>
 </article>
 </div>
 </div>
@@ -320,7 +326,6 @@
 <div class="work-item-tags">
 <span>AI Applications</span><span>RAG &amp; Eval</span><span>Enterprise Data</span><span>System Testing</span>
 </div>
-<div class="work-item-arrow">↗</div>
 </article>
 </div>
 </div>
@@ -344,7 +349,6 @@
 <div class="work-item-tags">
 <span>IELTS 7.0</span><span>GPA 3.6</span><span>Computer Science</span>
 </div>
-<div class="work-item-arrow">↗</div>
 </article>
 </div>
 </div>

@@ -5,6 +5,10 @@
 (function () {
   "use strict";
 
+  // Gate CSS reveal-animations behind JS availability: if this script (or the
+  // GSAP CDN) never runs, content stays visible instead of stuck at opacity:0.
+  document.documentElement.classList.add("js");
+
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isTouch = window.matchMedia("(hover: none), (max-width: 900px)").matches;
 
@@ -196,26 +200,38 @@
     if (stored === "en" || stored === "zh") currentLang = stored;
   } catch (e) {}
 
-  function applyLang(lang) {
+  function applyLang(lang, animate) {
     const dict = I18N[lang] || I18N.en;
-    currentLang = lang;
-    document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-    document.querySelectorAll("[data-i18n]").forEach((el) => {
-      const key = el.getAttribute("data-i18n");
-      if (key && dict[key] != null) el.innerHTML = dict[key];
-    });
-    document.querySelectorAll("#langSwitch button").forEach((b) => {
-      b.classList.toggle("is-active", b.dataset.lang === lang);
-    });
-    try { localStorage.setItem("sean-lang", lang); } catch (e) {}
-    // refresh ScrollTrigger positions in case text reflow changed layout
-    if (typeof ScrollTrigger !== "undefined") {
-      setTimeout(() => ScrollTrigger.refresh(), 50);
+    const swap = () => {
+      currentLang = lang;
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (key && dict[key] != null) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll("#langSwitch button").forEach((b) => {
+        b.classList.toggle("is-active", b.dataset.lang === lang);
+      });
+      try { localStorage.setItem("sean-lang", lang); } catch (e) {}
+      // refresh ScrollTrigger positions after the fade-in, once text reflow settled
+      if (typeof ScrollTrigger !== "undefined") {
+        setTimeout(() => ScrollTrigger.refresh(), 160);
+      }
+    };
+    // Fade the page out, swap text, fade back in — avoids an abrupt layout jump
+    if (animate && !prefersReduced) {
+      document.body.classList.add("lang-fading");
+      setTimeout(() => {
+        swap();
+        document.body.classList.remove("lang-fading");
+      }, 190);
+    } else {
+      swap();
     }
   }
 
   // Apply immediately to avoid flash
-  applyLang(currentLang);
+  applyLang(currentLang, false);
 
   // Bind switcher (after DOM is ready — script is at body end)
   const langSwitch = document.getElementById("langSwitch");
@@ -224,7 +240,7 @@
       const btn = e.target.closest("button[data-lang]");
       if (!btn) return;
       const lang = btn.dataset.lang;
-      if (lang !== currentLang) applyLang(lang);
+      if (lang !== currentLang) applyLang(lang, true);
     });
   }
 
@@ -321,24 +337,52 @@
           const target = document.querySelector(id);
           if (target) {
             e.preventDefault();
-            lenis.scrollTo(target, { offset: -20, duration: 1.2 });
+            // -80 clears the fixed nav (~70px tall when scrolled)
+            lenis.scrollTo(target, { offset: -80, duration: 1.2 });
           }
         }
       });
     });
   }
 
+  /* ---------- Mobile menu ---------- */
+  const burger = document.getElementById("navBurger");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  function setMenuOpen(open) {
+    if (!burger || !mobileMenu) return;
+    burger.classList.toggle("is-open", open);
+    mobileMenu.classList.toggle("is-open", open);
+    burger.setAttribute("aria-expanded", String(open));
+    mobileMenu.setAttribute("aria-hidden", String(!open));
+    document.body.style.overflow = open ? "hidden" : "";
+    if (lenis) { open ? lenis.stop() : lenis.start(); }
+  }
+  if (burger && mobileMenu) {
+    burger.addEventListener("click", () => {
+      setMenuOpen(!mobileMenu.classList.contains("is-open"));
+    });
+    mobileMenu.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", () => setMenuOpen(false));
+    });
+  }
+
   /* ---------- GSAP + ScrollTrigger ---------- */
+  function revealAllInstant() {
+    document.querySelectorAll(".reveal-up, .reveal-text, .reveal-line em")
+      .forEach((el) => {
+        el.style.opacity = "1";
+        el.style.transform = "none";
+      });
+  }
+
   function initReveals() {
-    if (prefersReduced) {
-      document.querySelectorAll(".reveal-up, .reveal-text, .reveal-line em")
-        .forEach((el) => {
-          el.style.opacity = "1";
-          el.style.transform = "none";
-        });
+    // Reduced motion OR GSAP CDN failed → show everything immediately,
+    // never leave content stuck at opacity:0.
+    if (prefersReduced || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+      revealAllInstant();
       return;
     }
-    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
     gsap.registerPlugin(ScrollTrigger);
 
     if (lenis) {
@@ -376,7 +420,19 @@
     gsap.utils.toArray(".stat-num").forEach((el) => {
       const finalText = el.textContent;
       const match = finalText.match(/^(\d+|∞)/);
-      if (!match || match[0] === "∞") return;
+      if (!match) return;
+      // "∞" can't count up — give it a gentle fade + scale entrance instead,
+      // matching the rhythm of the numeric count-ups.
+      if (match[0] === "∞") {
+        gsap.fromTo(el,
+          { scale: 0.4, opacity: 0 },
+          {
+            scale: 1, opacity: 1, duration: 1.1, ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 85%" },
+          }
+        );
+        return;
+      }
       const finalNum = parseInt(match[0], 10);
       const rest = finalText.replace(/^\d+/, "");
       const obj = { val: 0 };
