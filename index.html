@@ -1,344 +1,412 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="dark" />
-  <meta name="theme-color" content="#080808" />
-  <title>Sean | AI Agent &amp; LLM Application Developer</title>
-  <meta
-    name="description"
-    content="Sean is a computer science undergraduate building reliable AI agents, RAG systems and evaluation workflows."
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Sean | AI Agent &amp; LLM Application Developer" />
-  <meta
-    property="og:description"
-    content="Reliable AI agents, RAG systems and evaluation workflows built through hands-on projects."
-  />
-  <link rel="icon" href="data:," />
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sean — AI Agent &amp; LLM Application Developer</title>
+<meta content="Sean — computer science undergraduate building AI agent and LLM applications with Python, FastAPI, RAG and evaluation." name="description"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Styles -->
+<link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
-
-  <nav class="nav" id="nav" aria-label="Primary navigation">
-    <a class="nav-logo" href="#hero" aria-label="Sean, home">Sean</a>
-
-    <div class="nav-links">
-      <a class="nav-link" href="#about" data-i18n="nav.about">About</a>
-      <a class="nav-link" href="#skills" data-i18n="nav.skills">Skills</a>
-      <a class="nav-link" href="#work" data-i18n="nav.work">Work</a>
-      <a class="nav-link" href="#experience" data-i18n="nav.experience">Experience</a>
-      <a class="nav-link" href="#education" data-i18n="nav.education">Education</a>
-      <a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a>
-    </div>
-
-    <div class="nav-right">
-      <div class="lang-switch" id="langSwitch" aria-label="Language">
-        <button class="is-active" data-lang="en" type="button" aria-label="Use English" aria-pressed="true">EN</button>
-        <span class="lang-sep" aria-hidden="true">/</span>
-        <button data-lang="zh" type="button" aria-label="使用中文" aria-pressed="false">中</button>
-      </div>
-      <a
-        class="nav-cta"
-        data-i18n="nav.cta"
-        href="https://github.com/takagibit18"
-        rel="noopener"
-        target="_blank"
-      >GitHub</a>
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        type="button"
-        aria-controls="mobileMenu"
-        aria-expanded="false"
-        aria-label="Open navigation menu"
-      >
-        <span></span><span></span>
-      </button>
-    </div>
-
-    <div class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" role="navigation" hidden>
-      <a class="mobile-nav-link" href="#about" data-i18n="nav.about">About</a>
-      <a class="mobile-nav-link" href="#skills" data-i18n="nav.skills">Skills</a>
-      <a class="mobile-nav-link" href="#work" data-i18n="nav.work">Work</a>
-      <a class="mobile-nav-link" href="#experience" data-i18n="nav.experience">Experience</a>
-      <a class="mobile-nav-link" href="#education" data-i18n="nav.education">Education</a>
-      <a class="mobile-nav-link" href="#contact" data-i18n="nav.contact">Contact</a>
-    </div>
-  </nav>
-
-  <main id="main-content">
-    <section class="hero" id="hero">
-      <div class="hero-bg" aria-hidden="true"><div class="hero-grain"></div></div>
-      <div class="hero-grid">
-        <div class="hero-left">
-          <h1 class="hero-statement"><span data-i18n="hero.title1">I build </span><em data-i18n="hero.title2">reliable agents</em><span data-i18n="hero.title3"> for real work.</span></h1>
-
-          <div class="hero-meta">
-            <div class="hero-meta-item">
-              <span class="hero-meta-label" data-i18n="hero.metaBased">Based in</span>
-              <span class="hero-meta-value" data-i18n="hero.metaBasedVal">Beijing, China</span>
-            </div>
-            <div class="hero-meta-item">
-              <span class="hero-meta-label" data-i18n="hero.metaFocus">Focus</span>
-              <span class="hero-meta-value" data-i18n="hero.metaFocusVal">Agent systems / RAG evaluation</span>
-            </div>
-            <div class="hero-meta-item">
-              <span class="hero-meta-label" data-i18n="hero.metaStatus">Status</span>
-              <span class="hero-meta-value" data-i18n="hero.metaStatusVal">CS undergraduate, class of 2027</span>
-            </div>
-          </div>
-
-          <a class="hero-cta" data-i18n="hero.cta" href="#work">View selected work</a>
-        </div>
-
-        <aside class="proof-panel" aria-label="Retrieval evaluation highlight">
-          <div class="proof-panel-head">
-            <span data-i18n="proof.label">Retrieval evaluation</span>
-            <a href="#work" data-i18n="proof.case">View project</a>
-          </div>
-          <div class="proof-metric">
-            <span>Recall@10</span>
-            <strong>0.940</strong>
-            <p data-i18n="proof.summary">Best run with hybrid retrieval and reranking.</p>
-          </div>
-          <dl class="proof-grid">
-            <div>
-              <dt data-i18n="proof.methodsLabel">Methods</dt>
-              <dd data-i18n="proof.methods">BM25 / Hybrid / Rerank</dd>
-            </div>
-            <div>
-              <dt data-i18n="proof.evalLabel">Evaluation</dt>
-              <dd data-i18n="proof.eval">Golden queries / MRR</dd>
-            </div>
-            <div>
-              <dt data-i18n="proof.outputLabel">Output</dt>
-              <dd data-i18n="proof.output">Reproducible comparison</dd>
-            </div>
-          </dl>
-        </aside>
-      </div>
-    </section>
-
-    <section class="marquee" aria-label="Areas of focus">
-      <div class="marquee-track">
-        <div class="marquee-content">
-          <span data-i18n="marquee.1">Agent Workflows</span><span aria-hidden="true">/</span>
-          <span data-i18n="marquee.2">LLM Applications</span><span aria-hidden="true">/</span>
-          <span data-i18n="marquee.3">RAG &amp; Evaluation</span><span aria-hidden="true">/</span>
-          <span data-i18n="marquee.4">AI Backend</span><span aria-hidden="true">/</span>
-          <span data-i18n="marquee.5">Tool Calling</span><span aria-hidden="true">/</span>
-          <span data-i18n="marquee.6">Build in Public</span><span aria-hidden="true">/</span>
-        </div>
-        <div class="marquee-content" aria-hidden="true">
-          <span data-i18n="marquee.1">Agent Workflows</span><span>/</span>
-          <span data-i18n="marquee.2">LLM Applications</span><span>/</span>
-          <span data-i18n="marquee.3">RAG &amp; Evaluation</span><span>/</span>
-          <span data-i18n="marquee.4">AI Backend</span><span>/</span>
-          <span data-i18n="marquee.5">Tool Calling</span><span>/</span>
-          <span data-i18n="marquee.6">Build in Public</span><span>/</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="about" id="about">
-      <div class="container">
-        <div class="section-head"><span class="section-label" data-i18n="about.label">About</span></div>
-        <div class="about-grid">
-          <h2 class="about-title reveal-line"><span data-i18n="about.title1">I build </span><em data-i18n="about.title2">practical AI applications</em><span data-i18n="about.title3"> with agents, retrieval, backend engineering and evaluation.</span></h2>
-          <div class="about-side">
-            <p class="about-text reveal-up" data-i18n="about.p1">I'm Sean, a computer science undergraduate at Minzu University of China and an AI application engineering intern. I turn ideas into working systems with Python, FastAPI, structured outputs, tool calling and retrieval pipelines.</p>
-            <p class="about-text reveal-up" data-i18n="about.p2">My focus is engineering reliability: controllable workflows, measurable retrieval quality, useful traces and clear failure handling. I document the work through project notes and public builds.</p>
-            <div class="about-tags reveal-up">
-              <span class="tag" data-i18n="about.tag1">Agent engineering</span>
-              <span class="tag" data-i18n="about.tag2">Evaluation-driven</span>
-              <span class="tag" data-i18n="about.tag3">Public project notes</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="about-stats">
-          <div class="stat reveal-up">
-            <div class="stat-num">500+</div>
-            <div class="stat-label" data-i18n="about.stat1">GitHub commits in six months</div>
-          </div>
-          <div class="stat reveal-up">
-            <div class="stat-num">4M+</div>
-            <div class="stat-label" data-i18n="about.stat2">Technical content views</div>
-          </div>
-          <div class="stat stat-featured reveal-up">
-            <div class="stat-num">0.940</div>
-            <div class="stat-label" data-i18n="about.stat3">Recall@10 in the strongest retrieval run</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="skills" id="skills">
-      <div class="container">
-        <h2 class="skills-title reveal-line"><span data-i18n="skills.title1">Capabilities for </span><em data-i18n="skills.title2">reliable LLM applications</em><span data-i18n="skills.title3">, from orchestration to retrieval and evaluation.</span></h2>
-
-        <div class="skills-grid">
-          <article class="skill-card reveal-up">
-            <span class="skill-num">01</span>
-            <h3 class="skill-title" data-i18n="skills.1.title">LLM Application Engineering</h3>
-            <p class="skill-desc" data-i18n="skills.1.desc">LLM features with streaming responses, structured outputs, tool calling and context-aware prompts.</p>
-            <ul class="skill-list">
-              <li>OpenAI / Anthropic / Gemini</li>
-              <li data-i18n="skills.1.li2">Streaming and structured output</li>
-              <li data-i18n="skills.1.li3">Prompt and context engineering</li>
-              <li data-i18n="skills.1.li4">Function and tool calling</li>
-            </ul>
-          </article>
-          <article class="skill-card reveal-up">
-            <span class="skill-num">02</span>
-            <h3 class="skill-title" data-i18n="skills.2.title">Agent Workflow Engineering</h3>
-            <p class="skill-desc" data-i18n="skills.2.desc">Controllable agent loops with explicit state, tool boundaries, structured handoffs and failure handling.</p>
-            <ul class="skill-list">
-              <li data-i18n="skills.2.li1">ReAct and agent loops</li>
-              <li data-i18n="skills.2.li2">State and structured handoffs</li>
-              <li data-i18n="skills.2.li3">Tool registry and safety</li>
-              <li>LangGraph / OpenAI Agents SDK</li>
-            </ul>
-          </article>
-          <article class="skill-card reveal-up">
-            <span class="skill-num">03</span>
-            <h3 class="skill-title" data-i18n="skills.3.title">RAG and Data Pipelines</h3>
-            <p class="skill-desc" data-i18n="skills.3.desc">Document extraction, retrieval and evaluation pipelines for grounded, source-traced answers.</p>
-            <ul class="skill-list">
-              <li>BM25 / pgvector / Qdrant</li>
-              <li data-i18n="skills.3.li2">Document extraction and cleaning</li>
-              <li data-i18n="skills.3.li3">Hybrid search and reranking</li>
-              <li data-i18n="skills.3.li4">Grounding and citations</li>
-            </ul>
-          </article>
-          <article class="skill-card reveal-up">
-            <span class="skill-num">04</span>
-            <h3 class="skill-title" data-i18n="skills.4.title">AI Backend and Evaluation</h3>
-            <p class="skill-desc" data-i18n="skills.4.desc">FastAPI services, asynchronous workflows, schemas, tests and evaluation for dependable AI applications.</p>
-            <ul class="skill-list">
-              <li>FastAPI / Pydantic</li>
-              <li data-i18n="skills.4.li2">Async task workflows</li>
-              <li data-i18n="skills.4.li3">Golden evals and traces</li>
-              <li>Docker / GitHub Actions</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="work" id="work">
-      <div class="container">
-        <div class="section-head"><span class="section-label" data-i18n="work.label">Selected work</span></div>
-        <h2 class="work-title reveal-line"><span data-i18n="work.title1">Agents, workflows and evaluations </span><em data-i18n="work.title2">built through hands-on projects.</em></h2>
-
-        <div class="work-list">
-          <a class="work-item reveal-up" href="https://talk-to-sean.vercel.app" rel="noopener" target="_blank">
-            <div class="work-item-head"><span class="work-num">01</span><span class="work-year">2026</span></div>
-            <div class="work-item-body">
-              <h3 class="work-name">Talk-to-Sean</h3>
-              <p class="work-desc" data-i18n="work.1.desc">A server-side AI profile assistant with streaming responses, public-quota guardrails and context-engineered prompts over a personal knowledge base.</p>
-            </div>
-            <div class="work-item-tags"><span>LLM Streaming</span><span>Context</span><span>Guardrails</span><span>Vercel</span></div>
-            <span class="work-item-arrow" aria-hidden="true">↗</span>
-          </a>
-
-          <a class="work-item reveal-up" href="https://merge-warden.vercel.app" rel="noopener" target="_blank">
-            <div class="work-item-head"><span class="work-num">02</span><span class="work-year">2026</span></div>
-            <div class="work-item-body">
-              <h3 class="work-name">MergeWarden</h3>
-              <p class="work-desc" data-i18n="work.2.desc">An advisory PR review agent that looks beyond CI for behavioral regressions, missing tests, boundary cases and maintainability risks.</p>
-            </div>
-            <div class="work-item-tags"><span>Agent Workflow</span><span>GitHub App</span><span>Structured Output</span><span>Evaluation</span></div>
-            <span class="work-item-arrow" aria-hidden="true">↗</span>
-          </a>
-
-          <article class="work-item is-static reveal-up">
-            <div class="work-item-head"><span class="work-num">03</span><span class="work-year">2026</span></div>
-            <div class="work-item-body">
-              <h3 class="work-name">ShotgunCV</h3>
-              <p class="work-desc" data-i18n="work.3.desc">A batch CV tailoring workflow that clusters job descriptions, extracts evidence from a base resume and generates structured, traceable variants.</p>
-            </div>
-            <div class="work-item-tags"><span>Batch Workflow</span><span>LangGraph</span><span>RAG</span><span>Pydantic</span></div>
-          </article>
-
-          <article class="work-item is-static reveal-up">
-            <div class="work-item-head"><span class="work-num">04</span><span class="work-year">2026</span></div>
-            <div class="work-item-body">
-              <h3 class="work-name" data-i18n="work.4.name">RAG Retrieval Evaluation</h3>
-              <p class="work-desc" data-i18n="work.4.desc">A reproducible comparison of BM25, hybrid retrieval and reranking using golden queries, MRR and Recall@10. The strongest run reached 0.940 Recall@10.</p>
-            </div>
-            <div class="work-item-tags"><span>BM25</span><span>Hybrid Search</span><span>Reranking</span><span>Golden Eval</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="work experience" id="experience">
-      <div class="container">
-        <div class="section-head"><span class="section-label" data-i18n="experience.label">Experience</span></div>
-        <h2 class="work-title reveal-line"><span data-i18n="experience.title1">Engineering </span><em data-i18n="experience.title2">AI applications</em><span data-i18n="experience.title3"> for enterprise use.</span></h2>
-        <div class="work-list">
-          <article class="work-item is-static reveal-up">
-            <div class="work-item-head"><span class="work-num">01</span><span class="work-year" data-i18n="experience.1.year">2026 - Present</span></div>
-            <div class="work-item-body">
-              <h3 class="work-name" data-i18n="experience.1.company">National Data Group</h3>
-              <p class="work-desc" data-i18n="experience.1.desc">AI Application Development Intern. Built chatbot evaluation suites, RAG pipelines and data-integration prototypes for enterprise AI applications.</p>
-            </div>
-            <div class="work-item-tags"><span>AI Applications</span><span>RAG and Eval</span><span>Enterprise Data</span><span>Testing</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="work education" id="education">
-      <div class="container">
-        <h2 class="work-title reveal-line"><span data-i18n="education.title1">Computer science education, focused on </span><em data-i18n="education.title2">Agent systems.</em></h2>
-        <div class="work-list">
-          <article class="work-item is-static reveal-up">
-            <div class="work-item-head"><span class="work-num">01</span><span class="work-year">2023 - 2027</span></div>
-            <div class="work-item-body">
-              <h3 class="work-name" data-i18n="education.1.school">Minzu University of China</h3>
-              <p class="work-desc" data-i18n="education.1.desc">B.Eng in Computer Science, GPA 3.6. Coursework spans AI, databases and distributed systems, with IELTS 7.0 for technical reading and writing.</p>
-            </div>
-            <div class="work-item-tags"><span>IELTS 7.0</span><span>GPA 3.6</span><span>Computer Science</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact-cta" id="contact">
-      <div class="contact-cta-inner">
-        <div class="contact-cta-content">
-          <h2 class="contact-cta-title">
-            <span class="contact-cta-line"><span class="reveal-text" data-i18n="contact.title1">Let's</span></span>
-            <span class="contact-cta-line"><span class="reveal-text" data-i18n="contact.title2">connect.</span></span>
-          </h2>
-          <a class="contact-cta-btn reveal-up" href="https://github.com/takagibit18" rel="noopener" target="_blank">
-            <span data-i18n="contact.ctaBtn">View GitHub</span><span aria-hidden="true">↗</span>
-          </a>
-          <div class="contact-cta-links reveal-up">
-            <a href="https://talk-to-sean.vercel.app" rel="noopener" target="_blank">
-              <span data-i18n="contact.link1">Live project</span><span class="contact-cta-handle">Talk-to-Sean</span>
-            </a>
-            <a href="https://merge-warden.vercel.app" rel="noopener" target="_blank">
-              <span data-i18n="contact.link2">Live project</span><span class="contact-cta-handle">MergeWarden</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span class="footer-logo">Sean</span>
-      <span class="footer-tagline" data-i18n="footer.tagline">CS undergraduate building reliable Agent and LLM applications.</span>
-      <span class="footer-credit" data-i18n="footer.credit">Projects, evaluation and iteration.</span>
-    </div>
-  </footer>
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<!-- Loader -->
+<div class="loader" id="loader">
+<div class="loader-inner">
+<div class="loader-text">
+<span>S</span><span>E</span><span>A</span><span>N</span>
+</div>
+<div class="loader-progress">
+<div class="loader-bar" id="loaderBar"></div>
+</div>
+<div class="loader-count"><span id="loaderCount">0</span>%</div>
+</div>
+</div>
+<!-- Nav -->
+<nav class="nav" id="nav">
+<a class="nav-logo" href="#hero">
+<span class="nav-logo-dot"></span>
+      Sean
+    </a>
+<div class="nav-links">
+<a class="nav-link" href="#about"><span class="nav-num">01</span> <span data-i18n="nav.about">About</span></a>
+<a class="nav-link" href="#skills"><span class="nav-num">02</span> <span data-i18n="nav.skills">Skills</span></a>
+<a class="nav-link" href="#work"><span class="nav-num">03</span> <span data-i18n="nav.work">Work</span></a>
+<a class="nav-link" href="#experience"><span class="nav-num">04</span> <span data-i18n="nav.experience">Work Experience</span></a>
+<a class="nav-link" href="#education"><span class="nav-num">05</span> <span data-i18n="nav.education">Education</span></a>
+<a class="nav-link" href="#contact"><span class="nav-num">06</span> <span data-i18n="nav.contact">Contact</span></a>
+</div>
+<div class="nav-right">
+<div class="lang-switch" id="langSwitch">
+<button class="is-active" data-lang="en" type="button">EN</button>
+<span class="lang-sep">/</span>
+<button data-lang="zh" type="button">中</button>
+</div>
+<a class="nav-cta" data-i18n="nav.cta" href="#contact">Get in touch</a>
+<button aria-expanded="false" aria-label="Open menu" class="nav-burger" id="navBurger" type="button"><span></span><span></span></button>
+</div>
+</nav>
+<!-- Mobile menu -->
+<div aria-hidden="true" class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu-links">
+<a class="mobile-menu-link" href="#about"><span class="nav-num">01</span> <span data-i18n="nav.about">About</span></a>
+<a class="mobile-menu-link" href="#skills"><span class="nav-num">02</span> <span data-i18n="nav.skills">Skills</span></a>
+<a class="mobile-menu-link" href="#work"><span class="nav-num">03</span> <span data-i18n="nav.work">Work</span></a>
+<a class="mobile-menu-link" href="#experience"><span class="nav-num">04</span> <span data-i18n="nav.experience">Work Experience</span></a>
+<a class="mobile-menu-link" href="#education"><span class="nav-num">05</span> <span data-i18n="nav.education">Education</span></a>
+<a class="mobile-menu-link" href="#contact"><span class="nav-num">06</span> <span data-i18n="nav.contact">Contact</span></a>
+</div>
+</div>
+<!-- Hero -->
+<section class="hero" id="hero">
+<div class="hero-bg">
+<div class="hero-grain"></div>
+</div>
+<div class="hero-grid">
+<div class="hero-left">
+<div class="section-head">
+<span class="section-num">(00)</span>
+<span class="section-label" data-i18n="hero.sectionLabel">Intro</span>
+</div>
+<h1 class="hero-statement" data-i18n="hero.statement">I build <em>agents</em> that ship inside real enterprises.</h1>
+<div class="hero-meta">
+<div class="hero-meta-item">
+<span class="hero-meta-label" data-i18n="hero.metaBased">Based in</span>
+<span class="hero-meta-value" data-i18n="hero.metaBasedVal">Beijing, China</span>
+</div>
+<div class="hero-meta-item">
+<span class="hero-meta-label" data-i18n="hero.metaFocus">Focus</span>
+<span class="hero-meta-value">Agent · LLM Apps · RAG</span>
+</div>
+<div class="hero-meta-item">
+<span class="hero-meta-label" data-i18n="hero.metaStatus">Status</span>
+<span class="hero-meta-value" data-i18n="hero.metaStatusVal">CS Undergraduate · Class of 2027</span>
+</div>
+</div>
+<a class="hero-cta" data-i18n="hero.cta" href="#contact">Get in touch →</a>
+</div>
+<div class="hero-right">
+<div class="term" id="term">
+<div class="term-bar"><i></i><i></i><i></i><span>sean@agent ~ python</span></div>
+<div class="term-body">
+<div class="ln"><span class="c-com"># whoami.py</span></div>
+<div class="ln"><span class="c-key">class</span> <span class="c-fn">SeanYu</span>(Engineer):</div>
+<div class="ln">  role    = <span class="c-str">"Agent · RAG/LLM"</span></div>
+<div class="ln">  stack   = [<span class="c-str">"Python"</span>, <span class="c-str">"FastAPI"</span>, <span class="c-str">"Docker"</span>]</div>
+<div class="ln">  focus   = <span class="c-str">"hybrid retrieval + rerank"</span></div>
+<div class="ln">  pattern = [<span class="c-str">"ReAct"</span>, <span class="c-str">"Plan-Execute"</span>]</div>
+<div class="ln"> </div>
+<div class="ln">  <span class="c-key">def</span> <span class="c-fn">ship</span>(self, idea):</div>
+<div class="ln">    <span class="c-key">return</span> evaluate(idea) &gt; <span class="c-num">0.9</span><span class="cur"></span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="hero-scroll">
+<span data-i18n="hero.scroll">Scroll</span>
+<div class="hero-scroll-line"></div>
+</div>
+</section>
+<!-- Marquee -->
+<section class="marquee" id="marquee">
+<div class="marquee-track">
+<div class="marquee-content">
+<span data-i18n="marquee.1">Agent Workflows</span><span class="marquee-dot">●</span>
+<span data-i18n="marquee.2">LLM Applications</span><span class="marquee-dot">●</span>
+<span data-i18n="marquee.3">RAG &amp; Evaluation</span><span class="marquee-dot">●</span>
+<span data-i18n="marquee.4">AI Backend</span><span class="marquee-dot">●</span>
+<span data-i18n="marquee.5">Tool Calling</span><span class="marquee-dot">●</span>
+<span data-i18n="marquee.6">Build in Public</span><span class="marquee-dot">●</span>
+</div>
+<div aria-hidden="true" class="marquee-content">
+<span data-i18n="marquee.1">Agent Workflows</span><span class="marquee-dot">●</span>
+<span data-i18n="marquee.2">LLM Applications</span><span class="marquee-dot">●</span>
+<span data-i18n="marquee.3">RAG &amp; Evaluation</span><span class="marquee-dot">●</span>
+<span data-i18n="marquee.4">AI Backend</span><span class="marquee-dot">●</span>
+<span data-i18n="marquee.5">Tool Calling</span><span class="marquee-dot">●</span>
+<span data-i18n="marquee.6">Build in Public</span><span class="marquee-dot">●</span>
+</div>
+</div>
+</section>
+<!-- About -->
+<section class="about" id="about">
+<div class="container">
+<div class="section-head">
+<span class="section-num">(01)</span>
+<span class="section-label" data-i18n="about.label">About</span>
+</div>
+<div class="about-grid">
+<h2 class="about-title reveal-line" data-i18n="about.title">I build <em>practical AI applications</em> while studying computer science — connecting agents, retrieval, backend engineering and evaluation.</h2>
+<div class="about-side">
+<p class="about-text reveal-up" data-i18n="about.p1">I'm Sean, a 2027 computer science undergraduate at Minzu University of China, focused on Agent and LLM application development. I turn ideas into working systems with Python, FastAPI, structured outputs, tool calling and retrieval pipelines.</p>
+<p class="about-text reveal-up" data-i18n="about.p2">My work centers on engineering reliability rather than model research: designing controllable agent workflows, building RAG and data pipelines, adding evals, traces and guardrails, then iterating through measurable results. I also document AI-native development through Sean's Build Log.</p>
+<div class="about-tags reveal-up">
+<span class="tag" data-i18n="about.tag1">Agent engineering</span>
+<span class="tag" data-i18n="about.tag2">Evaluation driven</span>
+<span class="tag" data-i18n="about.tag3">Build in public</span>
+</div>
+</div>
+</div>
+<div class="about-stats">
+<div class="stat reveal-up">
+<div class="stat-num">500+</div>
+<div class="stat-label" data-i18n="about.stat1">GitHub commits<br/>in 6 months</div>
+</div>
+<div class="stat reveal-up">
+<div class="stat-num">4<span>M+</span></div>
+<div class="stat-label" data-i18n="about.stat2">Views on<br/>technical content</div>
+</div>
+<div class="stat reveal-up">
+<div class="stat-num">12</div>
+<div class="stat-label" data-i18n="about.stat3">Daily tech<br/>stack size</div>
+</div>
+<div class="stat reveal-up">
+<div class="stat-num">∞</div>
+<div class="stat-label" data-i18n="about.stat4">Iterate until<br/>it's right</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills -->
+<section class="skills" id="skills">
+<div class="container">
+<div class="section-head">
+<span class="section-num">(02)</span>
+<span class="section-label" data-i18n="skills.label">Capabilities</span>
+</div>
+<h2 class="skills-title reveal-line" data-i18n="skills.title">From agent workflows to <em>reliable LLM applications</em> — I combine AI capabilities with backend engineering and evaluation.</h2>
+<div class="skills-grid">
+<article class="skill-card reveal-up" data-hover="">
+<div class="skill-card-head">
+<span class="skill-num">01</span>
+</div>
+<h3 class="skill-title" data-i18n="skills.1.title">LLM Application Engineering</h3>
+<p class="skill-desc" data-i18n="skills.1.desc">LLM features with streaming responses, structured outputs, tool calling and context-aware prompts.</p>
+<ul class="skill-list">
+<li>OpenAI · Anthropic · Gemini</li>
+<li data-i18n="skills.1.li2">Streaming &amp; structured output</li>
+<li data-i18n="skills.1.li3">Prompt &amp; context engineering</li>
+<li data-i18n="skills.1.li4">Function / tool calling</li>
+</ul>
+</article>
+<article class="skill-card reveal-up" data-hover="">
+<div class="skill-card-head">
+<span class="skill-num">02</span>
+</div>
+<h3 class="skill-title" data-i18n="skills.2.title">Agent Workflow Engineering</h3>
+<p class="skill-desc" data-i18n="skills.2.desc">Controllable agent loops with clear state, tool boundaries, structured handoffs and failure handling.</p>
+<ul class="skill-list">
+<li data-i18n="skills.2.li1">ReAct &amp; agent loops</li>
+<li data-i18n="skills.2.li2">State &amp; structured handoffs</li>
+<li data-i18n="skills.2.li3">Tool registry &amp; safety</li>
+<li>LangGraph · OpenAI Agents SDK</li>
+</ul>
+</article>
+<article class="skill-card reveal-up" data-hover="">
+<div class="skill-card-head">
+<span class="skill-num">03</span>
+</div>
+<h3 class="skill-title" data-i18n="skills.3.title">RAG &amp; Data Pipelines</h3>
+<p class="skill-desc" data-i18n="skills.3.desc">Document extraction, retrieval and evaluation pipelines for grounded, source-traced answers.</p>
+<ul class="skill-list">
+<li>BM25 · pgvector · Qdrant</li>
+<li data-i18n="skills.3.li2">Document extraction &amp; cleaning</li>
+<li data-i18n="skills.3.li3">Hybrid search &amp; re-ranking</li>
+<li data-i18n="skills.3.li4">Grounding &amp; citations</li>
+</ul>
+</article>
+<article class="skill-card reveal-up" data-hover="">
+<div class="skill-card-head">
+<span class="skill-num">04</span>
+</div>
+<h3 class="skill-title" data-i18n="skills.4.title">AI Backend &amp; Evaluation</h3>
+<p class="skill-desc" data-i18n="skills.4.desc">FastAPI services, asynchronous workflows, schemas, tests and evaluation for dependable AI applications.</p>
+<ul class="skill-list">
+<li data-i18n="skills.4.li1">FastAPI · Pydantic</li>
+<li data-i18n="skills.4.li2">asyncio · task workflows</li>
+<li data-i18n="skills.4.li3">Golden eval · trace</li>
+<li data-i18n="skills.4.li4">Docker · GitHub Actions</li>
+</ul>
+</article>
+</div>
+</div>
+</section>
+<!-- Work -->
+<section class="work" id="work">
+<div class="container">
+<div class="section-head">
+<span class="section-num">(03)</span>
+<span class="section-label" data-i18n="work.label">Selected work</span>
+</div>
+<h2 class="work-title reveal-line" data-i18n="work.title">A selection of <em>agents, workflows and evaluations</em> built through hands-on projects.</h2>
+<div class="work-list">
+<a class="work-item reveal-up" data-hover="" href="https://talk-to-sean.vercel.app" rel="noopener" target="_blank">
+<div class="work-item-head">
+<span class="work-num">01</span>
+<span class="work-year">2026</span>
+</div>
+<div class="work-item-body">
+<h3 class="work-name">Talk-to-Sean</h3>
+<p class="work-desc" data-i18n="work.1.desc">A server-side AI profile assistant with streaming responses, public-quota guardrails and context-engineered prompts over a personal knowledge base.</p>
+</div>
+<div class="work-item-tags">
+<span>LLM Streaming</span><span>Context Engineering</span><span>Guardrails</span><span>Vercel</span>
+</div>
+<div class="work-item-arrow">↗</div>
+</a>
+<a class="work-item reveal-up" data-hover="" href="https://merge-warden.vercel.app" rel="noopener" target="_blank">
+<div class="work-item-head">
+<span class="work-num">02</span>
+<span class="work-year">2026</span>
+</div>
+<div class="work-item-body">
+<h3 class="work-name" data-i18n="work.2.name">MergeWarden</h3>
+<p class="work-desc" data-i18n="work.2.desc">An advisory PR review agent that looks beyond CI for behavioral regressions, missing tests, boundary cases and maintainability risks.</p>
+</div>
+<div class="work-item-tags">
+<span>Agent Workflow</span><span>GitHub App</span><span>Structured Output</span><span>Evaluation</span>
+</div>
+<div class="work-item-arrow">↗</div>
+</a>
+<article class="work-item reveal-up" data-hover="">
+<div class="work-item-head">
+<span class="work-num">03</span>
+<span class="work-year">2026</span>
+</div>
+<div class="work-item-body">
+<h3 class="work-name" data-i18n="work.3.name">ShotgunCV</h3>
+<p class="work-desc" data-i18n="work.3.desc">A batch CV tailoring workflow that clusters job descriptions, extracts evidence from a base résumé and generates structured, traceable variants.</p>
+</div>
+<div class="work-item-tags">
+<span>Batch Workflow</span><span>LangGraph</span><span>RAG</span><span>Pydantic</span>
+</div>
+</article>
+<article class="work-item reveal-up" data-hover="">
+<div class="work-item-head">
+<span class="work-num">04</span>
+<span class="work-year">2026</span>
+</div>
+<div class="work-item-body">
+<h3 class="work-name" data-i18n="work.4.name">RAG Retrieval Evaluation</h3>
+<p class="work-desc" data-i18n="work.4.desc">A reproducible comparison of BM25, hybrid retrieval and reranking using golden queries, MRR and Recall@10, with the strongest run reaching 0.940 Recall@10.</p>
+</div>
+<div class="work-item-tags">
+<span>BM25</span><span>Hybrid Search</span><span>Re-ranking</span><span>Golden Eval</span>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- Contact -->
+<section class="work experience" id="experience">
+<div class="container">
+<div class="section-head">
+<span class="section-num">(04)</span>
+<span class="section-label" data-i18n="experience.label">Work Experience</span>
+</div>
+<h2 class="work-title reveal-line" data-i18n="experience.title">
+      Engineering <em>AI applications</em> that ship inside enterprises.
+    </h2>
+<div class="work-list">
+<article class="work-item reveal-up" data-hover="">
+<div class="work-item-head">
+<span class="work-num">01</span>
+<span class="work-year" data-i18n="experience.1.year">2026 — Present</span>
+</div>
+<div class="work-item-body">
+<h3 class="work-name" data-i18n="experience.1.company">National Data Group</h3>
+<p class="work-desc" data-i18n="experience.1.desc">AI Application Development Intern. Delivered enterprise AI applications end-to-end — building chatbot evaluation suites, RAG pipelines and data-integration prototypes.</p>
+</div>
+<div class="work-item-tags">
+<span>AI Applications</span><span>RAG &amp; Eval</span><span>Enterprise Data</span><span>System Testing</span>
+</div>
+</article>
+</div>
+</div>
+</section><section class="work education" id="education">
+<div class="container">
+<div class="section-head">
+<span class="section-num">(05)</span>
+<span class="section-label" data-i18n="education.label">Education</span>
+</div>
+<h2 class="work-title reveal-line" data-i18n="education.title">Studying <em>computer science</em> with a focus on AI systems.</h2>
+<div class="work-list">
+<article class="work-item reveal-up" data-hover="">
+<div class="work-item-head">
+<span class="work-num">01</span>
+<span class="work-year" data-i18n="education.1.year">2023 — 2027</span>
+</div>
+<div class="work-item-body">
+<h3 class="work-name" data-i18n="education.1.school">Minzu University of China</h3>
+<p class="work-desc" data-i18n="education.1.desc">B.Eng in Computer Science (GPA 3.6). Coursework across AI, databases and distributed systems, with IELTS 7.0 backing strong English for reading papers and writing technical docs.</p>
+</div>
+<div class="work-item-tags">
+<span>IELTS 7.0</span><span>GPA 3.6</span><span>Computer Science</span>
+</div>
+</article>
+</div>
+</div>
+</section>
+<section class="contact-cta" id="contact">
+<div class="contact-cta-inner">
+<div class="section-head">
+<span class="section-num">(06)</span>
+<span class="section-label" data-i18n="contact.label">Get in touch</span>
+</div>
+<div class="contact-cta-content">
+<h2 class="contact-cta-title">
+<span class="contact-cta-line"><span class="reveal-text" data-i18n="contact.title1">Let’s</span></span>
+<span class="contact-cta-line"><span class="reveal-text" data-i18n="contact.title2">connect.</span></span>
+</h2>
+<a class="contact-cta-btn reveal-up" data-hover="" href="https://github.com/takagibit18" rel="noopener" target="_blank">
+<span class="roll">
+<span data-i18n="contact.ctaBtn">VIEW GITHUB</span>
+<span data-i18n="contact.ctaBtn">VIEW GITHUB</span>
+</span>
+<span class="roll roll-arrow">
+<span>→</span>
+<span>→</span>
+</span>
+</a>
+<div class="contact-cta-links reveal-up">
+<a data-hover="" href="https://github.com/takagibit18" rel="noopener" target="_blank">
+<span data-i18n="contact.link1">GitHub</span>
+<span class="contact-cta-handle">@takagibit18</span>
+</a>
+<a data-hover="" href="https://talk-to-sean.vercel.app" rel="noopener" target="_blank">
+<span data-i18n="contact.link2">Live site</span>
+<span class="contact-cta-handle">talk-to-sean</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="footer">
+<div class="container footer-inner">
+<div class="footer-left">
+<span class="footer-logo">
+<span class="nav-logo-dot"></span>
+          Sean
+        </span>
+<span class="footer-tagline" data-i18n="footer.tagline">CS undergraduate · Agent &amp; LLM application developer · Beijing</span>
+</div>
+<div class="footer-right">
+<span class="footer-time" id="footerTime">— : —</span>
+<span class="footer-credit" data-i18n="footer.credit">Built through projects, evaluation and iteration</span>
+</div>
+</div>
+</footer>
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
