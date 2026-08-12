@@ -26,13 +26,11 @@
         "hero.title1": "AI",
         "hero.title2": "agent",
         "hero.title3": "developer<sup>©</sup>",
-        "hero.metaBased": "Based in",
-        "hero.metaBasedVal": "Beijing, China",
-        "hero.metaFocus": "Focus",
-        "hero.metaStatus": "Status",
-        "hero.metaStatusVal": "CS Undergraduate · Class of 2027",
+        "hero.metaOpen": "● Open to opportunities",
+        "hero.metaLoc": "Beijing",
+        "hero.metaClass": "CS '27",
         "hero.sectionLabel": "Intro",
-        "hero.statement": "I build <em>agents</em> that ship inside real enterprises.",
+        "hero.statement": "Agents,<br/>shipped <em>for real</em>.",
         "hero.cta": "Get in touch →",
         "hero.scroll": "Scroll",
         "marquee.1": "Agent Workflows",
@@ -115,13 +113,11 @@
         "hero.title1": "AI",
         "hero.title2": "智能体",
         "hero.title3": "开发者<sup>©</sup>",
-        "hero.metaBased": "所在地",
-        "hero.metaBasedVal": "中国 · 北京",
-        "hero.metaFocus": "方向",
-        "hero.metaStatus": "身份",
-        "hero.metaStatusVal": "计算机本科 · 2027 届",
+        "hero.metaOpen": "● 开放工作机会",
+        "hero.metaLoc": "北京",
+        "hero.metaClass": "计算机 '27 届",
         "hero.sectionLabel": "简介",
-        "hero.statement": "我把 <em>agent</em> 做成能上线的企业级系统。",
+        "hero.statement": "把 agent<br/>真正<em>做上线</em>。",
         "hero.cta": "联系我 →",
         "hero.scroll": "滚动",
         "marquee.1": "Agent 工作流",
@@ -468,16 +464,28 @@
     });
   });
 
-  /* ---------- Hero terminal card — subtle 3D tilt ---------- */
+  /* ---------- Hero terminal card — pointer tilt ----------
+     rAF + lerp smoothing (0.09) instead of a CSS transition on every
+     mousemove: bigger swing (±6.5°), tighter perspective (900px) and a
+     small 6px translate parallax, without the laggy trail. */
   const term = document.getElementById("term");
-  if (term && !isTouch) {
+  if (term && !isTouch && !prefersReduced) {
+    let targetRX = 0, targetRY = 0, curRX = 0, curRY = 0;
     window.addEventListener("mousemove", (e) => {
-      const cx = window.innerWidth / 2;
-      const cy = window.innerHeight / 2;
-      const rx = (cy - e.clientY) / cy * 3;
-      const ry = (e.clientX - cx) / cx * 3;
-      term.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      const r = term.getBoundingClientRect();
+      const nx = (e.clientX - (r.left + r.width / 2)) / (window.innerWidth / 2);
+      const ny = (e.clientY - (r.top + r.height / 2)) / (window.innerHeight / 2);
+      targetRY = Math.max(-1, Math.min(1, nx)) * 6.5;
+      targetRX = Math.max(-1, Math.min(1, ny)) * -6.5;
     }, { passive: true });
+    (function tiltLoop() {
+      curRX += (targetRX - curRX) * 0.09;
+      curRY += (targetRY - curRY) * 0.09;
+      term.style.transform =
+        `perspective(900px) rotateX(${curRX.toFixed(2)}deg) rotateY(${curRY.toFixed(2)}deg)` +
+        ` translate3d(${(curRY * 0.9).toFixed(1)}px, ${(-curRX * 0.9).toFixed(1)}px, 0)`;
+      requestAnimationFrame(tiltLoop);
+    })();
   }
 
   /* ---------- Footer live time ---------- */
