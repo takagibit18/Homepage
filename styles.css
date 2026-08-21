@@ -939,42 +939,91 @@ a.work-item:hover .work-item-arrow {
    ============================================================ */
 .contact-cta {
   min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  overflow: hidden;
   border-top: 1px solid var(--line);
-  padding: clamp(100px, 16vh, 180px) var(--pad-x) clamp(60px, 8vh, 100px);
-  text-align: center;
-  position: relative;
+  padding: clamp(96px, 11vh, 148px) var(--pad-x) clamp(48px, 7vh, 88px);
+  text-align: left;
+  background: var(--bg);
+  isolation: isolate;
+}
+.contact-visual {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: url("assets/contact-night-city.png");
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.92) 30%, #000 46%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.92) 30%, #000 46%, #000 100%);
+}
+.contact-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #000 0%, #000 25%, rgba(0, 0, 0, 0.96) 36%, rgba(0, 0, 0, 0.8) 47%, rgba(0, 0, 0, 0.34) 64%, rgba(0, 0, 0, 0) 86%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.48) 0%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.12) 75%, #000 100%),
+    radial-gradient(ellipse at 94% 50%, rgba(0, 0, 0, 0) 28%, rgba(0, 0, 0, 0.52) 100%);
 }
 .contact-cta-inner {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(48px, 6vw, 80px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: clamp(48px, 7vw, 120px);
+  row-gap: clamp(56px, 8vh, 112px);
+  min-height: min(78dvh, 760px);
 }
-.contact-cta .section-head {
+.contact-cta-head {
+  grid-column: 1;
+  grid-row: 1;
   margin-bottom: 0;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .contact-cta-content {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: clamp(40px, 5vw, 64px);
+  align-items: flex-start;
+  gap: clamp(30px, 3.6vw, 52px);
+  min-width: 0;
+}
+.contact-cta-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(24px, 2.8vw, 40px);
 }
 .contact-cta-title {
-  font-size: clamp(56px, 11vw, 180px);
+  max-width: 100%;
+  font-size: clamp(58px, 8.5vw, 142px);
   font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.045em;
+  line-height: 0.98;
+  letter-spacing: 0;
   color: var(--fg);
 }
 .contact-cta-line {
   display: block;
   overflow: hidden;
+  white-space: nowrap;
+}
+.contact-cta-description {
+  max-width: 31em;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.75;
+  color: var(--fg-2);
 }
 
 /* TELL US button — Cuberto signature: bottom-center circle wipe + text roll.
@@ -993,7 +1042,7 @@ a.work-item:hover .work-item-arrow {
   color: var(--fg);
   font-size: clamp(22px, 2.5vw, 42px);
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   position: relative;
   overflow: hidden;
@@ -1046,31 +1095,138 @@ a.work-item:hover .work-item-arrow {
 .contact-cta-links {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(24px, 4vw, 56px);
-  padding-top: 32px;
+  align-items: flex-start;
+  gap: clamp(18px, 2.8vw, 42px);
+  padding-top: 24px;
   border-top: 1px solid var(--line);
   width: 100%;
-  justify-content: center;
+  max-width: 720px;
+  justify-content: flex-start;
 }
 .contact-cta-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding-bottom: 7px;
+  transition: color 0.35s var(--ease-out), transform 0.4s var(--ease-out);
+}
+.contact-cta-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s var(--ease-out);
+}
+.contact-cta-links a:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+.contact-cta-links a:hover::after { width: 100%; }
+.contact-link-icon {
+  display: inline-flex;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--fg-2);
+  transition: color 0.35s var(--ease-out);
+}
+.contact-link-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.contact-cta-links a:hover .contact-link-icon { color: var(--accent); }
+.contact-link-text {
   display: flex;
+  min-width: 0;
   flex-direction: column;
-  gap: 6px;
-  text-align: left;
-  transition: transform 0.4s var(--ease-out);
+  gap: 2px;
 }
-.contact-cta-links a:hover { transform: translateY(-4px); }
-.contact-cta-links a > span:first-child {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--fg-4);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.contact-cta-handle {
-  font-size: 16px;
+.contact-link-label {
+  font-size: 14px;
   font-weight: 500;
-  color: var(--fg);
+  line-height: 1.2;
+}
+.contact-link-meta {
+  color: var(--fg-3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: color 0.35s var(--ease-out);
+}
+.contact-cta-links a:hover .contact-link-meta { color: var(--accent); }
+.contact-link-pending { opacity: 0.78; }
+.contact-link-icon-github { color: var(--fg-2); }
+
+@media (max-width: 900px) {
+  .contact-cta {
+    align-items: flex-start;
+    padding: clamp(112px, 17vw, 144px) var(--pad-x) 48px;
+  }
+  .contact-visual {
+    background-position: 72% bottom;
+    background-size: auto 74%;
+    opacity: 0.86;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 36%, #000 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 36%, #000 100%);
+  }
+  .contact-overlay {
+    background:
+      linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.97) 34%, rgba(0, 0, 0, 0.72) 58%, rgba(0, 0, 0, 0.88) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.28) 100%);
+  }
+  .contact-cta-inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    row-gap: clamp(64px, 13vh, 104px);
+    min-height: auto;
+  }
+  .contact-cta-head {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .contact-cta-content {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    gap: clamp(42px, 11vw, 72px);
+  }
+  .contact-cta-title {
+    font-size: clamp(58px, 17vw, 100px);
+    line-height: 1.02;
+  }
+  .contact-cta-description {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .contact-cta-btn {
+    gap: 14px;
+    padding: 20px 34px;
+    font-size: clamp(19px, 5vw, 24px);
+  }
+  .contact-cta-links {
+    max-width: none;
+    gap: 16px 24px;
+  }
+  .contact-cta-links a {
+    flex: 1 1 130px;
+  }
+  .contact-link-meta {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-cta-inner { row-gap: 56px; }
+  .contact-cta-links { gap: 16px 18px; }
+  .contact-cta-links a { flex-basis: 120px; }
 }
 
 /* ============================================================
