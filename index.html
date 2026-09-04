@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sean — AI Agent &amp; LLM Application Developer</title>
-<meta content="Sean — computer science undergraduate building AI agent and LLM applications with Python, FastAPI, RAG and evaluation." name="description"/>
+<title data-i18n="meta.title">Sean｜AI 智能体与 LLM 应用开发者</title>
+<meta content="Sean，计算机科学本科生，专注于使用 Python、FastAPI、RAG 与评估体系构建 AI Agent 和 LLM 应用。" data-i18n-content="meta.description" name="description"/>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -44,9 +44,9 @@
 </div>
 <div class="nav-right">
 <div class="lang-switch" id="langSwitch">
-<button class="is-active" data-lang="en" type="button">EN</button>
+<button data-lang="en" type="button">EN</button>
 <span class="lang-sep">/</span>
-<button data-lang="zh" type="button">中</button>
+<button class="is-active" data-lang="zh" type="button">中</button>
 </div>
 <a class="nav-cta" data-i18n="nav.cta" href="#contact">Get in touch</a>
 <button aria-expanded="false" aria-label="Open menu" class="nav-burger" id="navBurger" type="button"><span></span><span></span></button>
@@ -66,6 +66,8 @@
 <!-- Hero -->
 <section class="hero" id="hero">
 <div class="hero-bg">
+<img class="hero-scene" src="assets/hero-workspace.png" alt="" aria-hidden="true"/>
+<div class="hero-vignette"></div>
 <div class="hero-grain"></div>
 </div>
 <div class="hero-grid">
@@ -82,22 +84,6 @@
 <span data-i18n="hero.metaClass">CS '27</span>
 </div>
 <a class="hero-link" data-i18n="hero.cta" href="#contact">Get in touch →</a>
-</div>
-<div class="hero-right">
-<div class="term" id="term">
-<div class="term-bar"><i></i><i></i><i></i><span>sean@agent ~ python</span></div>
-<div class="term-body">
-<div class="ln"><span class="c-com"># whoami.py</span></div>
-<div class="ln"><span class="c-key">class</span> <span class="c-fn">SeanYu</span>(Engineer):</div>
-<div class="ln">  role    = <span class="c-str">"Agent · RAG/LLM"</span></div>
-<div class="ln">  stack   = [<span class="c-str">"Python"</span>, <span class="c-str">"FastAPI"</span>, <span class="c-str">"Docker"</span>]</div>
-<div class="ln">  focus   = <span class="c-str">"hybrid retrieval + rerank"</span></div>
-<div class="ln">  pattern = [<span class="c-str">"ReAct"</span>, <span class="c-str">"Plan-Execute"</span>]</div>
-<div class="ln"> </div>
-<div class="ln">  <span class="c-key">def</span> <span class="c-fn">ship</span>(self, idea):</div>
-<div class="ln">    <span class="c-key">return</span> evaluate(idea) &gt; <span class="c-num">0.9</span><span class="cur"></span></div>
-</div>
-</div>
 </div>
 </div>
 <div class="hero-scroll">
@@ -147,7 +133,7 @@
 </div>
 <div class="about-stats">
 <div class="stat reveal-up">
-<div class="stat-num">500+</div>
+<div class="stat-num">900+</div>
 <div class="stat-label" data-i18n="about.stat1">GitHub commits<br/>in 6 months</div>
 </div>
 <div class="stat reveal-up">
@@ -155,8 +141,8 @@
 <div class="stat-label" data-i18n="about.stat2">Views on<br/>technical content</div>
 </div>
 <div class="stat reveal-up">
-<div class="stat-num">12</div>
-<div class="stat-label" data-i18n="about.stat3">Daily tech<br/>stack size</div>
+<div class="stat-num">27%</div>
+<div class="stat-label" data-i18n="about.stat3">Token<br/>reduction</div>
 </div>
 <div class="stat reveal-up">
 <div class="stat-num">∞</div>
@@ -238,20 +224,19 @@
 </div>
 <h2 class="work-title reveal-line" data-i18n="work.title">A selection of <em>agents, workflows and evaluations</em> built through hands-on projects.</h2>
 <div class="work-list">
-<a class="work-item reveal-up" data-hover="" href="https://talk-to-sean.vercel.app" rel="noopener" target="_blank">
+<article class="work-item reveal-up" data-hover="">
 <div class="work-item-head">
 <span class="work-num">01</span>
-<span class="work-year">2026</span>
+<span class="work-year" data-i18n="work.1.year">2026/06 - 2026/08</span>
 </div>
 <div class="work-item-body">
-<h3 class="work-name">Talk-to-Sean</h3>
-<p class="work-desc" data-i18n="work.1.desc">A server-side AI profile assistant with streaming responses, public-quota guardrails and context-engineered prompts over a personal knowledge base.</p>
+<h3 class="work-name" data-i18n="work.1.name">本体智能体平台</h3>
+<p class="work-desc" data-i18n="work.1.desc">参与智能体侧对已有本体平台的能力接入，围绕政策规则建模任务补充 Session / Retry / Checkpoint，支持失败重试与断点恢复，并参与配置化 Skill 与动态 Tool Loading 的接入验证，使不同领域工具能够按配置加载。</p>
 </div>
 <div class="work-item-tags">
-<span>LLM Streaming</span><span>Context Engineering</span><span>Guardrails</span><span>Vercel</span>
+<span>Ontology Platform</span><span>Agent Integration</span><span>Session / Retry</span><span>Dynamic Tool Loading</span>
 </div>
-<div class="work-item-arrow">↗</div>
-</a>
+</article>
 <a class="work-item reveal-up" data-hover="" href="https://merge-warden.vercel.app" rel="noopener" target="_blank">
 <div class="work-item-head">
 <span class="work-num">02</span>
@@ -351,19 +336,19 @@
 <div class="contact-cta-inner">
 <div class="section-head contact-cta-head">
 <span class="section-num">(06)</span>
-<span class="section-label">联系我</span>
+<span class="section-label" data-i18n="contact.label">联系我</span>
 </div>
 <div class="contact-cta-content">
 <div class="contact-cta-copy">
 <h2 class="contact-cta-title">
-<span class="contact-cta-line">让好的想法</span>
-<span class="contact-cta-line">继续发生。</span>
+<span class="contact-cta-line" data-i18n="contact.title1">让好的想法</span>
+<span class="contact-cta-line" data-i18n="contact.title2">继续发生。</span>
 </h2>
-<p class="contact-cta-description reveal-up">我始终对新的机会、<br/>有趣的项目和有意义的对话保持开放。</p>
-<a aria-label="和我聊聊，发送邮件" class="contact-cta-btn" data-hover="" href="mailto:huali6641@gmail.com">
+<p class="contact-cta-description reveal-up" data-i18n="contact.description">我始终对新的机会、<br/>有趣的项目和有意义的对话保持开放。</p>
+<a aria-label="和我聊聊，发送邮件" class="contact-cta-btn" data-hover="" data-i18n-aria-label="contact.ctaAria" href="mailto:huali6641@gmail.com">
 <span class="roll">
-<span>和我聊聊</span>
-<span>和我聊聊</span>
+<span data-i18n="contact.ctaBtn">和我聊聊</span>
+<span data-i18n="contact.ctaBtn">和我聊聊</span>
 </span>
 <span class="roll roll-arrow">
 <span>→</span>
@@ -372,7 +357,7 @@
 </a>
 </div>
 <div class="contact-cta-links reveal-up">
-<a aria-label="发送邮件至 huali6641@gmail.com" data-hover="" href="mailto:huali6641@gmail.com">
+<a aria-label="发送邮件至 huali6641@gmail.com" data-hover="" data-i18n-aria-label="contact.emailAria" href="mailto:huali6641@gmail.com">
 <span class="contact-link-icon" aria-hidden="true">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
 <rect height="14" rx="1.5" width="18" x="3" y="5"/>
@@ -380,22 +365,22 @@
 </svg>
 </span>
 <span class="contact-link-text">
-<span class="contact-link-label">邮箱</span>
+<span class="contact-link-label" data-i18n="contact.emailLabel">邮箱</span>
 <span class="contact-link-meta">huali6641@gmail.com</span>
 </span>
 </a>
-<a aria-label="在 GitHub 查看 takagibit18" data-hover="" href="https://github.com/takagibit18" rel="noopener" target="_blank">
+<a aria-label="在 GitHub 查看 takagibit18" data-hover="" data-i18n-aria-label="contact.githubAria" href="https://github.com/takagibit18" rel="noopener" target="_blank">
 <span class="contact-link-icon contact-link-icon-github" aria-hidden="true">
 <svg viewBox="0 0 24 24" fill="currentColor">
 <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.73.084-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
 </svg>
 </span>
 <span class="contact-link-text">
-<span class="contact-link-label">GitHub</span>
+<span class="contact-link-label" data-i18n="contact.githubLabel">GitHub</span>
 <span class="contact-link-meta">@takagibit18</span>
 </span>
 </a>
-<a aria-label="下载简历 PDF，文件待补充" class="contact-link-pending" data-hover="" href="assets/resume.pdf">
+<a aria-label="在新窗口打开简历 PDF" data-hover="" data-i18n-aria-label="contact.resumeAria" href="assets/resume.pdf" rel="noopener" target="_blank">
 <span class="contact-link-icon" aria-hidden="true">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
 <path d="M6 3.75h8l4 4v12.5H6z"/>
@@ -403,10 +388,66 @@
 </svg>
 </span>
 <span class="contact-link-text">
-<span class="contact-link-label">简历</span>
+<span class="contact-link-label" data-i18n="contact.resumeLabel">简历</span>
 <span class="contact-link-meta">PDF</span>
 </span>
 </a>
+<a aria-label="微信号 Sean_Yu3，发送邮件咨询" data-hover="" data-i18n-aria-label="contact.wechatAria" href="mailto:huali6641@gmail.com?subject=%E5%BE%AE%E4%BF%A1%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F">
+<span class="contact-link-icon contact-link-icon-wechat" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+<path d="M13.75 5.25c0-2.07-2.15-3.75-4.8-3.75s-4.8 1.68-4.8 3.75c0 1.18.7 2.23 1.79 2.92L5.5 10.25l2.28-1.15c.38.1.77.15 1.17.15"/>
+<path d="M11.3 8.9c0-2.07 2.15-3.75 4.8-3.75s4.8 1.68 4.8 3.75c0 1.18-.7 2.23-1.79 2.92l.44 2.08-2.28-1.15c-.38.1-.77.15-1.17.15-2.65 0-4.8-1.68-4.8-3.75Z"/>
+<circle cx="7.75" cy="5.25" r=".45" fill="currentColor" stroke="none"/>
+<circle cx="10.15" cy="5.25" r=".45" fill="currentColor" stroke="none"/>
+<circle cx="14.9" cy="8.9" r=".45" fill="currentColor" stroke="none"/>
+<circle cx="17.3" cy="8.9" r=".45" fill="currentColor" stroke="none"/>
+</svg>
+</span>
+<span class="contact-link-text">
+<span class="contact-link-label" data-i18n="contact.wechatLabel">微信</span>
+<span class="contact-link-meta">Sean_Yu3</span>
+</span>
+</a>
+<details class="contact-social">
+<summary aria-label="展开 Sean的构建日志社交媒体平台" class="contact-social-toggle" data-hover="" data-i18n-aria-label="contact.socialAria">
+<span class="contact-link-icon contact-link-icon-social" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+<circle cx="18" cy="5" r="2.25"/>
+<circle cx="6" cy="12" r="2.25"/>
+<circle cx="18" cy="19" r="2.25"/>
+<path d="m8 10.85 7.85-4.58M8 13.15l7.85 4.58"/>
+</svg>
+</span>
+<span class="contact-link-text">
+<span class="contact-link-label" data-i18n="contact.socialLabel">社交媒体</span>
+<span class="contact-link-meta" data-i18n="contact.socialMeta">Sean的构建日志</span>
+</span>
+<span aria-hidden="true" class="contact-social-toggle-mark">+</span>
+</summary>
+<div class="contact-social-panel">
+<div class="contact-social-panel-head">
+<span class="contact-social-panel-title" data-i18n="contact.socialTitle">Sean的构建日志</span>
+<span class="contact-social-panel-meta" data-i18n="contact.socialAll">全网同名</span>
+</div>
+<div class="contact-social-platforms">
+<a aria-label="在抖音搜索 Sean的构建日志" class="contact-social-platform" data-hover="" data-i18n-aria-label="contact.douyinAria" href="https://www.douyin.com/search/Sean%E7%9A%84%E6%9E%84%E5%BB%BA%E6%97%A5%E5%BF%97" rel="noopener noreferrer" target="_blank">
+<img alt="" aria-hidden="true" class="social-platform-logo social-platform-logo-douyin" decoding="async" src="assets/social/douyin.svg"/>
+<span class="social-platform-name" data-i18n="contact.douyinName">抖音</span>
+<span class="social-platform-action" data-i18n="contact.socialAction">搜索</span>
+</a>
+<a aria-label="在小红书搜索 Sean的构建日志" class="contact-social-platform" data-hover="" data-i18n-aria-label="contact.xiaohongshuAria" href="https://www.xiaohongshu.com/search_result?keyword=Sean%E7%9A%84%E6%9E%84%E5%BB%BA%E6%97%A5%E5%BF%97" rel="noopener noreferrer" target="_blank">
+<img alt="" aria-hidden="true" class="social-platform-logo social-platform-logo-xiaohongshu" decoding="async" src="assets/social/xiaohongshu.png"/>
+<span class="social-platform-name" data-i18n="contact.xiaohongshuName">小红书</span>
+<span class="social-platform-action" data-i18n="contact.socialAction">搜索</span>
+</a>
+<a aria-label="在 X 搜索 Sean的构建日志" class="contact-social-platform" data-hover="" data-i18n-aria-label="contact.xAria" href="https://x.com/search?q=Sean%E7%9A%84%E6%9E%84%E5%BB%BA%E6%97%A5%E5%BF%97&amp;src=typed_query" rel="noopener noreferrer" target="_blank">
+<img alt="" aria-hidden="true" class="social-platform-logo social-platform-logo-x" decoding="async" src="assets/social/x.svg"/>
+<span class="social-platform-name" data-i18n="contact.xName">X</span>
+<span class="social-platform-action" data-i18n="contact.socialAction">搜索</span>
+</a>
+</div>
+</div>
+</details>
 </div>
 </div>
 </div>

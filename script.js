@@ -15,6 +15,8 @@
   /* ---------- i18n dictionary ---------- */
   const I18N = {
     "en": {
+        "meta.title": "Sean | AI Agent &amp; LLM Application Developer",
+        "meta.description": "Sean, a computer science undergraduate building AI agent and LLM applications with Python, FastAPI, RAG and evaluation.",
         "nav.about": "About",
         "nav.skills": "Skills",
         "nav.work": "Work",
@@ -24,7 +26,7 @@
         "nav.cta": "Get in touch",
         "hero.tag": "CS undergraduate · Open to Agent / LLM opportunities",
         "hero.title1": "AI",
-        "hero.title2": "agent",
+        "hero.title2": "Agent",
         "hero.title3": "developer<sup>©</sup>",
         "hero.metaOpen": "● Open to opportunities",
         "hero.metaLoc": "Beijing",
@@ -48,7 +50,7 @@
         "about.tag3": "Build in public",
         "about.stat1": "GitHub commits<br/>in 6 months",
         "about.stat2": "Views on<br/>technical content",
-        "about.stat3": "Daily tech<br/>stack size",
+        "about.stat3": "Token<br/>reduction",
         "about.stat4": "Iterate until<br/>it's right",
         "skills.label": "Capabilities",
         "skills.title": "From agent workflows to <em>reliable LLM applications</em> — I combine AI capabilities with backend engineering and evaluation.",
@@ -75,7 +77,9 @@
         "skills.4.li4": "Docker · GitHub Actions",
         "work.label": "Selected work",
         "work.title": "A selection of <em>agents, workflows and evaluations</em> built through hands-on projects.",
-        "work.1.desc": "A server-side AI profile assistant with streaming responses, public-quota guardrails and context-engineered prompts over a personal knowledge base.",
+        "work.1.name": "Ontology Agent Platform",
+        "work.1.year": "2026/06 - 2026/08",
+        "work.1.desc": "Integrated an existing ontology platform into the agent layer, adding Session / Retry / Checkpoint for policy-rule modeling and validating configurable Skills with dynamic Tool Loading so domain tools load by configuration.",
         "work.2.name": "MergeWarden",
         "work.2.desc": "An advisory PR review agent that looks beyond CI for behavioral regressions, missing tests, boundary cases and maintainability risks.",
         "work.3.name": "ShotgunCV",
@@ -95,13 +99,35 @@
         "contact.label": "Get in touch",
         "contact.title1": "Let’s",
         "contact.title2": "connect.",
-        "contact.ctaBtn": "VIEW GITHUB",
-        "contact.link1": "GitHub",
-        "contact.link2": "Live site",
+        "contact.description": "I’m always open to new opportunities,<br/>interesting projects and meaningful conversations.",
+        "contact.ctaBtn": "Let's talk",
+        "contact.emailLabel": "Email",
+        "contact.githubLabel": "GitHub",
+        "contact.resumeLabel": "Resume",
+        "contact.wechatLabel": "WeChat",
+        "contact.socialLabel": "Social media",
+        "contact.socialMeta": "Sean's Build Log",
+        "contact.socialTitle": "Sean's Build Log",
+        "contact.socialAll": "Same handle everywhere",
+        "contact.socialAction": "Search",
+        "contact.ctaAria": "Talk with me by email",
+        "contact.emailAria": "Send email to huali6641@gmail.com",
+        "contact.githubAria": "View takagibit18 on GitHub",
+        "contact.resumeAria": "Open resume PDF in a new window",
+        "contact.wechatAria": "WeChat ID Sean_Yu3, send an email to connect",
+        "contact.socialAria": "Expand social platforms for Sean's Build Log",
+        "contact.douyinAria": "Search Sean's Build Log on Douyin",
+        "contact.xiaohongshuAria": "Search Sean's Build Log on Xiaohongshu",
+        "contact.xAria": "Search Sean's Build Log on X",
+        "contact.douyinName": "Douyin",
+        "contact.xiaohongshuName": "Xiaohongshu",
+        "contact.xName": "X",
         "footer.tagline": "CS undergraduate · Agent &amp; LLM application developer · Beijing",
         "footer.credit": "Built through projects, evaluation and iteration"
     },
     "zh": {
+        "meta.title": "Sean｜AI 智能体与 LLM 应用开发者",
+        "meta.description": "Sean，计算机科学本科生，专注于使用 Python、FastAPI、RAG 与评估体系构建 AI Agent 和 LLM 应用。",
         "nav.about": "关于",
         "nav.skills": "技能",
         "nav.work": "作品",
@@ -117,7 +143,7 @@
         "hero.metaLoc": "北京",
         "hero.metaClass": "计算机 '27 届",
         "hero.sectionLabel": "简介",
-        "hero.statement": "把 agent<br/>真正<em>做上线</em>。",
+        "hero.statement": "把 Agent<br/>真正<em>做上线</em>。",
         "hero.cta": "联系我 →",
         "hero.scroll": "滚动",
         "marquee.1": "Agent 工作流",
@@ -135,7 +161,7 @@
         "about.tag3": "公开构建",
         "about.stat1": "半年<br/>GitHub 提交数",
         "about.stat2": "技术内容<br/>累计播放",
-        "about.stat3": "日常技术栈<br/>数量",
+        "about.stat3": "Token<br/>减少",
         "about.stat4": "迭代直到<br/>满意",
         "skills.label": "能力",
         "skills.title": "从 Agent 工作流到<em>可靠的 LLM 应用</em> —— 我将 AI 能力与后端工程、评估体系结合。",
@@ -162,7 +188,9 @@
         "skills.4.li4": "Docker · GitHub Actions",
         "work.label": "精选项目",
         "work.title": "一组通过真实项目完成的<em>Agent、工作流与评估实践</em>。",
-        "work.1.desc": "服务端 AI 资料助手 —— 流式响应、公共配额护栏，以及基于个人知识库的上下文工程提示。",
+        "work.1.name": "本体智能体平台",
+        "work.1.year": "2026/06 - 2026/08",
+        "work.1.desc": "参与智能体侧对已有本体平台的能力接入，围绕政策规则建模任务补充 Session / Retry / Checkpoint，支持失败重试与断点恢复，并参与配置化 Skill 与动态 Tool Loading 的接入验证，使不同领域工具能够按配置加载。",
         "work.2.name": "MergeWarden",
         "work.2.desc": "面向 Pull Request 的建议型代码审查 Agent，补充 CI 难以覆盖的行为回归、测试缺口、边界条件与可维护性风险。",
         "work.3.name": "ShotgunCV",
@@ -182,22 +210,43 @@
         "contact.label": "联系我",
         "contact.title1": "保持",
         "contact.title2": "联系。",
-        "contact.ctaBtn": "查看 GITHUB",
-        "contact.link1": "GitHub",
-        "contact.link2": "在线站点",
+        "contact.description": "我始终对新的机会、<br/>有趣的项目和有意义的对话保持开放。",
+        "contact.ctaBtn": "和我聊聊",
+        "contact.emailLabel": "邮箱",
+        "contact.githubLabel": "GitHub",
+        "contact.resumeLabel": "简历",
+        "contact.wechatLabel": "微信",
+        "contact.socialLabel": "社交媒体",
+        "contact.socialMeta": "Sean的构建日志",
+        "contact.socialTitle": "Sean的构建日志",
+        "contact.socialAll": "全网同名",
+        "contact.socialAction": "搜索",
+        "contact.ctaAria": "和我聊聊，发送邮件",
+        "contact.emailAria": "发送邮件至 huali6641@gmail.com",
+        "contact.githubAria": "在 GitHub 查看 takagibit18",
+        "contact.resumeAria": "在新窗口打开简历 PDF",
+        "contact.wechatAria": "微信号 Sean_Yu3，发送邮件咨询",
+        "contact.socialAria": "展开 Sean的构建日志社交媒体平台",
+        "contact.douyinAria": "在抖音搜索 Sean的构建日志",
+        "contact.xiaohongshuAria": "在小红书搜索 Sean的构建日志",
+        "contact.xAria": "在 X 搜索 Sean的构建日志",
+        "contact.douyinName": "抖音",
+        "contact.xiaohongshuName": "小红书",
+        "contact.xName": "X",
         "footer.tagline": "计算机本科生 · Agent 与 LLM 应用开发者 · 北京",
         "footer.credit": "通过项目、评估与迭代持续构建"
     }
 };
 
-  let currentLang = "en";
+  const langStorageKey = "sean-lang-v2";
+  let currentLang = "zh";
   try {
-    const stored = localStorage.getItem("sean-lang");
+    const stored = localStorage.getItem(langStorageKey);
     if (stored === "en" || stored === "zh") currentLang = stored;
   } catch (e) {}
 
   function applyLang(lang, animate) {
-    const dict = I18N[lang] || I18N.en;
+    const dict = I18N[lang] || I18N.zh;
     const swap = () => {
       currentLang = lang;
       document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
@@ -205,10 +254,18 @@
         const key = el.getAttribute("data-i18n");
         if (key && dict[key] != null) el.innerHTML = dict[key];
       });
+      document.querySelectorAll("[data-i18n-content]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-content");
+        if (key && dict[key] != null) el.setAttribute("content", dict[key]);
+      });
+      document.querySelectorAll("[data-i18n-aria-label]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-aria-label");
+        if (key && dict[key] != null) el.setAttribute("aria-label", dict[key]);
+      });
       document.querySelectorAll("#langSwitch button").forEach((b) => {
         b.classList.toggle("is-active", b.dataset.lang === lang);
       });
-      try { localStorage.setItem("sean-lang", lang); } catch (e) {}
+      try { localStorage.setItem(langStorageKey, lang); } catch (e) {}
       // refresh ScrollTrigger positions after the fade-in, once text reflow settled
       if (typeof ScrollTrigger !== "undefined") {
         setTimeout(() => ScrollTrigger.refresh(), 160);
@@ -408,7 +465,7 @@
       );
     });
 
-    /* Note: the Hero C meta items use CSS fadeUp (see styles.css) for their
+    /* Note: the Hero meta items use CSS fadeUp (see styles.css) for their
        entrance so they stay visible on first paint. A GSAP fromTo here would
        set inline opacity:0 with a delay and override the CSS animation's final
        state, causing a flicker — so we intentionally do NOT animate them. */
@@ -463,30 +520,6 @@
       card.style.setProperty("--my", py + "%");
     });
   });
-
-  /* ---------- Hero terminal card — pointer tilt ----------
-     rAF + lerp smoothing (0.09) instead of a CSS transition on every
-     mousemove: bigger swing (±6.5°), tighter perspective (900px) and a
-     small 6px translate parallax, without the laggy trail. */
-  const term = document.getElementById("term");
-  if (term && !isTouch && !prefersReduced) {
-    let targetRX = 0, targetRY = 0, curRX = 0, curRY = 0;
-    window.addEventListener("mousemove", (e) => {
-      const r = term.getBoundingClientRect();
-      const nx = (e.clientX - (r.left + r.width / 2)) / (window.innerWidth / 2);
-      const ny = (e.clientY - (r.top + r.height / 2)) / (window.innerHeight / 2);
-      targetRY = Math.max(-1, Math.min(1, nx)) * 6.5;
-      targetRX = Math.max(-1, Math.min(1, ny)) * -6.5;
-    }, { passive: true });
-    (function tiltLoop() {
-      curRX += (targetRX - curRX) * 0.09;
-      curRY += (targetRY - curRY) * 0.09;
-      term.style.transform =
-        `perspective(900px) rotateX(${curRX.toFixed(2)}deg) rotateY(${curRY.toFixed(2)}deg)` +
-        ` translate3d(${(curRY * 0.9).toFixed(1)}px, ${(-curRX * 0.9).toFixed(1)}px, 0)`;
-      requestAnimationFrame(tiltLoop);
-    })();
-  }
 
   /* ---------- Footer live time ---------- */
   const footerTime = document.getElementById("footerTime");
