@@ -345,7 +345,7 @@
 <span class="contact-cta-line" data-i18n="contact.title2">继续发生。</span>
 </h2>
 <p class="contact-cta-description reveal-up" data-i18n="contact.description">我始终对新的机会、<br/>有趣的项目和有意义的对话保持开放。</p>
-<a aria-label="和我聊聊，发送邮件" class="contact-cta-btn" data-hover="" data-i18n-aria-label="contact.ctaAria" href="mailto:huali6641@gmail.com">
+<button aria-controls="contactDialog" aria-expanded="false" aria-haspopup="dialog" aria-label="和我聊聊，发送邮件" class="contact-cta-btn" data-hover="" data-i18n-aria-label="contact.ctaAria" id="contactCta" type="button">
 <span class="roll">
 <span data-i18n="contact.ctaBtn">和我聊聊</span>
 <span data-i18n="contact.ctaBtn">和我聊聊</span>
@@ -354,7 +354,7 @@
 <span>→</span>
 <span>→</span>
 </span>
-</a>
+</button>
 </div>
 <div class="contact-cta-links reveal-up">
 <a aria-label="发送邮件至 huali6641@gmail.com" data-hover="" data-i18n-aria-label="contact.emailAria" href="mailto:huali6641@gmail.com">
@@ -452,6 +452,46 @@
 </div>
 </div>
 </section>
+<dialog aria-describedby="contactDialogDescription" aria-labelledby="contactDialogTitle" aria-modal="true" class="contact-dialog" id="contactDialog">
+<div class="contact-dialog-inner">
+<div class="contact-dialog-copy">
+<div class="contact-dialog-head">
+<span class="section-label" data-i18n="contact.dialogLabel">联系我</span>
+<button aria-label="关闭联系面板" class="contact-dialog-close" data-hover="" data-i18n-aria-label="contact.dialogClose" id="contactDialogClose" type="button">
+<span data-i18n="contact.dialogCloseShort">关闭</span>
+</button>
+</div>
+<h2 class="contact-dialog-title" data-i18n="contact.dialogTitle" id="contactDialogTitle">和我聊聊</h2>
+<p class="contact-dialog-description" data-i18n="contact.dialogDescription" id="contactDialogDescription">选择一种方式联系我。</p>
+<div class="contact-dialog-email">
+<span class="contact-dialog-kicker" data-i18n="contact.emailLabel">邮箱</span>
+<code>huali6641@gmail.com</code>
+</div>
+<div class="contact-dialog-actions">
+<a class="contact-dialog-action contact-dialog-action-primary" data-hover="" href="mailto:huali6641@gmail.com">
+<span data-i18n="contact.emailAction">发送邮件</span>
+<span aria-hidden="true">→</span>
+</a>
+<button aria-describedby="copyEmailStatus" class="contact-dialog-action contact-dialog-action-secondary" data-hover="" id="copyEmailButton" type="button">
+<span data-i18n="contact.copyEmail">复制邮箱</span>
+<span aria-hidden="true">+</span>
+</button>
+</div>
+<p aria-live="polite" class="contact-dialog-status" id="copyEmailStatus"></p>
+</div>
+<div class="contact-dialog-qr">
+<div class="contact-dialog-qr-head">
+<span class="contact-dialog-kicker" data-i18n="contact.wechatLabel">微信</span>
+<span class="contact-dialog-qr-meta">Sean_Yu3</span>
+</div>
+<div class="contact-dialog-qr-frame">
+<img alt="Sean 的微信二维码" class="contact-dialog-qr-image" data-i18n-alt="contact.wechatQrAlt" decoding="async" src="assets/wechat-qr.jpg"/>
+</div>
+<p class="contact-dialog-qr-caption" data-i18n="contact.wechatHint">扫码添加我</p>
+<span class="contact-dialog-qr-id">Sean_Yu3</span>
+</div>
+</div>
+</dialog>
 <!-- Footer -->
 <footer class="footer">
 <div class="container footer-inner">
