@@ -98,6 +98,17 @@ a.work-item:active { background: var(--bg-soft); }
 }
 .cursor.is-hover { --s: 10; }
 
+/* Native dialog elements live in the browser's top layer, above the page's
+   custom cursor. Use the system pointer while that layer is active so the
+   pointer stays visible over the panel and its backdrop. */
+html.contact-dialog-open,
+html.contact-dialog-open body,
+.contact-dialog[open],
+.contact-dialog[open] * {
+  cursor: auto;
+}
+html.contact-dialog-open .cursor { display: none; }
+
 /* ============================================================
    Loader
    ============================================================ */
@@ -1093,13 +1104,16 @@ a.work-item:hover .work-item-arrow {
   border-radius: 999px;
   background: transparent;
   color: var(--fg);
+  font-family: var(--font-sans);
   font-size: clamp(22px, 2.5vw, 42px);
   font-weight: 500;
   letter-spacing: 0.02em;
+  text-align: left;
   text-transform: uppercase;
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  cursor: none;
   transition: transform 0.35s var(--ease-out);
 }
 .contact-cta-btn::before {
@@ -1144,6 +1158,205 @@ a.work-item:hover .work-item-arrow {
   transform: translateY(-100%);
 }
 .roll-arrow { line-height: 1; }
+
+/* Contact dialog — keeps the same restrained black, white and indigo language
+   as the contact section while making the two practical contact paths obvious. */
+.contact-dialog {
+  width: min(620px, calc(100vw - 32px));
+  max-width: none;
+  max-height: min(760px, calc(100dvh - 32px));
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: rgba(10, 10, 10, 0.98);
+  color: var(--fg);
+  box-shadow: 0 28px 100px rgba(0, 0, 0, 0.56);
+  overflow: auto;
+}
+.contact-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.74);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .contact-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.88);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+.contact-dialog-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(190px, 0.78fr);
+}
+.contact-dialog-copy,
+.contact-dialog-qr {
+  padding: clamp(24px, 4vw, 40px);
+}
+.contact-dialog-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+}
+.contact-dialog-head,
+.contact-dialog-qr-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.contact-dialog-head {
+  margin-bottom: clamp(38px, 6vw, 64px);
+}
+.contact-dialog-close {
+  padding: 4px 0;
+  color: var(--fg-3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: color 0.35s var(--ease-out);
+}
+.contact-dialog-close:hover { color: var(--fg); }
+.contact-dialog-title {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.contact-dialog-description {
+  max-width: 26em;
+  margin-top: 16px;
+  color: var(--fg-2);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.contact-dialog-email {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: clamp(32px, 5vw, 52px);
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.contact-dialog-kicker {
+  color: var(--fg-3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.contact-dialog-email code {
+  color: var(--fg);
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: clamp(12px, 1.5vw, 14px);
+  overflow-wrap: anywhere;
+}
+.contact-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.contact-dialog-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 44px;
+  padding: 12px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--fg);
+  font-size: 13px;
+  transition: color 0.35s var(--ease-out), border-color 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out), background-color 0.35s var(--ease-out);
+}
+.contact-dialog-action:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+.contact-dialog-action-primary {
+  border-color: var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+}
+.contact-dialog-action-primary:hover {
+  border-color: var(--fg);
+  background: transparent;
+  color: var(--fg);
+}
+.contact-dialog-action-secondary {
+  background: transparent;
+  cursor: none;
+}
+.contact-dialog-status {
+  min-height: 20px;
+  margin-top: 12px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.contact-dialog-qr-head { width: 100%; }
+.contact-dialog-qr-meta,
+.contact-dialog-qr-id {
+  color: var(--fg-3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+.contact-dialog-qr-frame {
+  width: min(100%, 260px);
+  margin: 30px auto 18px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #fff;
+}
+.contact-dialog-qr-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.contact-dialog-qr-caption {
+  color: var(--fg-2);
+  font-size: 13px;
+}
+.contact-dialog-qr-id {
+  margin-top: 6px;
+  color: var(--accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .contact-dialog[open] {
+    animation: contact-dialog-in 0.28s var(--ease-out) both;
+  }
+  @keyframes contact-dialog-in {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+}
+@media (max-width: 600px) {
+  .contact-dialog {
+    width: calc(100vw - 24px);
+    max-height: calc(100dvh - 24px);
+  }
+  .contact-dialog-inner { grid-template-columns: 1fr; }
+  .contact-dialog-qr {
+    align-items: flex-start;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+  .contact-dialog-qr-frame {
+    align-self: center;
+    width: min(100%, 260px);
+  }
+}
 
 .contact-cta-links {
   display: flex;

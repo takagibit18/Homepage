@@ -111,6 +111,17 @@
         "contact.socialAll": "Same handle everywhere",
         "contact.socialAction": "Search",
         "contact.ctaAria": "Talk with me by email",
+        "contact.dialogLabel": "Contact",
+        "contact.dialogTitle": "Let's connect",
+        "contact.dialogDescription": "Choose a way to reach me.",
+        "contact.dialogClose": "Close contact panel",
+        "contact.dialogCloseShort": "Close",
+        "contact.emailAction": "Send email",
+        "contact.copyEmail": "Copy email",
+        "contact.copySuccess": "Email copied",
+        "contact.copyFailure": "Copy failed. Please copy it manually.",
+        "contact.wechatHint": "Scan to add me",
+        "contact.wechatQrAlt": "Sean's WeChat QR code",
         "contact.emailAria": "Send email to huali6641@gmail.com",
         "contact.githubAria": "View takagibit18 on GitHub",
         "contact.resumeAria": "Open resume PDF in a new window",
@@ -222,6 +233,17 @@
         "contact.socialAll": "全网同名",
         "contact.socialAction": "搜索",
         "contact.ctaAria": "和我聊聊，发送邮件",
+        "contact.dialogLabel": "联系我",
+        "contact.dialogTitle": "和我聊聊",
+        "contact.dialogDescription": "选择一种方式联系我。",
+        "contact.dialogClose": "关闭联系面板",
+        "contact.dialogCloseShort": "关闭",
+        "contact.emailAction": "发送邮件",
+        "contact.copyEmail": "复制邮箱",
+        "contact.copySuccess": "邮箱已复制",
+        "contact.copyFailure": "复制失败，请手动复制。",
+        "contact.wechatHint": "扫码添加我",
+        "contact.wechatQrAlt": "Sean 的微信二维码",
         "contact.emailAria": "发送邮件至 huali6641@gmail.com",
         "contact.githubAria": "在 GitHub 查看 takagibit18",
         "contact.resumeAria": "在新窗口打开简历 PDF",
@@ -261,6 +283,10 @@
       document.querySelectorAll("[data-i18n-aria-label]").forEach((el) => {
         const key = el.getAttribute("data-i18n-aria-label");
         if (key && dict[key] != null) el.setAttribute("aria-label", dict[key]);
+      });
+      document.querySelectorAll("[data-i18n-alt]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-alt");
+        if (key && dict[key] != null) el.setAttribute("alt", dict[key]);
       });
       document.querySelectorAll("#langSwitch button").forEach((b) => {
         b.classList.toggle("is-active", b.dataset.lang === lang);
@@ -419,6 +445,97 @@
       a.addEventListener("click", () => setMenuOpen(false));
     });
   }
+
+  /* ---------- Contact dialog ---------- */
+  const contactCta = document.getElementById("contactCta");
+  const contactDialog = document.getElementById("contactDialog");
+  const contactDialogClose = document.getElementById("contactDialogClose");
+  const copyEmailButton = document.getElementById("copyEmailButton");
+  const copyEmailStatus = document.getElementById("copyEmailStatus");
+  const contactEmail = "huali6641@gmail.com";
+  let contactBodyOverflow = "";
+  let copyStatusTimer = null;
+
+  function getContactCopy(key) {
+    const dict = I18N[currentLang] || I18N.zh;
+    return dict[key] || "";
+  }
+
+  function restoreAfterContactDialog() {
+    contactCta?.setAttribute("aria-expanded", "false");
+    document.documentElement.classList.remove("contact-dialog-open");
+    document.body.style.overflow = contactBodyOverflow;
+    if (lenis && !mobileMenu?.classList.contains("is-open")) lenis.start();
+    requestAnimationFrame(() => contactCta?.focus());
+  }
+
+  function openContactDialog() {
+    if (!contactDialog || contactDialog.open) return;
+    contactBodyOverflow = document.body.style.overflow;
+    if (typeof contactDialog.showModal === "function") {
+      contactDialog.showModal();
+    } else {
+      contactDialog.setAttribute("open", "");
+    }
+    document.documentElement.classList.add("contact-dialog-open");
+    contactCta?.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    if (lenis) lenis.stop();
+    requestAnimationFrame(() => contactDialogClose?.focus());
+  }
+
+  function closeContactDialog() {
+    if (!contactDialog) return;
+    if (contactDialog.open && typeof contactDialog.close === "function") {
+      contactDialog.close();
+    } else {
+      contactDialog.removeAttribute("open");
+      restoreAfterContactDialog();
+    }
+  }
+
+  if (contactCta && contactDialog) {
+    contactCta.addEventListener("click", openContactDialog);
+    contactDialogClose?.addEventListener("click", closeContactDialog);
+    contactDialog.addEventListener("click", (e) => {
+      if (e.target === contactDialog) closeContactDialog();
+    });
+    contactDialog.addEventListener("close", restoreAfterContactDialog);
+  }
+
+  function setCopyStatus(key) {
+    if (!copyEmailStatus) return;
+    copyEmailStatus.textContent = getContactCopy(key);
+    clearTimeout(copyStatusTimer);
+    copyStatusTimer = setTimeout(() => {
+      copyEmailStatus.textContent = "";
+    }, 3200);
+  }
+
+  async function copyEmail() {
+    let copied = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(contactEmail);
+        copied = true;
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = contactEmail;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        copied = document.execCommand("copy");
+        textarea.remove();
+      }
+    } catch (e) {
+      copied = false;
+    }
+    setCopyStatus(copied ? "contact.copySuccess" : "contact.copyFailure");
+  }
+
+  copyEmailButton?.addEventListener("click", copyEmail);
 
   /* ---------- GSAP + ScrollTrigger ---------- */
   function revealAllInstant() {
