@@ -24,6 +24,7 @@
 
   /* Type */
   --font-sans: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-display: "Bodoni Moda", "Times New Roman", "Songti SC", serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
 
   /* Layout */
@@ -72,7 +73,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 
 /* Touch / active feedback (hover effects don't exist on touch devices) */
-.nav-cta:active, .hero-link:active { transform: scale(0.97); }
+.nav-cta:active { transform: scale(0.97); }
 .skill-card:active { background: var(--bg-hover); }
 a.work-item:active { background: var(--bg-soft); }
 
@@ -264,27 +265,35 @@ html.contact-dialog-open .cursor { display: none; }
 .lang-switch {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 100px;
+  background: var(--bg-soft);
+  flex-shrink: 0;
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.04em;
 }
 .lang-switch button {
-  color: var(--fg-4);
-  padding: 2px 0;
-  transition: color 0.3s var(--ease-out);
+  color: var(--fg-2);
+  min-width: 44px;
+  min-height: 36px;
+  padding: 7px 10px;
+  border-radius: 100px;
+  font-weight: 500;
+  transition: color 0.2s, background-color 0.2s;
   position: relative;
 }
-.lang-switch button:hover { color: var(--fg-2); }
-.lang-switch button.is-active { color: var(--fg); }
-.lang-switch button.is-active::after {
-  content: "";
-  position: absolute;
-  left: 0; bottom: -3px;
-  width: 100%; height: 1px;
+.lang-switch button:hover { color: var(--fg); background: var(--bg-hover); }
+.lang-switch button.is-active {
+  color: var(--bg);
   background: var(--fg);
 }
-.lang-sep { color: var(--fg-4); }
+.lang-switch button:focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; }
+@media (pointer: coarse) {
+  .lang-switch button { min-height: 44px; }
+}
 .nav-cta {
   font-size: 14px;
   padding: 10px 18px;
@@ -369,305 +378,184 @@ html.contact-dialog-open .cursor { display: none; }
 .mobile-menu-link:active { color: var(--accent); }
 
 /* ============================================================
-   Hero
+   Hero — editorial portrait + oversized typography
+   The composition is intentionally static: photography, type and a few
+   quiet editorial labels carry the first viewport without overlays or cards.
    ============================================================ */
-.hero {
+.hero-editorial {
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 var(--pad-x);
-  padding-top: 120px;
-  padding-bottom: 80px;
+  min-height: 100svh;
   overflow: hidden;
+  isolation: isolate;
+  background: #555;
+  color: #f1eee7;
 }
-.hero-bg {
+.hero-editorial-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
-}
-.hero-grain {
-  position: absolute;
-  inset: -50%;
-  background-image: none;
-  /* Keep the Hero background pure black. The grain layer created a dirty
-     grey wash over the page, especially on high-brightness displays. */
-  opacity: 0;
+  overflow: hidden;
+  background: #555;
   pointer-events: none;
 }
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: var(--container);
-  margin: 0 auto;
-  width: 100%;
-}
-.hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--fg-2);
-  letter-spacing: 0.04em;
-  margin-bottom: 40px;
-  padding: 8px 14px;
-  border: 1px solid var(--line);
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.02);
-}
-.hero-tag .dot {
-  width: 6px; height: 6px;
-  background: #4ade80;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
-  70% { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
-}
-.hero-title {
-  font-size: clamp(56px, 13vw, 200px);
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
-  margin-bottom: 56px;
-}
-.hero-line {
+.hero-editorial-bg-image {
   display: block;
-  overflow: hidden;
-}
-.hero-line sup {
-  font-size: 0.18em;
-  vertical-align: super;
-  font-weight: 500;
-  color: var(--fg-3);
-  margin-left: 0.1em;
-}
-.hero-scroll {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--fg-3);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  z-index: 1;
-}
-.hero-scroll-line {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--fg-3), transparent);
-  position: relative;
-  overflow: hidden;
-}
-.hero-scroll-line::after {
-  content: "";
-  position: absolute;
-  top: -40px;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background: #fff;
-  animation: scrollDown 1.8s var(--ease-in-out) infinite;
-}
-@keyframes scrollDown {
-  0% { top: -40px; }
-  100% { top: 40px; }
-}
-
-/* ============================================================
-   Hero — numbered narrative over the baked workspace image
-   ============================================================ */
-.hero-grid {
-  position: relative;
-  z-index: 1;
-  max-width: var(--container);
-  margin: 0 auto;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 0.92fr 1.08fr;
-  gap: clamp(32px, 5vw, 64px);
-  align-items: center;
-}
-/* Entrance: CSS fadeUp so Hero text is visible on load (no scroll dependency) */
-.hero-left > * { animation: fadeUp .7s var(--ease-out) both; }
-.hero-left > *:nth-child(2) { animation-delay: .06s; }
-.hero-left > *:nth-child(3) { animation-delay: .12s; }
-.hero-left > *:nth-child(4) { animation-delay: .18s; }
-
-/* Statement-first hero: oversized short title, single-line inline meta,
-   underline text link, and a quiet image-led right side. */
-.hero-statement {
-  font-size: clamp(44px, 5.6vw, 80px);
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  margin-bottom: 36px;
-}
-.hero-statement em { font-style: normal; color: var(--accent); }
-
-.hero-inline-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  letter-spacing: 0.02em;
-  color: var(--fg-3);
-  margin-bottom: 44px;
-}
-.hero-inline-meta .ok { color: #4ade80; }
-.hero-inline-meta .sep { color: var(--fg-4); }
-
-.hero-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--fg);
-  border-bottom: 1px solid var(--line-strong);
-  padding-bottom: 4px;
-  transition: color 0.3s, border-color 0.3s;
-}
-.hero-link:hover { color: var(--accent); border-color: var(--accent); }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: none; }
-}
-
-@media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 44px; }
-}
-
-/* ============================================================
-   Hero shell — editorial night workspace + baked profile screen
-   The supplied static image contains the full workspace and IDE screen,
-   while the HTML layer is reserved for the page copy and navigation.
-   ============================================================ */
-.hero {
-  min-height: 100svh;
-  display: block;
-  padding: 0;
-  background: #000;
-}
-.hero-bg {
-  overflow: hidden;
-  background: #000;
-}
-.hero-scene {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
+}
+.hero-editorial-bg-image {
   max-width: none;
   object-fit: cover;
-  object-position: center center;
+  object-position: center top;
 }
-.hero-vignette {
+.hero-editorial-name {
   position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.04) 42%, rgba(0, 0, 0, 0.18) 100%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.05) 58%, rgba(0, 0, 0, 0.12) 100%);
-  pointer-events: none;
-}
-.hero-grid {
-  min-height: 100svh;
-  max-width: none;
-  margin: 0;
-  display: block;
-}
-.hero-left {
-  position: relative;
-  z-index: 3;
-  width: min(56vw, 760px);
-  padding: clamp(190px, 29vh, 300px) var(--pad-x) 160px;
-}
-.hero-left::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  top: -44px;
-  right: -180px;
-  bottom: -110px;
-  left: -92px;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0) 38%, rgba(0, 0, 0, 0.18) 78%, rgba(0, 0, 0, 0.28) 100%),
-    radial-gradient(ellipse 78% 52% at 38% 58%, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0.52) 42%, rgba(0, 0, 0, 0.26) 68%, rgba(0, 0, 0, 0) 92%);
-  filter: blur(10px);
-  transform: scale(1.03);
-  pointer-events: none;
-}
-.hero-left > * {
-  position: relative;
   z-index: 1;
+  top: 36%;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4.5%;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
-.hero-left .section-head { margin-bottom: 40px; }
-.hero .section-num,
-.hero .section-label { color: rgba(255, 255, 255, 0.68); }
-.hero .section-label::before { background: rgba(255, 255, 255, 0.28); }
-.hero-statement {
-  max-width: 720px;
-  font-size: clamp(48px, 6.2vw, 94px);
-  line-height: 1.02;
-  letter-spacing: -0.045em;
-  margin-bottom: 30px;
+.hero-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(110px, 14vw, 270px);
+  font-weight: 600;
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 32;
+  line-height: 1;
+  letter-spacing: -0.065em;
+  white-space: nowrap;
+}
+.hero-name-sean {
+  color: rgba(5, 5, 5, 0.92);
+}
+.hero-name-yu {
+  color: rgba(245, 242, 235, 0.96);
+  font-size: clamp(138px, 17.5vw, 338px);
+}
+.hero-role,
+.hero-location,
+.hero-editorial-statement,
+.hero-process {
+  position: absolute;
+  z-index: 3;
+}
+.hero-role,
+.hero-location,
+.hero-process {
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 0.9vw, 13px);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.hero-role {
+  top: 110px;
+  left: var(--pad-x);
+  color: rgba(245, 242, 235, 0.84);
+}
+.hero-location {
+  top: 110px;
+  right: var(--pad-x);
+  color: #f1eee7;
+}
+.hero-editorial-statement {
+  bottom: 12%;
+  left: var(--pad-x);
+  max-width: clamp(300px, 29vw, 420px);
+  color: #f1eee7;
+  font-family: var(--font-mono);
+  font-size: clamp(16px, 1.45vw, 24px);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   text-wrap: balance;
 }
-.hero-statement em { color: #c59d62; }
-.hero-inline-meta {
-  max-width: 720px;
-  color: rgba(255, 255, 255, 0.58);
-  margin-bottom: 34px;
+.hero-process {
+  right: var(--pad-x);
+  bottom: 12%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  color: #f1eee7;
 }
-.hero-inline-meta .ok { color: #afc397; }
-.hero-link {
-  color: #f1eee8;
-  border-color: rgba(197, 157, 98, 0.62);
+.hero-process::before {
+  content: "—";
+  margin-bottom: 4px;
+  letter-spacing: 0;
 }
-.hero-link:hover { color: #d4ae73; border-color: #d4ae73; }
-.hero-scroll { z-index: 3; }
+.hero-process span { display: block; }
 
-@media (max-width: 900px) {
-  .hero { min-height: auto; }
-  .hero-scene { object-position: 64% bottom; }
-  .hero-grid {
-    min-height: auto;
-    display: flex;
-    flex-direction: column;
+html[lang="zh-CN"] .hero-editorial-statement {
+  font-family: var(--font-sans);
+  text-transform: none;
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+  .hero-editorial-name { top: 32%; }
+  .hero-editorial-statement { max-width: 32vw; }
+}
+
+@media (min-width: 769px) {
+  .hero-role,
+  .hero-editorial-statement { left: clamp(24px, 4.8vw, 80px); }
+  .hero-location,
+  .hero-process { right: clamp(24px, 4.8vw, 80px); }
+}
+
+@media (max-width: 768px) {
+  .hero-editorial { min-height: 100svh; }
+  .hero-editorial-bg-image { object-position: 55% top; }
+  .hero-editorial-name {
+    top: 20svh;
+    right: 0;
+    left: 0;
+    display: block;
+    height: 280px;
+    padding: 0;
+    transform: none;
   }
-  .hero-left {
-    width: 100%;
-    min-height: 70svh;
-    padding: 160px var(--pad-x) 76px;
+  .hero-name {
+    position: absolute;
+    font-size: clamp(60px, 19vw, 110px);
+    line-height: 0.72;
+    transform: none;
   }
-  .hero-left::before {
-    top: -30px;
-    right: -56px;
-    bottom: -70px;
-    left: -56px;
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.22) 100%),
-      radial-gradient(ellipse 84% 58% at 42% 58%, rgba(0, 0, 0, 0.64) 0%, rgba(0, 0, 0, 0.42) 46%, rgba(0, 0, 0, 0) 92%);
-    filter: blur(8px);
-    transform: scale(1.02);
+  .hero-name-sean {
+    top: -0.9em;
+    left: 20px;
   }
-  .hero-statement { font-size: clamp(46px, 12vw, 72px); }
-  .hero-inline-meta { font-size: 11px; gap: 7px; }
-  .hero-scroll { display: none; }
+  .hero-name-yu {
+    top: -0.9em;
+    right: 20px;
+  }
+  .hero-role {
+    top: 180px;
+    max-width: 68vw;
+    font-size: 10px;
+    letter-spacing: 0.17em;
+  }
+  .hero-location,
+  .hero-process { display: none; }
+  .hero-editorial-statement {
+    bottom: clamp(24px, 5svh, 44px);
+    left: var(--pad-x);
+    max-width: min(74vw, 310px);
+    font-family: var(--font-sans);
+    font-size: clamp(30px, 8.8vw, 42px);
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+    text-transform: none;
+  }
 }
 
 /* ============================================================
@@ -1712,7 +1600,7 @@ a.work-item:hover .work-item-arrow {
 .reveal-line em { font-style: normal; }
 
 /* Chinese typography — CJK glyphs need breathing room, not tight Latin tracking */
-html[lang="zh-CN"] .hero-statement,
+html[lang="zh-CN"] .hero-editorial-statement,
 html[lang="zh-CN"] .about-title,
 html[lang="zh-CN"] .skills-title,
 html[lang="zh-CN"] .work-title {

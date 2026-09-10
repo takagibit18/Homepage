@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title data-i18n="meta.title">Sean｜AI 智能体与 LLM 应用开发者</title>
+<title data-i18n="meta.title">Sean | AI Agent &amp; LLM Application Developer</title>
 <meta content="Sean，计算机科学本科生，专注于使用 Python、FastAPI、RAG 与评估体系构建 AI Agent 和 LLM 应用。" data-i18n-content="meta.description" name="description"/>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&amp;family=JetBrains+Mono:wght@400;500&amp;family=Outfit:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <!-- Styles -->
 <link href="styles.css" rel="stylesheet"/>
 </head>
@@ -43,10 +43,9 @@
 <a class="nav-link" href="#contact"><span class="nav-num">06</span> <span data-i18n="nav.contact">Contact</span></a>
 </div>
 <div class="nav-right">
-<div class="lang-switch" id="langSwitch">
-<button data-lang="en" type="button">EN</button>
-<span class="lang-sep">/</span>
-<button class="is-active" data-lang="zh" type="button">中</button>
+<div class="lang-switch" id="langSwitch" role="group" aria-label="Language / 语言">
+<button class="is-active" data-lang="en" type="button" aria-pressed="true" title="Switch to English" lang="en">EN</button>
+<button data-lang="zh" type="button" aria-pressed="false" title="切换为中文" lang="zh-CN">中文</button>
 </div>
 <a class="nav-cta" data-i18n="nav.cta" href="#contact">Get in touch</a>
 <button aria-expanded="false" aria-label="Open menu" class="nav-burger" id="navBurger" type="button"><span></span><span></span></button>
@@ -64,31 +63,21 @@
 </div>
 </div>
 <!-- Hero -->
-<section class="hero" id="hero">
-<div class="hero-bg">
-<img class="hero-scene" src="assets/hero-workspace.png" alt="" aria-hidden="true"/>
-<div class="hero-vignette"></div>
-<div class="hero-grain"></div>
+<section class="hero hero-editorial" id="hero">
+<div class="hero-editorial-bg">
+<img class="hero-editorial-bg-image" src="assets/hero-sean-editorial-20260911.png" alt="Sean Yu" decoding="async" fetchpriority="high" width="1448" height="1086"/>
 </div>
-<div class="hero-grid">
-<div class="hero-left">
-<div class="section-head">
-<span class="section-num">(00)</span>
-<span class="section-label" data-i18n="hero.sectionLabel">Intro</span>
+<div aria-hidden="true" class="hero-editorial-name">
+<span class="hero-name hero-name-sean">SEAN</span>
+<span class="hero-name hero-name-yu">YU</span>
 </div>
-<h1 class="hero-statement" data-i18n="hero.statement">Agents,<br/>shipped <em>for real</em>.</h1>
-<div class="hero-inline-meta">
-<span class="ok" data-i18n="hero.metaOpen">● Open to opportunities</span><span class="sep">/</span>
-<span data-i18n="hero.metaLoc">Beijing</span><span class="sep">/</span>
-<span>Agent · RAG · Evals</span><span class="sep">/</span>
-<span data-i18n="hero.metaClass">CS '27</span>
-</div>
-<a class="hero-link" data-i18n="hero.cta" href="#contact">Get in touch →</a>
-</div>
-</div>
-<div class="hero-scroll">
-<span data-i18n="hero.scroll">Scroll</span>
-<div class="hero-scroll-line"></div>
+<div class="hero-role">— AGENT / LLM ENGINEER</div>
+<div class="hero-location">BEIJING · CHINA</div>
+<h1 class="hero-editorial-statement" data-i18n="hero.statement">Agents,<br/>shipped for real.</h1>
+<div aria-label="Build, evaluate, iterate" class="hero-process">
+<span>BUILD</span>
+<span>EVALUATE</span>
+<span>ITERATE</span>
 </div>
 </section>
 <!-- Marquee -->
