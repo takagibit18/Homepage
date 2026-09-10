@@ -16,3 +16,7 @@ npm-debug.log*
 
 # vercel
 .vercel
+
+# local browser and screenshot artifacts
+.playwright-cli/
+output/

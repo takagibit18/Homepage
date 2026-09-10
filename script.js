@@ -24,17 +24,7 @@
         "nav.contact": "Contact",
         "nav.education": "Education",
         "nav.cta": "Get in touch",
-        "hero.tag": "CS undergraduate · Open to Agent / LLM opportunities",
-        "hero.title1": "AI",
-        "hero.title2": "Agent",
-        "hero.title3": "developer<sup>©</sup>",
-        "hero.metaOpen": "● Open to opportunities",
-        "hero.metaLoc": "Beijing",
-        "hero.metaClass": "CS '27",
-        "hero.sectionLabel": "Intro",
-        "hero.statement": "Agents,<br/>shipped <em>for real</em>.",
-        "hero.cta": "Get in touch →",
-        "hero.scroll": "Scroll",
+        "hero.statement": "Agents,<br/>shipped for real.",
         "marquee.1": "Agent Workflows",
         "marquee.2": "LLM Applications",
         "marquee.3": "RAG &amp; Evaluation",
@@ -146,17 +136,7 @@
         "nav.contact": "联系",
         "nav.education": "教育经历",
         "nav.cta": "联系我",
-        "hero.tag": "计算机本科生 · 寻找 Agent / LLM 应用机会",
-        "hero.title1": "AI",
-        "hero.title2": "智能体",
-        "hero.title3": "开发者<sup>©</sup>",
-        "hero.metaOpen": "● 开放工作机会",
-        "hero.metaLoc": "北京",
-        "hero.metaClass": "计算机 '27 届",
-        "hero.sectionLabel": "简介",
-        "hero.statement": "把 Agent<br/>真正<em>做上线</em>。",
-        "hero.cta": "联系我 →",
-        "hero.scroll": "滚动",
+        "hero.statement": "把 Agent<br/>真正做上线。",
         "marquee.1": "Agent 工作流",
         "marquee.2": "LLM 应用",
         "marquee.3": "RAG 与评估",
@@ -260,15 +240,16 @@
     }
 };
 
-  const langStorageKey = "sean-lang-v2";
-  let currentLang = "zh";
+  // Persist explicit choices only; the old key also stored the automatic default.
+  const langStorageKey = "sean-language-preference";
+  let currentLang = "en";
   try {
     const stored = localStorage.getItem(langStorageKey);
     if (stored === "en" || stored === "zh") currentLang = stored;
   } catch (e) {}
 
   function applyLang(lang, animate) {
-    const dict = I18N[lang] || I18N.zh;
+    const dict = I18N[lang] || I18N.en;
     const swap = () => {
       currentLang = lang;
       document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
@@ -290,8 +271,8 @@
       });
       document.querySelectorAll("#langSwitch button").forEach((b) => {
         b.classList.toggle("is-active", b.dataset.lang === lang);
+        b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
       });
-      try { localStorage.setItem(langStorageKey, lang); } catch (e) {}
       // refresh ScrollTrigger positions after the fade-in, once text reflow settled
       if (typeof ScrollTrigger !== "undefined") {
         setTimeout(() => ScrollTrigger.refresh(), 160);
@@ -319,6 +300,7 @@
       const btn = e.target.closest("button[data-lang]");
       if (!btn) return;
       const lang = btn.dataset.lang;
+      try { localStorage.setItem(langStorageKey, lang); } catch (e) {}
       if (lang !== currentLang) applyLang(lang, true);
     });
   }
@@ -582,11 +564,6 @@
       );
     });
 
-    /* Note: the Hero meta items use CSS fadeUp (see styles.css) for their
-       entrance so they stay visible on first paint. A GSAP fromTo here would
-       set inline opacity:0 with a delay and override the CSS animation's final
-       state, causing a flicker — so we intentionally do NOT animate them. */
-
     gsap.utils.toArray(".stat-num").forEach((el) => {
       const finalText = el.textContent;
       const match = finalText.match(/^(\d+|∞)/);
@@ -654,35 +631,14 @@
   updateTime();
   setInterval(updateTime, 1000);
 
-  /* ---------- Boot ---------- */
-  function bootHeroIntro() {
-    if (!prefersReduced && typeof gsap !== "undefined") {
-      const heroLines = gsap.utils.toArray(".hero-title .reveal-text");
-      gsap.fromTo(heroLines,
-        { yPercent: 110 },
-        { yPercent: 0, duration: 1.3, ease: "power4.out", stagger: 0.12, delay: 0.1 }
-      );
-      const heroTag = document.querySelector(".hero-tag");
-      if (heroTag) {
-        gsap.fromTo(heroTag, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out" });
-      }
-    } else {
-      document.querySelectorAll(".hero-title .reveal-text").forEach((el) => {
-        el.style.transform = "none";
-      });
-    }
-  }
-
   window.addEventListener("load", () => {
     runLoader(() => {
-      bootHeroIntro();
       initReveals();
     });
   });
 
   if (document.readyState === "complete") {
     runLoader(() => {
-      bootHeroIntro();
       initReveals();
     });
   }
